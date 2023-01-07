@@ -4,7 +4,7 @@ My neovim configuration.
 
 ## Installation
 
-Run below command
+Run below command.
 
 ```
 git clone https://github.com/pogyomo/nvim ~/.config/nvim
