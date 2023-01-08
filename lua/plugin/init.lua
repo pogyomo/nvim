@@ -54,6 +54,10 @@ require("utils.install.packer").install(function()
                 config = require("plugin.settings.indent")
             }
             use{
+                "rcarriga/nvim-notify",
+                config = require("plugin.settings.notify")
+            }
+            use{
                 "folke/todo-comments.nvim",
                 config = require("plugin.settings.todo")
             }
