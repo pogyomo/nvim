@@ -1,5 +1,5 @@
 require("utils.install.packer").install(function()
-    -- NOTE: If it is a time when this config installed packer,
+    -- NOTE: If it is a time this config installed packer,
     --       require("packer") fail. So I need to check whether
     --       it is successed or not.
     -- TODO: Is there any good solution to load packer without error
