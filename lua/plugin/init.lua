@@ -36,6 +36,10 @@ require("utils.install.packer").install(function()
                 "lukas-reineke/indent-blankline.nvim",
                 config = require("plugin.settings.indent")
             }
+            use{
+                "folke/todo-comments.nvim",
+                config = require("plugin.settings.todo")
+            }
         end, 
         config = {
             display = {
