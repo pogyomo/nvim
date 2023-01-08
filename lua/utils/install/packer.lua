@@ -1,9 +1,19 @@
+local pb   = require("utils.path.builder")
 local uv   = vim.loop
 local wrap = vim.schedule_wrap
 local url  = "https://github.com/wbthomason/packer.nvim"
-local path = ("%s/site/pack/packer/start/packer.nvim"):format(vim.fn.stdpath("data"))
+local path = pb.build(vim.fn.stdpath("data"), {
+    "site",
+    "pack",
+    "packer",
+    "start",
+    "packer.nvim"
+})
 
-return function(callback)
+local M = {}
+
+function M.install(callback)
+    callback = callback or function() end
     uv.fs_stat(path, wrap(function(err)
         if err then
             vim.notify("Installing packer...")
@@ -16,10 +26,13 @@ return function(callback)
                 }
             }, wrap(function(code)
                 assert(code == 0, ("Failed to install packer: code %d"):format(code))
-                vim.notify("Packer was installed successfully")
+                vim.notify("Packer installed successfully.")
+                callback()
             end))
         else
             callback()
         end
     end))
 end
+
+return M
