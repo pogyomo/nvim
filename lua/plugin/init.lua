@@ -13,11 +13,7 @@ require("utils.install.packer").install(function()
         function(use)
             use("wbthomason/packer.nvim")
 
-            -- Visual
-            use{
-                "sainnhe/sonokai",
-                config = require("plugin.settings.sonokai")
-            }
+            -- Syntax highlight
             use{
                 "nvim-treesitter/nvim-treesitter",
                 run = function()
@@ -26,6 +22,12 @@ require("utils.install.packer").install(function()
                     }()
                 end,
                 config = require("plugin.settings.treesitter")
+            }
+
+            -- Visual
+            use{
+                "sainnhe/sonokai",
+                config = require("plugin.settings.sonokai")
             }
         end, 
         config = {
