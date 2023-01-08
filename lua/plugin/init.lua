@@ -24,6 +24,14 @@ require("utils.install.packer").install(function()
                         with_sync = true
                     }()
                 end,
+                requires = {
+                    {
+                        "p00f/nvim-ts-rainbow",
+                        cond = function()
+                            return pcall(require, "nvim-treesitter")
+                        end
+                    }
+                },
                 config = require("plugin.settings.treesitter")
             }
 
