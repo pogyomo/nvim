@@ -62,12 +62,45 @@ require("utils.install.packer").install(function()
                 config = require("plugin.settings.todo")
             }
 
+            -- Package manager
+            use{
+                "williamboman/mason.nvim",
+                requires = {
+                    -- Lsp manager and utility
+                    "neovim/nvim-lspconfig",
+                    "williamboman/mason-lspconfig.nvim",
+                    "j-hui/fidget.nvim"
+                },
+                config = require("plugin.settings.mason")
+            }
+
+            -- Completion
+            use{
+                "hrsh7th/nvim-cmp",
+                requires = {
+                    -- Snippet engine
+                    "L3MON4D3/LuaSnip",
+
+                    -- Sources
+                    "hrsh7th/cmp-nvim-lsp",
+                    "hrsh7th/cmp-buffer",
+                    "hrsh7th/cmp-path",
+                    "hrsh7th/cmp-cmdline",
+                    "hrsh7th/cmp-nvim-lsp-signature-help",
+                    "saadparwaiz1/cmp_luasnip",
+
+                    -- Visual
+                    "onsails/lspkind.nvim"
+                },
+                config = require("plugin.settings.cmp")
+            }
+
             -- Key mapping
             use{
                 "windwp/nvim-autopairs",
                 config = require("plugin.settings.autopairs")
             }
-        end, 
+        end,
         config = {
             display = {
                 open_fn = require("packer.util").float
