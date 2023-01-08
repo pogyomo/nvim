@@ -1,7 +1,4 @@
 return function()
-    -- Got a true color.
-    vim.o.termguicolors = true
-
     -- Settings for this colorscheme
     vim.g.sonokai_style = "shusia"
     vim.g.sonokai_disable_italic_comment = true
