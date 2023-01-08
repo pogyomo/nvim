@@ -29,6 +29,10 @@ require("utils.install.packer").install(function()
                 "sainnhe/sonokai",
                 config = require("plugin.settings.sonokai")
             }
+            use{
+                "lukas-reineke/indent-blankline.nvim",
+                config = require("plugin.settings.indent")
+            }
         end, 
         config = {
             display = {
