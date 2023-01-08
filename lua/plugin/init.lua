@@ -35,6 +35,15 @@ require("utils.install.packer").install(function()
                 config = require("plugin.settings.treesitter")
             }
 
+            -- Statusline
+            use{
+                "nvim-lualine/lualine.nvim",
+                requires = {
+                    "kyazdani42/nvim-web-devicons"
+                },
+                config = require("plugin.settings.lualine")
+            }
+
             -- Visual
             use{
                 "sainnhe/sonokai",
