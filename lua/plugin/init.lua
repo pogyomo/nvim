@@ -61,6 +61,12 @@ require("utils.install.packer").install(function()
                 "folke/todo-comments.nvim",
                 config = require("plugin.settings.todo")
             }
+
+            -- Key mapping
+            use{
+                "windwp/nvim-autopairs",
+                config = require("plugin.settings.autopairs")
+            }
         end, 
         config = {
             display = {
