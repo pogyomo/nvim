@@ -1,8 +1,11 @@
 return function()
-    local is_ok, indent = pcall(require, "indent_blankline")
+    local module = require("utils.module")
+    local is_ok, mods = pcall(module.require, {
+        { "indent_blankline", as = "indent" }
+    })
     if not is_ok then
         return
     end
 
-    indent.setup()
+    mods["indent"].setup()
 end

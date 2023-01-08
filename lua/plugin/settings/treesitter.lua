@@ -1,10 +1,13 @@
 return function()
-    local is_ok, ts = pcall(require, "nvim-treesitter.configs")
+    local module = require("utils.module")
+    local is_ok, mods = pcall(module.require, {
+        { "nvim-treesitter.configs", as = "ts" }
+    })
     if not is_ok then
         return
     end
 
-    ts.setup{
+    mods["ts"].setup{
         ensure_installed = {
             "bibtex",
             "c",
