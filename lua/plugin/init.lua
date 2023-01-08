@@ -75,6 +75,9 @@ require("utils.install.packer").install(function()
             }
 
             -- Completion
+            -- FIXME: When I install nvim-cmp with lsp support, lua highlight collapse
+            --        in the situation of calling passed variable inside the function.
+            --        ex: function f(cb) cb() end
             use{
                 "hrsh7th/nvim-cmp",
                 requires = {
