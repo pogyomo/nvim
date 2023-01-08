@@ -4,12 +4,15 @@ require("utils.install.packer").install(function()
     --       it is successed or not.
     -- TODO: Is there any good solution to load packer without error
     --       when it is first time to run this config?
-    local is_ok = pcall(require, "packer")
+    local module = require("utils.module")
+    local is_ok, mods = pcall(module.require, {
+        "packer"
+    })
     if not is_ok then
         return
     end
 
-    require("packer").startup({
+    mods["packer"].startup({
         function(use)
             use("wbthomason/packer.nvim")
 
