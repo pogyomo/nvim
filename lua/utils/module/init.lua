@@ -1,3 +1,9 @@
+---@alias Module string | { [1]: string, as: string }
+
+---Parse module.
+---@param mod Module Module to parse.
+---@return string # Actual name of the module.
+---@return string # Alias of the module.
 local function parse_mod(mod)
     vim.validate{
         mod = { mod, { "string", "table" } }
@@ -12,6 +18,9 @@ end
 
 local M = {}
 
+---Require multiple modules.
+---@param mods Module[]
+---@return any
 function M.require(mods)
     vim.validate{
         mods = { mods, "table" }

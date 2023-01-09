@@ -12,6 +12,8 @@ local path = pb.build(vim.fn.stdpath("data"), {
 
 local M = {}
 
+---Install packer.
+---@param callback function Callback which will be called after packer installed.
 function M.install(callback)
     callback = callback or function() end
     uv.fs_stat(path, wrap(function(err)
