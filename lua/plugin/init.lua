@@ -12,6 +12,15 @@ require("utils.install.packer").install(function()
         return
     end
 
+    vim.api.nvim_create_augroup("__packer_menu", {})
+    vim.api.nvim_create_autocmd("FileType", {
+        group = "__packer_menu",
+        pattern = "packer",
+        callback = function()
+            vim.opt.winblend = 10
+        end
+    })
+
     mods["packer"].startup({
         function(use)
             use("wbthomason/packer.nvim")
@@ -103,7 +112,11 @@ require("utils.install.packer").install(function()
         end,
         config = {
             display = {
-                open_fn = require("packer.util").float
+                open_fn = function()
+                    return require("packer.util").float({
+                        border = "rounded"
+                    })
+                end
             }
         }
     })
