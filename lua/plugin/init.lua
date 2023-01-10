@@ -109,6 +109,9 @@ require("utils.install.packer").install(function()
                 "windwp/nvim-autopairs",
                 config = require("plugin.settings.autopairs")
             }
+
+            -- Utility
+            use("lewis6991/impatient.nvim")
         end,
         config = {
             display = {
