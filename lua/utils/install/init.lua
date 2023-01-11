@@ -1,27 +1,28 @@
-local pb   = require("utils.path.builder")
+local path = require("utils.path")
 local uv   = vim.loop
-local url  = "https://github.com/wbthomason/packer.nvim"
-local path = pb.build(vim.fn.stdpath("data"), {
-    "site",
-    "pack",
-    "packer",
-    "start",
-    "packer.nvim"
-})
 
 local M = {}
 
 ---Install packer synchronously.
 ---@return boolean # False if packer already installed.
 function M.install_packer()
-    if not uv.fs_stat(path) then
+    local packer_url  = "https://github.com/wbthomason/packer.nvim"
+    local packer_path = path.build(vim.fn.stdpath("data"), {
+        "site",
+        "pack",
+        "packer",
+        "start",
+        "packer.nvim"
+    })
+
+    if not uv.fs_stat(packer_path) then
         vim.notify("Installing packer...")
         vim.fn.system({
             "git",
             "clone",
             "--depth=1",
-            url,
-            path
+            packer_url,
+            packer_path
         })
         assert(
             vim.v.shell_error == 0,
