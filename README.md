@@ -9,3 +9,7 @@ Run below command.
 ```
 git clone https://github.com/pogyomo/nvim ~/.config/nvim
 ```
+
+## TODO
+
+- [ ] Trying out lazy.nvim
