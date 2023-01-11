@@ -73,10 +73,6 @@ require("packer").startup({
         }
 
         -- Completion
-        -- FIXME: When I installed nightly neovim, this file's syntax highlight
-        --        collapse. But this doesn't occure when I use nvim <= v0.8.2.
-        --        I may need to fix this problem if nvim v0.9.0 released and this
-        --        problem still exist.
         use{
             "hrsh7th/nvim-cmp",
             requires = {
