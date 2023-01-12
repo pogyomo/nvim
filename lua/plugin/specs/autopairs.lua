@@ -1,5 +1,6 @@
 return {
     "windwp/nvim-autopairs",
+    event = "InsertEnter",
     config = function()
         local module = require("utils.module")
         local mods = module.require{
