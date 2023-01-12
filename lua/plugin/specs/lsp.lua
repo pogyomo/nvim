@@ -1,37 +1,17 @@
-return function()
-    local module = require("utils.module")
-    local is_ok, mods = pcall(module.require, {
-        "mason",
-        "lspconfig",
-        "mason-lspconfig",
-        "cmp_nvim_lsp",
-        "fidget"
-    })
-    if not is_ok then
-        return
-    end
-
-    local function setup_mason()
-        -- Always show signcolumn.
-        vim.opt.signcolumn = "yes"
-
-        mods["mason"].setup{
-            ui = {
-                border = "rounded"
-            }
+return {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = {
+        "neovim/nvim-lspconfig",
+        "j-hui/fidget.nvim"
+    },
+    config = function()
+        local module = require("utils.module")
+        local mods = module.require{
+            "fidget",
+            "lspconfig",
+            "mason-lspconfig",
+            "cmp_nvim_lsp",
         }
-
-        vim.api.nvim_create_augroup("__mason_menu", {})
-        vim.api.nvim_create_autocmd("FileType", {
-            group = "__mason_menu",
-            pattern = "mason",
-            callback = function()
-                vim.opt.winblend = 10
-            end
-        })
-    end
-
-    local function setup_lsp()
         -- Show progress of lsp startup.
         mods["fidget"].setup()
 
@@ -74,7 +54,4 @@ return function()
             end,
         }
     end
-
-    setup_mason()
-    setup_lsp()
-end
+}

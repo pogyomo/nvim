@@ -1,13 +1,14 @@
-return function()
-    local module = require("utils.module")
-    local is_ok, mods = pcall(module.require, {
-        { "nvim-treesitter.configs", as = "ts" }
-    })
-    if not is_ok then
-        return
-    end
-
-    mods["ts"].setup{
+return {
+    "nvim-treesitter/nvim-treesitter",
+    build = function()
+        require("nvim-treesitter.install").update{
+            with_sync = true
+        }()
+    end,
+    dependencies = {
+        "p00f/nvim-ts-rainbow"
+    },
+    opts = {
         ensure_installed = {
             "bibtex",
             "c",
@@ -30,5 +31,8 @@ return function()
             enable = true,
             extended_mode = true
         }
-    }
-end
+    },
+    config = function(_, opts)
+        require("nvim-treesitter.configs").setup(opts)
+    end
+}
