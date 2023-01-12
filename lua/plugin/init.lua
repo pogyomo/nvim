@@ -27,4 +27,18 @@ else
     vim.opt.rtp:prepend(lazy_path)
 end
 
-require("lazy").setup("plugin.specs")
+-- Register autocmd to set transparency to lazy's menu.
+vim.api.nvim_create_augroup("__lazy_menu", {})
+vim.api.nvim_create_autocmd("FileType", {
+    group = "__lazy_menu",
+    pattern = "lazy",
+    callback = function()
+        vim.opt.winblend = 10
+    end
+})
+
+require("lazy").setup("plugin.specs", {
+    ui = {
+        border = "rounded"
+    }
+})
