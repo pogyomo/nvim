@@ -3,34 +3,34 @@ local uv   = vim.loop
 
 local M = {}
 
----Install packer synchronously.
----@return boolean # False if packer already installed.
-function M.install_packer()
-    local packer_url  = "https://github.com/wbthomason/packer.nvim"
-    local packer_path = path.build(vim.fn.stdpath("data"), {
-        "site",
-        "pack",
-        "packer",
-        "start",
-        "packer.nvim"
+---Install lazy synchronously.
+---@return boolean # False if lazy was already installed.
+function M.install_lazy()
+    local lazy_url  = "https://github.com/folke/lazy.nvim"
+    local lazy_path = path.build(vim.fn.stdpath("data"), {
+        "lazy",
+        "lazy.nvim"
     })
 
-    if not uv.fs_stat(packer_path) then
-        vim.notify("Installing packer...")
+    if not uv.fs_stat(lazy_path) then
+        vim.notify("Installing lazy...")
         vim.fn.system({
             "git",
             "clone",
-            "--depth=1",
-            packer_url,
-            packer_path
+            "--filter=blob:none",
+            lazy_url,
+            "--branch=stable",
+            lazy_path
         })
         assert(
             vim.v.shell_error == 0,
-            ("Failed to install packer: code is %d"):format(vim.v.shell_error)
+            ("Failed to install lazy: code is %d"):format(vim.v.shell_error)
         )
-        vim.notify("Packer was installed successfully.")
+        vim.notify("Lazy was installed successfully.")
+        vim.opt.rtp:prepend(lazy_path)
         return true
     else
+        vim.opt.rtp:prepend(lazy_path)
         return false
     end
 end
