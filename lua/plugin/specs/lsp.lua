@@ -12,6 +12,7 @@ return {
             "mason-lspconfig",
             "cmp_nvim_lsp",
         }
+
         -- Show progress of lsp startup.
         mods["fidget"].setup()
 
