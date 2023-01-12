@@ -40,5 +40,8 @@ vim.api.nvim_create_autocmd("FileType", {
 require("lazy").setup("plugin.specs", {
     ui = {
         border = "rounded"
+    },
+    install = {
+        colorscheme = { "sonokai" }
     }
 })
