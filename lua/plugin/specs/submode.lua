@@ -8,7 +8,6 @@ return {
 
         mods["submode"]:setup()
 
-        vim.g.mapleader = " "
         vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)")
 
         mods["submode"]:create("LspOperator", {
