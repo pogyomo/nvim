@@ -6,7 +6,8 @@ return {
     config = function()
         local module = require("utils.module")
         local mods = module.require{
-            "lualine"
+            "lualine",
+            "submode"
         }
 
         local filename_symbols = {
@@ -22,7 +23,8 @@ return {
 
         local status_line = {
             lualine_a = {
-                { "mode",  fmt = string.lower }
+                { "mode",  fmt = string.lower },
+                function() return mods["submode"]:mode() or "" end
             },
             lualine_b = {
                 "branch", "diff", "diagnostics"
