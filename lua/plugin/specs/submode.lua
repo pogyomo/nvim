@@ -20,19 +20,19 @@ return {
             leave = { "q", "<ESC>" }
         }, {
             lhs = "d",
-            rhs = vim.lsp.buf.definition
+            rhs = function() vim.lsp.buf.definition() end
         }, {
             lhs = "D",
-            rhs = vim.lsp.buf.declaration
+            rhs = function() vim.lsp.buf.declaration() end
         }, {
             lhs = "H",
-            rhs = vim.lsp.buf.hover
+            rhs = function() vim.lsp.buf.hover() end
         }, {
             lhs = "i",
-            rhs = vim.lsp.buf.implementation
+            rhs = function() vim.lsp.buf.implementation() end
         }, {
             lhs = "r",
-            rhs = vim.lsp.buf.references
+            rhs = function() vim.lsp.buf.references() end
         })
 
         mods["submode"]:create("DocReader", {
