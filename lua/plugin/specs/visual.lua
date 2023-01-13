@@ -56,5 +56,8 @@ return {
             -- Load this colorscheme
             vim.cmd.colorscheme("sonokai")
         end
+    },
+    {
+        "thentenaar/vim-syntax-obscure"
     }
 }
