@@ -6,9 +6,13 @@ return {
             "submode"
         }
 
+        local function append_leave(map)
+            return ("%s<cmd>lua require('submode'):leave()<cr>"):format(map)
+        end
+
         mods["submode"]:setup()
 
-        vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)")
+        vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)", { remap = true })
 
         mods["submode"]:create("LspOperator", {
             mode  = "n",
@@ -44,7 +48,7 @@ return {
             rhs = "<cmd>ta<cr>"
         }, {
             lhs = "i",
-            rhs = "<cmd>lua require('submode'):leave()<cr><insert>"
+            rhs = append_leave("<Insert>")
         })
 
         vim.api.nvim_create_augroup("DocReaderAug", {})
