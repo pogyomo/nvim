@@ -22,7 +22,7 @@ return {
                 "clangd",
                 "sumneko_lua",
                 "rust_analyzer",
-                "tsserver"
+                "denols"
             }
         }
 
