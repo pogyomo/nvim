@@ -18,7 +18,7 @@ for _, key in ipairs({ "L", "H" }) do
     end, { expr = true })
 end
 
--- Keymaps to manage windows
+-- Keymaps to move around windows
 for _, key in ipairs({ "l", "h", "j", "k", "L", "H", "J", "K" }) do
     vim.keymap.set("n", "<Plug>(core-window-manager)" .. key, "<C-w>" .. key)
 end
