@@ -20,6 +20,7 @@ return {
             "lua",
             "latex",
             "markdown",
+            "typescript",
             "rust",
             "zig"
         },
