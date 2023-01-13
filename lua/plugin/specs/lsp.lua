@@ -36,6 +36,7 @@ return {
             end,
             ["sumneko_lua"] = function()
                 mods["lspconfig"].sumneko_lua.setup{
+                    capabilities = cap,
                     -- NOTE: In lua, if this feature enabled, the syntax highlight collaps.
                     --       I need to disable this while this problem alive.
                     on_attach = function(client, _)
@@ -52,7 +53,7 @@ return {
                         }
                     }
                 }
-            end,
+            end
         }
     end
 }
