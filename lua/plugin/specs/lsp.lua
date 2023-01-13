@@ -1,7 +1,7 @@
 return {
-    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
     dependencies = {
-        "neovim/nvim-lspconfig",
+        "williamboman/mason-lspconfig.nvim",
         "j-hui/fidget.nvim"
     },
     config = function()
