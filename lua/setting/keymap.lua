@@ -31,5 +31,8 @@ for _, key in ipairs({ "l", "h", "j", "k" }) do
     end, { expr = true })
 end
 
--- Keymaps to leave from insert mode
+-- Keymap to leave from insert mode
 vim.keymap.set("i", "jj", "<ESC>")
+
+-- Keymap to leave from terminal mode
+vim.keymap.set("t", "<A-j><A-j>", "<C-\\><C-n>")
