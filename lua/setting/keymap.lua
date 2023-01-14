@@ -33,6 +33,3 @@ end
 
 -- Keymap to leave from insert mode
 vim.keymap.set("i", "jj", "<ESC>")
-
--- Keymap to leave from terminal mode
-vim.keymap.set("t", "<A-j><A-j>", "<C-\\><C-n>")
