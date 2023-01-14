@@ -12,4 +12,4 @@ git clone https://github.com/pogyomo/nvim ~/.config/nvim
 
 ## TODO
 
-- [ ] Trying out lazy.nvim
+- [x] Trying out lazy.nvim
