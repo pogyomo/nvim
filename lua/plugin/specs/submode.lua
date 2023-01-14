@@ -62,7 +62,6 @@ return {
                 local diff = 5
 
                 if vim.fn.winlayout()[1] == "leaf" then
-                    setter(0, getter(0) + (lhs == "j" and diff or -diff))
                     return
                 end
 
