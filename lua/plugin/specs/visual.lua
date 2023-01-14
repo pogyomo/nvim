@@ -58,6 +58,7 @@ return {
         end
     },
     {
-        "thentenaar/vim-syntax-obscure"
+        "thentenaar/vim-syntax-obscure",
+        ft = { "nesasm", "ca65", "ophis", "ti99asm" }
     }
 }
