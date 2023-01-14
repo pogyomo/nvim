@@ -7,6 +7,7 @@ return {
         }()
     end,
     dependencies = {
+        -- TODO: This plugin was archived, so I need to find alternative plugin like this.
         "p00f/nvim-ts-rainbow"
     },
     opts = {
