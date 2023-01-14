@@ -61,6 +61,11 @@ return {
                 local getter = vim.api["nvim_win_get_" .. dir]
                 local diff = 5
 
+                if vim.fn.winlayout()[1] == "leaf" then
+                    setter(0, getter(0) + (lhs == "j" and diff or -diff))
+                    return
+                end
+
                 if lhs == "l" then
                     setter(0, getter(0) + (have_neighbor_to(0, "right") and -diff or diff))
                 elseif lhs == "h" then
