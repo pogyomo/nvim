@@ -23,8 +23,8 @@ return {
             return vim.api.nvim_win_get_number(right) == vim.api.nvim_win_get_number(window)
         end
 
-        vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)", { remap = true })
-        vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)",  { remap = true })
+        vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)")
+        vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
 
         mods["submode"]:setup()
 
