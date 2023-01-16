@@ -20,7 +20,9 @@ return {
                 })[dir])
                 return vim.api.nvim_get_current_win()
             end)
-            return vim.api.nvim_win_get_number(right) == vim.api.nvim_win_get_number(window)
+            local r_winnr = vim.api.nvim_win_get_number(right)
+            local w_winnr = vim.api.nvim_win_get_number(window)
+            return r_winnr == w_winnr
         end
 
         vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)")
