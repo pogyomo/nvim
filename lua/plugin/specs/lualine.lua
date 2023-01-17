@@ -72,9 +72,9 @@ return {
                 theme = "sonokai",
                 globalstatus = true,
                 refresh = {
-                    statusline = 100,
-                    tabline    = 100,
-                    winbar     = 100
+                    statusline = 200,
+                    tabline    = 200,
+                    winbar     = 200
                 }
             },
             sections         = status_line,
