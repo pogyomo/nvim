@@ -34,3 +34,6 @@ end
 -- Keymaps to move display line.
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
+
+-- Keymap to leave from insert mode
+vim.keymap.set("i", "jj", "<ESC>")

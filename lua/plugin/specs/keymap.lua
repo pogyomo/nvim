@@ -1,10 +1,5 @@
 return {
     {
-        "max397574/better-escape.nvim",
-        event = "InsertEnter",
-        config = true
-    },
-    {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         config = function()
