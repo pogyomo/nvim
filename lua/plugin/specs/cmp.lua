@@ -52,7 +52,15 @@ return {
                 }
             },
             mapping = {
-                ["<Tab>"] = mods["cmp"].mapping.select_next_item(),
+                ["<Tab>"] = mods["cmp"].mapping(function(fallback)
+                    if mods["luasnip"].expand_or_jumpable() then
+                        mods["luasnip"].expand_or_jump()
+                    elseif mods["cmp"].visible() then
+                        mods["cmp"].select_next_item()
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
                 ["<CR>"]  = mods["cmp"].mapping.confirm{ select = false },
                 ["<C-n>"] = mods["cmp"].mapping.select_next_item{
                     behavior = mods["cmp"].SelectBehavior.Select
