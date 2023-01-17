@@ -43,5 +43,8 @@ require("lazy").setup("plugin.specs", {
     },
     install = {
         colorscheme = { "sonokai" }
+    },
+    change_detection = {
+        notify = false
     }
 })
