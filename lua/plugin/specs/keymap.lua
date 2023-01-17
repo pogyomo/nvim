@@ -19,6 +19,7 @@ return {
     },
     {
         "pogyomo/submode.nvim",
+        dev = true,
         config = function()
             local module = require("utils.module")
             local mods = module.require{
@@ -119,14 +120,21 @@ return {
                 "BufEnter", "BufLeave"
             }, {
                 group = "DocReaderAug",
-                pattern = "*",
                 callback = function(opt)
                     if vim.opt.ft:get() == "help" then
                         if opt.event == "BufEnter" then
                             mods["submode"]:enter("DocReader")
-                        else
+                        elseif mods["submode"]:mode() == "DocReader" then
                             mods["submode"]:leave()
                         end
+                    end
+                end
+            })
+            vim.api.nvim_create_autocmd("CursorMoved", {
+                group = "DocReaderAug",
+                callback = function()
+                    if vim.opt.ft:get() == "help" and mods["submode"]:mode() ~= "DocReader" then
+                        mods["submode"]:enter("DocReader")
                     end
                 end
             })
