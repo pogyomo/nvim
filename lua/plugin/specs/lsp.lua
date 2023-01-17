@@ -10,7 +10,7 @@ return {
             "fidget",
             "lspconfig",
             "mason-lspconfig",
-            "cmp_nvim_lsp",
+            "cmp_nvim_lsp"
         }
 
         -- Show progress of lsp startup.
