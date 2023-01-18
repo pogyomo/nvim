@@ -3,13 +3,13 @@ return {
         "folke/todo-comments.nvim",
         opts = {
             keywords = {
-                REVIEW =  { icon = " ", color = "info" },
+                REVIEW  = { icon = " ", color = "info" },
                 CHANGED = { icon = " ", color = "hint" }
             }
         },
         config = function(_, opts)
             local module = require("utils.module")
-            local mods = module.require{
+            local mods   = module.require{
                 "todo-comments"
             }
 
@@ -30,7 +30,7 @@ return {
         },
         config = function(_, opts)
             local module = require("utils.module")
-            local mods = module.require{
+            local mods   = module.require{
                 "notify"
             }
             mods["notify"].setup(opts)
@@ -44,7 +44,7 @@ return {
             vim.g.sonokai_style = "shusia"
 
             -- Disable italic.
-            vim.g.sonokai_enable_italic = false
+            vim.g.sonokai_enable_italic          = false
             vim.g.sonokai_disable_italic_comment = true
 
             -- Make virtual text to be colorful.

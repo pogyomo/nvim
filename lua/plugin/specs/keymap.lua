@@ -21,7 +21,7 @@ return {
         "pogyomo/submode.nvim",
         config = function()
             local module = require("utils.module")
-            local mods = module.require{
+            local mods   = module.require{
                 "submode"
             }
 
