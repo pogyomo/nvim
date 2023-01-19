@@ -114,6 +114,8 @@ return {
                 rhs = append_leave("<Insert>")
             })
 
+            --- FIX: Leave from DocReader when I'm in help and
+            ---      press 'q:'.
             vim.api.nvim_create_augroup("DocReaderAug", {})
             vim.api.nvim_create_autocmd({
                 "BufEnter", "BufLeave"
