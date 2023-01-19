@@ -35,15 +35,18 @@ return {
         mods["mason-lspconfig"].setup_handlers{
             function(name)
                 mods["lspconfig"][name].setup{
-                    capabilities = cap
+                    capabilities = cap,
+                    on_attach = function(client, _)
+                        -- NOTE: This feature may collapse syntax highlight.
+                        --       So, I need to disable it.
+                        client.server_capabilities.semanticTokensProvider = nil
+                    end,
                 }
             end,
             ["sumneko_lua"] = function()
                 mods["lspconfig"].sumneko_lua.setup{
                     capabilities = cap,
                     on_attach = function(client, _)
-                        -- NOTE: In lua, if this feature enabled, the syntax highlight collaps.
-                        --       I need to disable this while this problem alive.
                         client.server_capabilities.semanticTokensProvider = nil
                     end,
                     settings = {
