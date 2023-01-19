@@ -114,8 +114,6 @@ return {
                 rhs = append_leave("<Insert>")
             })
 
-            --- FIX: Leave from DocReader when I'm in help and
-            ---      press 'q:'.
             vim.api.nvim_create_augroup("DocReaderAug", {})
             vim.api.nvim_create_autocmd({
                 "BufEnter", "BufLeave"
@@ -125,9 +123,11 @@ return {
                     if vim.opt.ft:get() == "help" then
                         if opt.event == "BufEnter" then
                             mods["submode"]:enter("DocReader")
-                        elseif mods["submode"]:mode() == "DocReader" then
+                        else
                             mods["submode"]:leave()
                         end
+                    elseif mods["submode"]:mode() == "DocReader" then
+                        mods["submode"]:leave()
                     end
                 end
             })
