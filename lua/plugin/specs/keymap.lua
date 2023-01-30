@@ -82,6 +82,19 @@ return {
                     local getter = vim.api["nvim_win_get_" .. dir]
                     local diff = 5
 
+                    if vim.api.nvim_win_get_config(0).relative ~= "" then
+                        if lhs == "l" then
+                            setter(0, getter(0) + diff)
+                        elseif lhs == "h" then
+                            setter(0, getter(0) - diff)
+                        elseif lhs == "j" then
+                            setter(0, getter(0) + diff)
+                        else
+                            setter(0, getter(0) - diff)
+                        end
+                        return
+                    end
+
                     if vim.fn.winlayout()[1] == "leaf" then
                         return
                     end
