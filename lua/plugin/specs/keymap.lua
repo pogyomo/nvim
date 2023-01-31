@@ -22,26 +22,12 @@ return {
         config = function()
             local module = require("utils.module")
             local mods   = module.require{
-                "submode"
+                "submode",
+                { "utils.window.resize", as = "resize" }
             }
 
             local function append_leave(map)
                 return ("%s<cmd>lua require('submode'):leave()<cr>"):format(map)
-            end
-
-            local function have_neighbor_to(window, dir)
-                local right = vim.api.nvim_win_call(window, function()
-                    vim.cmd.wincmd(({
-                        left  = "h",
-                        right = "l",
-                        up    = "k",
-                        down  = "j"
-                    })[dir])
-                    return vim.api.nvim_get_current_win()
-                end)
-                local r_winnr = vim.api.nvim_win_get_number(right)
-                local w_winnr = vim.api.nvim_win_get_number(window)
-                return r_winnr == w_winnr
             end
 
             vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)")
@@ -77,39 +63,12 @@ return {
             }, {
                 lhs = { "l", "h", "j", "k" },
                 rhs = function(lhs)
-                    local dir = (lhs == "l" or lhs == "h") and "width" or "height"
-                    local setter = vim.api["nvim_win_set_" .. dir]
-                    local getter = vim.api["nvim_win_get_" .. dir]
-                    local diff_row = 2
-                    local diff_col = 5
-
-                    if vim.api.nvim_win_get_config(0).relative ~= "" then
-                        if lhs == "l" then
-                            setter(0, getter(0) + diff_col)
-                        elseif lhs == "h" then
-                            setter(0, getter(0) - diff_col)
-                        elseif lhs == "j" then
-                            setter(0, getter(0) + diff_row)
-                        else
-                            setter(0, getter(0) - diff_row)
-                        end
-                        return
-                    end
-
-                    if vim.fn.winlayout()[1] == "leaf" then
-                        return
-                    end
-
-                    dir = (lhs == "l" or lhs == "h") and "right" or "down"
-                    if lhs == "l" then
-                        setter(0, getter(0) + (have_neighbor_to(0, dir) and -diff_col or diff_col))
-                    elseif lhs == "h" then
-                        setter(0, getter(0) + (have_neighbor_to(0, dir) and diff_col or -diff_col))
-                    elseif lhs == "j" then
-                        setter(0, getter(0) + (have_neighbor_to(0, dir) and -diff_row or diff_row))
-                    else
-                        setter(0, getter(0) + (have_neighbor_to(0, dir) and diff_row or -diff_row))
-                    end
+                    mods["resize"](0, 2, 5, ({
+                        ["l"] = "right",
+                        ["h"] = "left",
+                        ["j"] = "down",
+                        ["k"] = "up"
+                    })[lhs])
                 end
             })
 
