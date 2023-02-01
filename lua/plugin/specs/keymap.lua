@@ -23,7 +23,8 @@ return {
             local module = require("utils.module")
             local mods   = module.require{
                 "submode",
-                { "utils.window.resize", as = "resize" }
+                { "utils.window.resize", as = "resize" },
+                { "utils.window.move",   as = "move" }
             }
 
             local function append_leave(map)
@@ -68,6 +69,16 @@ return {
                         ["h"] = "left",
                         ["j"] = "down",
                         ["k"] = "up"
+                    })[lhs])
+                end
+            }, {
+                lhs = { "<C-l>", "<C-h>", "<C-j>", "<C-k>" },
+                rhs = function(lhs)
+                    mods["move"](0, 2, 5, ({
+                        ["<C-l>"] = "right",
+                        ["<C-h>"] = "left",
+                        ["<C-j>"] = "down",
+                        ["<C-k>"] = "up"
                     })[lhs])
                 end
             })
