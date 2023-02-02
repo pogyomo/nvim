@@ -1,9 +1,9 @@
 ---Check whether the window have neighbor to 'dir' or not.
----@param window integer Window handle, or 0 for current window.
+---@param win integer Window handle, or 0 for current window.
 ---@param dir "left" | "right" | "up" | "down" Direction to check.
 ---@return boolean # True if the window have neighbor to 'dir'.
-local function have_neighbor_to(window, dir)
-    local neighbor = vim.api.nvim_win_call(window, function()
+local function have_neighbor_to(win, dir)
+    local neighbor = vim.api.nvim_win_call(win, function()
         vim.cmd.wincmd(({
             left  = "h",
             right = "l",
@@ -13,7 +13,7 @@ local function have_neighbor_to(window, dir)
         return vim.api.nvim_get_current_win()
     end)
     local n_winnr = vim.api.nvim_win_get_number(neighbor)
-    local w_winnr = vim.api.nvim_win_get_number(window)
+    local w_winnr = vim.api.nvim_win_get_number(win)
     return n_winnr ~= w_winnr
 end
 
