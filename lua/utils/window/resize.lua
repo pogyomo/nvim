@@ -14,7 +14,7 @@ local function have_neighbor_to(window, dir)
     end)
     local n_winnr = vim.api.nvim_win_get_number(neighbor)
     local w_winnr = vim.api.nvim_win_get_number(window)
-    return n_winnr == w_winnr
+    return n_winnr ~= w_winnr
 end
 
 ---Resize the window as normal (not float) window.
@@ -29,15 +29,19 @@ local function resize_normal(win, diff_row, diff_col, key_dir)
 
     if key_dir == "left" or key_dir == "right" then
         if have_neighbor_to(win, "right") then
-            setter(win, getter(win) + (key_dir == "left" and diff_col or -diff_col))
+            setter(win, getter(win) + (key_dir == "right" and diff_col or -diff_col))
         else
-            setter(win, getter(win) + (key_dir == "left" and -diff_col or diff_col))
+            setter(win, getter(win) + (key_dir == "right" and -diff_col or diff_col))
         end
     else
+        if not have_neighbor_to(win, "down") and not have_neighbor_to(win, "up") then
+            return
+        end
+
         if have_neighbor_to(win, "down") then
-            setter(win, getter(win) + (key_dir == "up" and diff_row or -diff_row))
+            setter(win, getter(win) + (key_dir == "down" and diff_row or -diff_row))
         else
-            setter(win, getter(win) + (key_dir == "up" and -diff_row or diff_row))
+            setter(win, getter(win) + (key_dir == "down" and -diff_row or diff_row))
         end
     end
 end
