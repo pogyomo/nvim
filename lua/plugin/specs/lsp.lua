@@ -33,25 +33,25 @@ return {
             }
         }
 
-        -- Settings for specific lsp with nvim-cmp
-        local cap = mods["cmp_nvim_lsp"].default_capabilities()
+        -- Default config of each lsp.
+        local capabilities = mods["cmp_nvim_lsp"].default_capabilities()
+        local on_attach = function(client)
+            -- NOTE: This feature may collapse syntax highlight.
+            --       So, I need to disable it.
+            client.server_capabilities.semanticTokensProvider = nil
+        end
+
         mods["mason-lspconfig"].setup_handlers{
             function(name)
                 mods["lspconfig"][name].setup{
-                    capabilities = cap,
-                    on_attach = function(client, _)
-                        -- NOTE: This feature may collapse syntax highlight.
-                        --       So, I need to disable it.
-                        client.server_capabilities.semanticTokensProvider = nil
-                    end,
+                    capabilities = capabilities,
+                    on_attach = on_attach
                 }
             end,
             ["sumneko_lua"] = function()
                 mods["lspconfig"].sumneko_lua.setup{
-                    capabilities = cap,
-                    on_attach = function(client, _)
-                        client.server_capabilities.semanticTokensProvider = nil
-                    end,
+                    capabilities = capabilities,
+                    on_attach = on_attach,
                     settings = {
                         Lua = {
                             runtime = {
