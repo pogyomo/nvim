@@ -119,9 +119,14 @@ return {
             vim.api.nvim_create_autocmd("CursorMoved", {
                 group = "DocReaderAug",
                 callback = function()
-                    if vim.opt.ft:get() == "help" and mods["submode"]:mode() ~= "DocReader" then
-                        mods["submode"]:enter("DocReader")
+                    if vim.opt.ft:get() ~= "help" then
+                        return
                     end
+                    if mods["submode"]:mode() == "DocReader" then
+                        return
+                    end
+
+                    mods["submode"]:enter("DocReader")
                 end
             })
         end
