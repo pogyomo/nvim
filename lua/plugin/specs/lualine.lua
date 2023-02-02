@@ -1,8 +1,5 @@
 return {
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-        "nvim-tree/nvim-web-devicons"
-    },
     config = function()
         local module = require("utils.module")
         local mods   = module.require{
