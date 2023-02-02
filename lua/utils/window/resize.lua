@@ -74,9 +74,5 @@ return function(win, diff_row, diff_col, key_dir)
         return
     end
 
-    if vim.fn.winlayout()[1] == "leaf" then
-        return
-    end
-
     resize_normal(win, diff_row, diff_col, key_dir)
 end
