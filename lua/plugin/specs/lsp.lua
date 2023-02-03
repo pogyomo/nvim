@@ -1,9 +1,8 @@
--- FIX: When I writing rust code, sometimes diagnostics
---      don't appear.
+-- FIX: When I writing rust code, sometimes diagnostics don't appear.
 --      This happen frequently when the crate is young.
--- FIX: After I installed new plugin, lsp throw error
---      when I writing something.
+-- FIX: After I installed new plugin, lsp throw error when I writing something.
 --      I think this may be caused by disabling semantic token.
+--      Maybe related to https://github.com/neovim/neovim/issues/21588
 
 return {
     "neovim/nvim-lspconfig",
