@@ -28,6 +28,15 @@ return {
         highlight = {
             enable = true,
             disable = function(lang, bufnr)
+                -- NOTE: Disable treesitter on help file if the size of file is too large.
+                --       This is temporary treatment. See above NOTE for the reason.
+                if lang == "help" then
+                    local line = vim.api.nvim_buf_call(bufnr, function()
+                        return vim.fn.line("$")
+                    end)
+                    return line > 3000
+                end
+
                 -- NOTE: I need to disable treesitter on command window.
                 --       See: https://github.com/nvim-treesitter/nvim-treesitter/issues/3961
                 local bufname = vim.api.nvim_buf_get_name(bufnr)
