@@ -108,8 +108,6 @@ return {
                     if vim.opt.ft:get() == "help" then
                         if opt.event == "BufEnter" then
                             mods["submode"]:enter("DocReader")
-                        else
-                            mods["submode"]:leave()
                         end
                     elseif mods["submode"]:mode() == "DocReader" then
                         mods["submode"]:leave()
