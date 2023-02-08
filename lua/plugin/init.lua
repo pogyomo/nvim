@@ -46,5 +46,8 @@ require("lazy").setup("plugin.specs", {
     },
     change_detection = {
         notify = false
+    },
+    dev = {
+        path = os.getenv("LAZY_DEV_PATH") or "~/projects"
     }
 })
