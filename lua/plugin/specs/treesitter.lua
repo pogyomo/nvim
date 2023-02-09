@@ -1,6 +1,7 @@
 -- NOTE: When I scrolling second half of huge help file, the scroll slow down.
 --       This problem doesn't happen if I disable treesitter highlight on the file.
 --       Also, this only happen when I using nightly neovim (using 0.8.2 doesn't cause the problem).
+--       This may caused by semantic token support.
 
 return {
     "nvim-treesitter/nvim-treesitter",
