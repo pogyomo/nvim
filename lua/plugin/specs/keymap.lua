@@ -106,11 +106,17 @@ return {
             }, {
                 group = "DocReaderAug",
                 callback = function(opt)
-                    if vim.opt.ft:get() == "help" then
-                        if opt.event == "BufEnter" then
-                            mods["submode"]:enter("DocReader")
-                        end
+                    if vim.opt.ft:get() == "help" and opt.event == "BufEnter" then
+                        mods["submode"]:enter("DocReader")
                     elseif mods["submode"]:mode() == "DocReader" then
+                        mods["submode"]:leave()
+                    end
+                end
+            })
+            vim.api.nvim_create_autocmd("CmdwinEnter", {
+                group = "DocReaderAug",
+                callback = function()
+                    if mods["submode"]:mode() == "DocReader" then
                         mods["submode"]:leave()
                     end
                 end
