@@ -26,7 +26,7 @@ return {
         mods["mason-lspconfig"].setup{
             ensure_installed = {
                 "clangd",
-                "sumneko_lua",
+                "lua_ls",
                 "rust_analyzer",
                 "denols"
             }
@@ -47,8 +47,8 @@ return {
                     on_attach = on_attach
                 }
             end,
-            ["sumneko_lua"] = function()
-                mods["lspconfig"].sumneko_lua.setup{
+            ["lua_ls"] = function()
+                mods["lspconfig"].lua_ls.setup{
                     capabilities = capabilities,
                     on_attach = on_attach,
                     settings = {
