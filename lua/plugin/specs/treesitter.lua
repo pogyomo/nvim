@@ -18,9 +18,10 @@ return {
             "go",
             "help",
             "java",
-            "lua",
             "latex",
+            "lua",
             "markdown",
+            "toml",
             "typescript",
             "rust",
             "zig"
