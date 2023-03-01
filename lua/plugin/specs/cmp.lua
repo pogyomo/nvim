@@ -54,10 +54,10 @@ return {
             },
             mapping = {
                 ["<Tab>"] = mods["cmp"].mapping(function(fallback)
-                    if mods["luasnip"].expand_or_jumpable() then
-                        mods["luasnip"].expand_or_jump()
-                    elseif mods["cmp"].visible() then
+                    if mods["cmp"].visible() then
                         mods["cmp"].select_next_item()
+                    elseif mods["luasnip"].expand_or_jumpable() then
+                        mods["luasnip"].expand_or_jump()
                     else
                         fallback()
                     end
