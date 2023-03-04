@@ -83,7 +83,6 @@ return {
         }
 
         -- Command line settings (when "/")
-        -- TODO: How can I show the completion menu automatically?
         mods["cmp"].setup.cmdline({ "/", "?" }, {
             mapping = mods["cmp"].mapping.preset.cmdline(),
             sources = {
