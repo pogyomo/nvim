@@ -2,6 +2,10 @@
 
 My neovim configuration.
 
+## Requirement
+
+Nightly neovim is highly recommended for use this config.
+
 ## Installation
 
 Run below command.
