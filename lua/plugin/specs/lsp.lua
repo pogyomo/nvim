@@ -34,23 +34,16 @@ return {
 
         -- Default config of each lsp.
         local capabilities = mods["cmp_nvim_lsp"].default_capabilities()
-        local on_attach = function(client)
-            -- NOTE: This feature may collapse syntax highlight.
-            --       So, I need to disable it.
-            client.server_capabilities.semanticTokensProvider = nil
-        end
 
         mods["mason-lspconfig"].setup_handlers{
             function(name)
                 mods["lspconfig"][name].setup{
-                    capabilities = capabilities,
-                    on_attach = on_attach
+                    capabilities = capabilities
                 }
             end,
             ["lua_ls"] = function()
                 mods["lspconfig"].lua_ls.setup{
                     capabilities = capabilities,
-                    on_attach = on_attach,
                     settings = {
                         Lua = {
                             runtime = {
