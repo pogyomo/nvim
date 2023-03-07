@@ -2,8 +2,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     dependencies = {
-        -- TODO: This plugin was archived, so I need to find alternative plugin like this.
-        "p00f/nvim-ts-rainbow"
+        "HiPhish/nvim-ts-rainbow2"
     },
     opts = {
         ensure_installed = {
@@ -34,7 +33,14 @@ return {
 
         rainbow = {
             enable = true,
-            extended_mode = true
+            hlgroups = {
+                "Red",
+                "Orange",
+                "Yellow",
+                "Green",
+                "Blue",
+                "Purple"
+            }
         }
     },
     config = function(_, opts)
