@@ -1,6 +1,3 @@
--- FIX: When I writing rust code, sometimes diagnostics don't appear.
---      This happen frequently when the crate is young.
-
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
