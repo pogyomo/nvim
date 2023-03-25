@@ -107,6 +107,9 @@ return {
                 group = "DocReaderAug",
                 callback = function(opt)
                     if vim.opt.ft:get() == "help" and opt.event == "BufEnter" then
+                        if vim.o.modifiable then
+                            return
+                        end
                         mods["submode"]:enter("DocReader")
                     elseif mods["submode"]:mode() == "DocReader" then
                         mods["submode"]:leave()
@@ -124,7 +127,7 @@ return {
             vim.api.nvim_create_autocmd("CursorMoved", {
                 group = "DocReaderAug",
                 callback = function()
-                    if vim.opt.ft:get() ~= "help" then
+                    if vim.opt.ft:get() ~= "help" or vim.o.modifiable then
                         return
                     end
                     if mods["submode"]:mode() == "DocReader" then
