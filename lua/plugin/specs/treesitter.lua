@@ -10,14 +10,14 @@ return {
             "c",
             "cpp",
             "go",
-            "help",
             "java",
             "latex",
             "lua",
             "markdown",
+            "rust",
             "toml",
             "typescript",
-            "rust",
+            "vimdoc",
             "zig"
         },
 
