@@ -58,14 +58,28 @@ return {
                 rhs = function() vim.lsp.buf.references() end
             })
 
+            local is_precise = false
             mods["submode"]:create("WinResizer", {
                 mode = "n",
+                mode_name = function()
+                    return ("WinResizer%s"):format(is_precise and " - precise" or "")
+                end,
                 enter = "<Plug>(submode-win-resizer)",
-                leave = { "q", "<ESC>" }
+                leave = { "q", "<ESC>" },
+                leave_cb = function()
+                    is_precise = false
+                end
+            }, {
+                lhs = { "i", "<C-i>" },
+                rhs = function()
+                    is_precise = not is_precise
+                end
             }, {
                 lhs = { "l", "h", "j", "k" },
                 rhs = function(lhs)
-                    mods["resize"](0, 2, 5, ({
+                    local diff_row = is_precise and 1 or 2
+                    local diff_col = is_precise and 1 or 5
+                    mods["resize"](0, diff_row, diff_col, ({
                         ["l"] = "right",
                         ["h"] = "left",
                         ["j"] = "down",
@@ -75,7 +89,9 @@ return {
             }, {
                 lhs = { "<C-l>", "<C-h>", "<C-j>", "<C-k>" },
                 rhs = function(lhs)
-                    mods["move"](0, 2, 5, ({
+                    local diff_row = is_precise and 1 or 2
+                    local diff_col = is_precise and 1 or 5
+                    mods["move"](0, diff_row, diff_col, ({
                         ["<C-l>"] = "right",
                         ["<C-h>"] = "left",
                         ["<C-j>"] = "down",
