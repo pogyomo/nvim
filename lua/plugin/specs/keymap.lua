@@ -59,44 +59,49 @@ return {
             })
 
             local is_precise = false
-            mods["submode"]:create("WinResizer", {
+            local is_move = false
+            mods["submode"]:create("WinManipulator", {
                 mode = "n",
                 mode_name = function()
-                    return ("WinResizer%s"):format(is_precise and " - precise" or "")
+                    local mode_name = is_move and "WinMove" or "WinResize"
+                    local postfix = is_precise and " - precise" or ""
+                    return ("%s%s"):format(mode_name, postfix)
                 end,
                 enter = "<Plug>(submode-win-resizer)",
                 leave = { "q", "<ESC>" },
                 leave_cb = function()
                     is_precise = false
+                    is_move = false
                 end
             }, {
-                lhs = { "i", "<C-i>" },
-                rhs = function()
-                    is_precise = not is_precise
+                lhs = { "i", "r" },
+                rhs = function(lhs)
+                    if lhs == "i" then
+                        is_precise = not is_precise
+                    else
+                        is_move = not is_move
+                    end
                 end
             }, {
                 lhs = { "l", "h", "j", "k" },
                 rhs = function(lhs)
                     local diff_row = is_precise and 1 or 2
                     local diff_col = is_precise and 1 or 5
-                    mods["resize"](0, diff_row, diff_col, ({
-                        ["l"] = "right",
-                        ["h"] = "left",
-                        ["j"] = "down",
-                        ["k"] = "up"
-                    })[lhs])
-                end
-            }, {
-                lhs = { "<C-l>", "<C-h>", "<C-j>", "<C-k>" },
-                rhs = function(lhs)
-                    local diff_row = is_precise and 1 or 2
-                    local diff_col = is_precise and 1 or 5
-                    mods["move"](0, diff_row, diff_col, ({
-                        ["<C-l>"] = "right",
-                        ["<C-h>"] = "left",
-                        ["<C-j>"] = "down",
-                        ["<C-k>"] = "up"
-                    })[lhs])
+                    if is_move then
+                        mods["move"](0, diff_row, diff_col, ({
+                            ["l"] = "right",
+                            ["h"] = "left",
+                            ["j"] = "down",
+                            ["k"] = "up"
+                        })[lhs])
+                    else
+                        mods["resize"](0, diff_row, diff_col, ({
+                            ["l"] = "right",
+                            ["h"] = "left",
+                            ["j"] = "down",
+                            ["k"] = "up"
+                        })[lhs])
+                    end
                 end
             })
 
