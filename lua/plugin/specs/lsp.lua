@@ -2,7 +2,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
         "williamboman/mason-lspconfig.nvim",
-        "j-hui/fidget.nvim"
+        { "j-hui/fidget.nvim", tag = "legacy" }
     },
     config = function()
         local module = require("utils.module")
