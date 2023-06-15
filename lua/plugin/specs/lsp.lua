@@ -2,7 +2,8 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
         "williamboman/mason-lspconfig.nvim",
-        { "j-hui/fidget.nvim", tag = "legacy" }
+        { "j-hui/fidget.nvim", tag = "legacy" },
+        "folke/neodev.nvim"
     },
     config = function()
         local module = require("utils.module")
@@ -10,8 +11,12 @@ return {
             "fidget",
             "lspconfig",
             "mason-lspconfig",
-            "cmp_nvim_lsp"
+            "cmp_nvim_lsp",
+            "neodev"
         }
+
+        -- Setup neodev before lspconfig
+        mods["neodev"].setup()
 
         -- Show progress of lsp startup.
         mods["fidget"].setup()
