@@ -7,6 +7,39 @@ return {
             "submode"
         }
 
+        local function is_in_range(l, r, value)
+            return l <= value and value < r
+        end
+
+        local function current_time_clock_emoji()
+            local time = os.date("*t")
+            if is_in_range(0, 1, time.hour) or is_in_range(12, 13, time.hour) then
+                return "󱑖"
+            elseif is_in_range(1, 2, time.hour) or is_in_range(13, 14, time.hour) then
+                return "󱑋"
+            elseif is_in_range(2, 3, time.hour) or is_in_range(14, 15, time.hour) then
+                return "󱑌"
+            elseif is_in_range(3, 4, time.hour) or is_in_range(15, 16, time.hour) then
+                return "󱑍"
+            elseif is_in_range(4, 5, time.hour) or is_in_range(16, 17, time.hour) then
+                return "󱑎"
+            elseif is_in_range(5, 6, time.hour) or is_in_range(17, 18, time.hour) then
+                return "󱑏"
+            elseif is_in_range(6, 7, time.hour) or is_in_range(18, 19, time.hour) then
+                return "󱑐"
+            elseif is_in_range(7, 8, time.hour) or is_in_range(19, 20, time.hour) then
+                return "󱑑"
+            elseif is_in_range(8, 9, time.hour) or is_in_range(20, 21, time.hour) then
+                return "󱑒"
+            elseif is_in_range(9, 10, time.hour) or is_in_range(21, 22, time.hour) then
+                return "󱑓"
+            elseif is_in_range(10, 11, time.hour) or is_in_range(22, 23, time.hour) then
+                return "󱑔"
+            elseif is_in_range(11, 12, time.hour) or is_in_range(23, 24, time.hour) then
+                return "󱑕"
+            end
+        end
+
         local filename_symbols = {
             modified = "+",
             readonly = "-",
@@ -50,7 +83,10 @@ return {
             lualine_c = {},
             lualine_x = {},
             lualine_y = {
-                "vim.fn.strftime(' %Y/%m/%d %H:%M:%S')"
+                function()
+                    local clock = current_time_clock_emoji()
+                    return ("%s %s"):format(clock, vim.fn.strftime("%Y/%m/%d %H:%M:%S"))
+                end
             },
             lualine_z = {}
         }
