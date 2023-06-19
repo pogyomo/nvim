@@ -8,24 +8,16 @@ local lazy_path = path.build(vim.fn.stdpath("data"), {
 
 -- Install lazy if not exist
 if not uv.fs_stat(lazy_path) then
-    vim.notify("Installing lazy...")
-    vim.fn.system({
+    vim.system({
         "git",
         "clone",
         "--filter=blob:none",
         lazy_url,
         "--branch=stable",
         lazy_path
-    })
-    assert(
-        vim.v.shell_error == 0,
-        ("Failed to install lazy: code is %d"):format(vim.v.shell_error)
-    )
-    vim.notify("Lazy was installed successfully.")
-    vim.opt.rtp:prepend(lazy_path)
-else
-    vim.opt.rtp:prepend(lazy_path)
+    }):wait()
 end
+vim.opt.rtp:prepend(lazy_path)
 
 -- Register autocmd to set transparency to lazy's menu.
 vim.api.nvim_create_augroup("__lazy_menu", {})
