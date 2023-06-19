@@ -1,6 +1,5 @@
 return {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
     config = function()
         local module = require("utils.module")
         local mods   = module.require{
