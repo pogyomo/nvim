@@ -12,7 +12,10 @@ return {
             "cpp",
             "go",
             "java",
-            "latex",
+            -- TODO: When install latex, the startup time become too slow.
+            --       Is there any solution?
+            --
+            --"latex",
             "lua",
             "markdown",
             "rust",
