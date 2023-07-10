@@ -12,10 +12,7 @@ return {
             "cpp",
             "go",
             "java",
-            -- TODO: When install latex, the startup time become too slow.
-            --       Is there any solution?
-            --
-            --"latex",
+            "latex",
             "lua",
             "markdown",
             "rust",
@@ -37,6 +34,7 @@ return {
 
         rainbow = {
             enable = true,
+            disable = { "latex", "zig" },
             hlgroups = {
                 "Red",
                 "Orange",
