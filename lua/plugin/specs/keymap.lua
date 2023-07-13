@@ -145,6 +145,14 @@ return {
                     end
                 end
             })
+            vim.api.nvim_create_autocmd("CmdlineEnter", {
+                group = "DocReaderAug",
+                callback = function()
+                    if mods["submode"]:mode() == "DocReader" then
+                        mods["submode"]:leave()
+                    end
+                end
+            })
             vim.api.nvim_create_autocmd("CursorMoved", {
                 group = "DocReaderAug",
                 callback = function()
