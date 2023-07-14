@@ -102,7 +102,7 @@ return {
 
         mods["lualine"].setup{
             options = {
-                theme = "sonokai",
+                theme = "tokyonight",
                 globalstatus = true,
                 refresh = {
                     statusline = 200,

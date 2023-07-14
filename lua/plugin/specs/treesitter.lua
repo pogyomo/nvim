@@ -2,9 +2,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-        "HiPhish/rainbow-delimiters.nvim",
-    },
     opts = {
         ensure_installed = {
             "bibtex",
@@ -35,23 +32,9 @@ return {
     config = function(_, opts)
         local module = require("utils.module")
         local mods   = module.require{
-            "nvim-treesitter.configs",
-            "rainbow-delimiters",
+            "nvim-treesitter.configs"
         }
 
         mods["nvim-treesitter.configs"].setup(opts)
-
-        vim.g.rainbow_delimiters = {
-            highlight = {
-                "Red",
-                "Yellow",
-                "Blue",
-                "Orange",
-                "Green",
-                "Violet",
-                "Cyan",
-            },
-            blacklist = { "latex", "zig" }
-        }
     end
 }
