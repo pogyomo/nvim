@@ -83,10 +83,14 @@ return {
             lualine_c = {},
             lualine_x = {},
             lualine_y = {
-                function()
-                    local clock = current_time_clock_emoji()
-                    return ("%s %s"):format(clock, vim.fn.strftime("%Y/%m/%d %H:%M:%S"))
-                end
+                {
+                    function()
+                        local clock = current_time_clock_emoji()
+                        local date  = vim.fn.strftime("%Y/%m/%d %H:%M:%S")
+                        return ("%s %s"):format(clock, date)
+                    end,
+                    color = "lualine_b_normal",
+                }
             },
             lualine_z = {}
         }
