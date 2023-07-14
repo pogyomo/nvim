@@ -3,7 +3,7 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-        "HiPhish/nvim-ts-rainbow2"
+        "HiPhish/rainbow-delimiters.nvim",
     },
     opts = {
         ensure_installed = {
@@ -30,22 +30,28 @@ return {
                 local bufname = vim.api.nvim_buf_get_name(bufnr)
                 return lang == "vim" and bufname:match("%[Command Line%]")
             end
-        },
-
-        rainbow = {
-            enable = true,
-            disable = { "latex", "zig" },
-            hlgroups = {
-                "Red",
-                "Orange",
-                "Yellow",
-                "Green",
-                "Blue",
-                "Purple"
-            }
         }
     },
     config = function(_, opts)
-        require("nvim-treesitter.configs").setup(opts)
+        local module = require("utils.module")
+        local mods   = module.require{
+            "nvim-treesitter.configs",
+            "rainbow-delimiters",
+        }
+
+        mods["nvim-treesitter.configs"].setup(opts)
+
+        vim.g.rainbow_delimiters = {
+            highlight = {
+                "Red",
+                "Yellow",
+                "Blue",
+                "Orange",
+                "Green",
+                "Violet",
+                "Cyan",
+            },
+            blacklist = { "latex", "zig" }
+        }
     end
 }
