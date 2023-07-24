@@ -34,7 +34,7 @@ require("lazy").setup("plugin.specs", {
         border = "rounded"
     },
     install = {
-        colorscheme = { "sonokai" }
+        colorscheme = { "tokyonight" }
     },
     change_detection = {
         notify = false
