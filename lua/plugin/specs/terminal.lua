@@ -1,6 +1,22 @@
 return {
     "akinsho/toggleterm.nvim",
     version = "*",
+    keys = {
+        {
+            "<Leader>f",
+            mode = "n",
+        }
+    },
+    cmd = {
+        "ToggleTerm",
+        "ToggleTermToggleAll",
+        "TermExec",
+        "TermSelect",
+        "ToggleTermSetName",
+        "ToggleTermSendCurrentLine",
+        "ToggleTermSendVisualLines",
+        "ToggleTermSendVisualSelection",
+    },
     config = function()
         local module = require("utils.module")
         local mods   = module.require {
