@@ -22,7 +22,11 @@ return {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         event = { "BufReadPost", "BufNewFile" },
-        opts = {},
+        opts = {
+            scope = {
+                enabled = false,
+            }
+        },
         config = function(_, opts)
             local module = require("utils.module")
             local mods   = module.require{
