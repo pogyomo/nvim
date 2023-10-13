@@ -3,24 +3,23 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "williamboman/mason-lspconfig.nvim",
-        { "j-hui/fidget.nvim", tag = "legacy" },
         "folke/neodev.nvim"
     },
     config = function()
         local module = require("utils.module")
         local mods   = module.require{
-            "fidget",
             "lspconfig",
             "mason-lspconfig",
             "cmp_nvim_lsp",
+            { "utils.lsp.progress.notify", as = "progress-notify" },
             "neodev"
         }
 
         -- Setup neodev before lspconfig
         mods["neodev"].setup()
 
-        -- Show progress of lsp startup.
-        mods["fidget"].setup()
+        -- Setup lsp progress notifier
+        mods["progress-notify"].setup()
 
         -- Specify lsps to install
         mods["mason-lspconfig"].setup{
