@@ -1,4 +1,3 @@
-
 ---@alias CliendId integer
 ---@alias ProgressToken integer | string
 ---@alias Notifies table<ProgressToken, NotifyInfomation>
@@ -41,7 +40,7 @@ function M.setup()
 
             local notifies = M.client_to_notifies[client_id]
             if value.kind == "begin" then
-                notifies[token] = {}
+                notifies[token] = {} ---@diagnostic disable-line
                 notifies[token].spinner = spinner()
                 notifies[token].record = vim.notify(message, vim.log.levels.INFO, {
                     title = title,
