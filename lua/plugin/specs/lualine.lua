@@ -57,7 +57,7 @@ return {
         local status_line = {
             lualine_a = {
                 { "mode",  fmt = string.lower },
-                function() return mods["submode"]:mode() or "" end
+                function() return mods["submode"].mode() or "" end
             },
             lualine_b = {
                 "branch", "diff", "diagnostics"

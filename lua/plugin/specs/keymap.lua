@@ -35,9 +35,9 @@ return {
             vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)")
             vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
 
-            mods["submode"]:setup()
+            mods["submode"].setup()
 
-            mods["submode"]:create("LspOperator", {
+            mods["submode"].create("LspOperator", {
                 mode  = "n",
                 enter = "<Plug>(submode-lsp-operator)",
                 leave = { "q", "<ESC>" }
@@ -60,7 +60,7 @@ return {
 
             local is_precise = false
             local is_move = false
-            mods["submode"]:create("WinManipulator", {
+            mods["submode"].create("WinManipulator", {
                 mode = "n",
                 mode_name = function()
                     local mode_name = is_move and "WinMove" or "WinResize"
@@ -105,7 +105,7 @@ return {
                 end
             })
 
-            mods["submode"]:create("DocReader", {
+            mods["submode"].create("DocReader", {
                 mode = "n"
             }, {
                 lhs = "<Enter>",
@@ -131,25 +131,25 @@ return {
                         if vim.o.modifiable then
                             return
                         end
-                        mods["submode"]:enter("DocReader")
-                    elseif mods["submode"]:mode() == "DocReader" then
-                        mods["submode"]:leave()
+                        mods["submode"].enter("DocReader")
+                    elseif mods["submode"].mode() == "DocReader" then
+                        mods["submode"].leave()
                     end
                 end
             })
             vim.api.nvim_create_autocmd("CmdwinEnter", {
                 group = "DocReaderAug",
                 callback = function()
-                    if mods["submode"]:mode() == "DocReader" then
-                        mods["submode"]:leave()
+                    if mods["submode"].mode() == "DocReader" then
+                        mods["submode"].leave()
                     end
                 end
             })
             vim.api.nvim_create_autocmd("CmdlineEnter", {
                 group = "DocReaderAug",
                 callback = function()
-                    if mods["submode"]:mode() == "DocReader" then
-                        mods["submode"]:leave()
+                    if mods["submode"].mode() == "DocReader" then
+                        mods["submode"].leave()
                     end
                 end
             })
@@ -159,11 +159,11 @@ return {
                     if vim.opt.ft:get() ~= "help" or vim.o.modifiable then
                         return
                     end
-                    if mods["submode"]:mode() == "DocReader" then
+                    if mods["submode"].mode() == "DocReader" then
                         return
                     end
 
-                    mods["submode"]:enter("DocReader")
+                    mods["submode"].enter("DocReader")
                 end
             })
         end
