@@ -45,6 +45,9 @@ return {
                     capabilities = capabilities,
                     settings = {
                         Lua = {
+                            workspace = {
+                                checkThirdParty = false
+                            },
                             runtime = {
                                 version = "LuaJIT"
                             },
