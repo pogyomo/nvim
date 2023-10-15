@@ -5,7 +5,7 @@ return {
     },
     config = function()
         local module = require("utils.module")
-        local mods   = module.require{
+        local mods   = module.require {
             "lualine",
             "submode"
         }
@@ -107,7 +107,7 @@ return {
             lualine_z = {}
         }
 
-        mods["lualine"].setup{
+        mods["lualine"].setup {
             options = {
                 theme = "tokyonight",
                 globalstatus = true,

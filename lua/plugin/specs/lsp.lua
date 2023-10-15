@@ -7,7 +7,7 @@ return {
     },
     config = function()
         local module = require("utils.module")
-        local mods   = module.require{
+        local mods   = module.require {
             "lspconfig",
             "mason-lspconfig",
             "cmp_nvim_lsp",
@@ -22,7 +22,7 @@ return {
         mods["progress-notify"].setup()
 
         -- Specify lsps to install
-        mods["mason-lspconfig"].setup{
+        mods["mason-lspconfig"].setup {
             ensure_installed = {
                 "clangd",
                 "lua_ls",
@@ -34,14 +34,14 @@ return {
         -- Default config of each lsp.
         local capabilities = mods["cmp_nvim_lsp"].default_capabilities()
 
-        mods["mason-lspconfig"].setup_handlers{
+        mods["mason-lspconfig"].setup_handlers {
             function(name)
-                mods["lspconfig"][name].setup{
+                mods["lspconfig"][name].setup {
                     capabilities = capabilities
                 }
             end,
             ["lua_ls"] = function()
-                mods["lspconfig"].lua_ls.setup{
+                mods["lspconfig"].lua_ls.setup {
                     capabilities = capabilities,
                     settings = {
                         Lua = {

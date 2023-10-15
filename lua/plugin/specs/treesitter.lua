@@ -31,7 +31,7 @@ return {
     },
     config = function(_, opts)
         local module = require("utils.module")
-        local mods   = module.require{
+        local mods   = module.require {
             "nvim-treesitter.configs"
         }
 

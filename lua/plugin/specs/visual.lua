@@ -13,7 +13,7 @@ return {
         },
         config = function(_, opts)
             local module = require("utils.module")
-            local mods   = module.require{
+            local mods   = module.require {
                 "todo-comments"
             }
 
@@ -32,7 +32,7 @@ return {
         },
         config = function(_, opts)
             local module = require("utils.module")
-            local mods   = module.require{
+            local mods   = module.require {
                 "ibl",
             }
 
@@ -48,7 +48,7 @@ return {
         },
         config = function(_, opts)
             local module = require("utils.module")
-            local mods   = module.require{
+            local mods   = module.require {
                 "notify"
             }
             mods["notify"].setup(opts)

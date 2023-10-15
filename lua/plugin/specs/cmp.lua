@@ -18,7 +18,7 @@ return {
     },
     config = function()
         local module = require("utils.module")
-        local mods   = module.require{
+        local mods   = module.require {
             "cmp",
             "luasnip",
             "lspkind"
@@ -40,7 +40,7 @@ return {
                 }
             },
             formatting = {
-                format = mods["lspkind"].cmp_format{
+                format = mods["lspkind"].cmp_format {
                     mode = "symbol_text",
                     -- List all possible source name
                     menu = {
@@ -63,10 +63,10 @@ return {
                     end
                 end, { "i", "s" }),
                 ["<CR>"]  = mods["cmp"].mapping.confirm{ select = false },
-                ["<C-n>"] = mods["cmp"].mapping.select_next_item{
+                ["<C-n>"] = mods["cmp"].mapping.select_next_item {
                     behavior = mods["cmp"].SelectBehavior.Select
                 },
-                ["<C-p>"] = mods["cmp"].mapping.select_prev_item{
+                ["<C-p>"] = mods["cmp"].mapping.select_prev_item {
                     behavior = mods["cmp"].SelectBehavior.Select
                 },
                 ["<C-b>"] = mods["cmp"].mapping.scroll_docs(-4),
