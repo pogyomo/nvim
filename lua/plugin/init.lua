@@ -1,10 +1,6 @@
-local path      = require("utils.path")
 local uv        = vim.loop
 local lazy_url  = "https://github.com/folke/lazy.nvim"
-local lazy_path = path.build(vim.fn.stdpath("data"), {
-    "lazy",
-    "lazy.nvim"
-})
+local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 -- Install lazy if not exist
 if not uv.fs_stat(lazy_path) then
