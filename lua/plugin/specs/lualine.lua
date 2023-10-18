@@ -122,7 +122,8 @@ return {
             inactive_section = status_line,
             tabline          = status_tab,
             winbar           = status_bar,
-            inactive_winbar  = status_bar
+            inactive_winbar  = status_bar,
+            extensions = { "lazy", "mason", "toggleterm" }
         }
     end
 }
