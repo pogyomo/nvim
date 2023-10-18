@@ -16,29 +16,30 @@ return {
 
         local function current_time_clock_emoji()
             local time = os.date("*t")
-            if is_in_range(0, 1, time.hour) or is_in_range(12, 13, time.hour) then
+            local hour = time.hour
+            if is_in_range(0, 1, hour) or is_in_range(12, 13, hour) then
                 return "󱑖 "
-            elseif is_in_range(1, 2, time.hour) or is_in_range(13, 14, time.hour) then
+            elseif is_in_range(1, 2, hour) or is_in_range(13, 14, hour) then
                 return "󱑋 "
-            elseif is_in_range(2, 3, time.hour) or is_in_range(14, 15, time.hour) then
+            elseif is_in_range(2, 3, hour) or is_in_range(14, 15, hour) then
                 return "󱑌 "
-            elseif is_in_range(3, 4, time.hour) or is_in_range(15, 16, time.hour) then
+            elseif is_in_range(3, 4, hour) or is_in_range(15, 16, hour) then
                 return "󱑍 "
-            elseif is_in_range(4, 5, time.hour) or is_in_range(16, 17, time.hour) then
+            elseif is_in_range(4, 5, hour) or is_in_range(16, 17, hour) then
                 return "󱑎 "
-            elseif is_in_range(5, 6, time.hour) or is_in_range(17, 18, time.hour) then
+            elseif is_in_range(5, 6, hour) or is_in_range(17, 18, hour) then
                 return "󱑏 "
-            elseif is_in_range(6, 7, time.hour) or is_in_range(18, 19, time.hour) then
+            elseif is_in_range(6, 7, hour) or is_in_range(18, 19, hour) then
                 return "󱑐 "
-            elseif is_in_range(7, 8, time.hour) or is_in_range(19, 20, time.hour) then
+            elseif is_in_range(7, 8, hour) or is_in_range(19, 20, hour) then
                 return "󱑑 "
-            elseif is_in_range(8, 9, time.hour) or is_in_range(20, 21, time.hour) then
+            elseif is_in_range(8, 9, hour) or is_in_range(20, 21, hour) then
                 return "󱑒 "
-            elseif is_in_range(9, 10, time.hour) or is_in_range(21, 22, time.hour) then
+            elseif is_in_range(9, 10, hour) or is_in_range(21, 22, hour) then
                 return "󱑓 "
-            elseif is_in_range(10, 11, time.hour) or is_in_range(22, 23, time.hour) then
+            elseif is_in_range(10, 11, hour) or is_in_range(22, 23, hour) then
                 return "󱑔 "
-            elseif is_in_range(11, 12, time.hour) or is_in_range(23, 24, time.hour) then
+            elseif is_in_range(11, 12, hour) or is_in_range(23, 24, hour) then
                 return "󱑕 "
             end
         end
