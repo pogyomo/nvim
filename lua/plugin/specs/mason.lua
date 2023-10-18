@@ -2,7 +2,8 @@ return {
     "williamboman/mason.nvim",
     opts = {
         ui = {
-            border = "rounded"
+            border = "rounded",
+            height = 0.8,
         }
     },
     config = function(_, opts)
