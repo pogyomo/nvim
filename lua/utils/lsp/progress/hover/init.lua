@@ -74,14 +74,15 @@ function M.update_by_client_id(client_id, token, value)
     local message = ("[%s] %s"):format(value.title, value.message or "completed")
 
     local client = vim.lsp.get_client_by_id(client_id)
-    local title = client and client.name or "unknown"
+    local client_title = client and client.name or "unknown"
+    local title = spinner() .. " " .. client_title
     if #windows == 0 then
         table.insert(windows, 1, {
-            window = window:new(spinner() .. " " .. title, 0, 30),
+            window = window:new(title, 0, 30, "LightMagenta"),
             token = nil,
         })
     else
-        windows[#windows].window:update(spinner() .. " " .. title)
+        windows[#windows].window:update(title)
     end
 
     if value.kind == "begin" then

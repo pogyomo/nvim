@@ -13,7 +13,8 @@ local M = {}
 ---@param message string
 ---@param row integer
 ---@param opacity integer
-function M:new(message, row, opacity)
+---@param fg string?
+function M:new(message, row, opacity, fg)
     local hl_ns = vim.api.nvim_create_namespace("")
     local bufid = vim.api.nvim_create_buf(false, true)
     local winid = vim.api.nvim_open_win(bufid, false, {
@@ -30,7 +31,7 @@ function M:new(message, row, opacity)
     })
     vim.api.nvim_win_set_hl_ns(winid, hl_ns)
     vim.api.nvim_set_hl(hl_ns, "NormalFloat", {
-        fg = "fg",
+        fg = fg or "fg",
         bg = "bg",
     })
     return setmetatable({
