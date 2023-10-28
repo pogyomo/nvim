@@ -26,7 +26,10 @@ function M.update_by_client_id(client_id, token, value)
     if M.client_to_winmanager[client_id] == nil then
         local client = vim.lsp.get_client_by_id(client_id)
         local title = client and client.name or "unknown"
-        M.client_to_winmanager[client_id] = winmgr:new(title, vim.o.lines - 3, spinner, "✓", 1000, function()
+        local row_base = function()
+            return vim.o.lines - 3
+        end
+        M.client_to_winmanager[client_id] = winmgr:new(title, row_base, spinner, "✓", 1000, function()
             M.client_to_winmanager[client_id] = nil
         end)
     end

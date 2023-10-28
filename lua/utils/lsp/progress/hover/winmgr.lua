@@ -19,7 +19,7 @@ local window = require("utils.lsp.progress.hover.window")
 local M = {}
 
 ---@param title string
----@param row_base integer
+---@param row_base fun(): integer
 ---@param spinner string[]
 ---@param fin_icon string
 ---@param timeout integer
@@ -69,7 +69,7 @@ function M:update(message, token, remove)
             end
         end
     end
-    self:__update_title()
+    self:__update_windows_row()
 end
 
 ---@package
@@ -82,10 +82,10 @@ end
 function M:__update_windows_row()
     local diff = 0
     for _, tkwin in ipairs(self.messages) do
-        tkwin.window:update(nil, self.row_base + diff)
+        tkwin.window:update(nil, self.row_base() + diff)
         diff = diff - 1
     end
-    self:__update_title(self.row_base + diff)
+    self:__update_title(self.row_base() + diff)
 end
 
 ---@package
