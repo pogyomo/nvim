@@ -48,7 +48,7 @@ end
 
 --- Close the window. Closed window is no longer valid and doesn't do anything.
 function M:close()
-    vim.api.nvim_win_close(self.winid, true)
+    pcall(vim.api.nvim_win_close, self.winid, true)
     pcall(vim.api.nvim_buf_delete, self.bufid, { force = true })
     self.valid = false
 end
