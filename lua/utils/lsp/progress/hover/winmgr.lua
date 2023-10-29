@@ -132,13 +132,13 @@ end
 
 ---@package
 function M:__update_windows_row()
-    local diff = 0
+    local row = self.row_base()
     for _, tkwin in ipairs(self.messages) do
         assert(tkwin.window.state ~= WINDOWSTATE.closed)
-        tkwin.window.window:update(nil, self.row_base() + diff)
-        diff = diff - 1
+        tkwin.window.window:update(nil, row)
+        row = row - 1
     end
-    self:__update_title(self.row_base() + diff)
+    self:__update_title(row)
 end
 
 ---@package
