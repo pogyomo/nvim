@@ -29,7 +29,7 @@ function M.update_by_client_id(client_id, token, value)
         local row_base = function()
             return vim.o.lines - 3
         end
-        M.client_to_winmanager[client_id] = winmgr:new(title, row_base, spinner, "✓", 1000)
+        M.client_to_winmanager[client_id] = winmgr:new(title, row_base, spinner, "✓", 1000, 100)
     end
     local manager = M.client_to_winmanager[client_id]
 

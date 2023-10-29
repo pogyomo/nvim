@@ -1,24 +1,29 @@
 ---@class WindowManager
----@field title UpdatableRightWindow
----@field title_msg string
----@field title_state TitleState
----@field title_timer integer
+---@field title TitleWindow
 ---@field messages TokenWindow[]
 ---@field row_base integer
 ---@field spinner string[]
 ---@field spinner_idx integer
 ---@field fin_icon string
 ---@field timeout integer
+---@field refresh_rate integer
 ---@field timer uv_timer_t
+
+---@class StatefulWindow
+---@field state WindowState
+---@field window UpdatableRightWindow
+---@field timer integer
+
+---@class TitleWindow
+---@field title string
+---@field window StatefulWindow
 
 ---@class TokenWindow
 ---@field token ProgressToken
----@field window UpdatableRightWindow
----@field removable boolean
----@field timer integer
+---@field window StatefulWindow state must be either `showing` or `closing`.
 
----@enum TitleState
-local TITLESTATE = {
+---@enum WindowState
+local WINDOWSTATE = {
     showing = 0,
     closing = 1,
     closed = 2,
@@ -34,53 +39,61 @@ local M = {}
 ---@param spinner string[]
 ---@param fin_icon string
 ---@param timeout integer
-function M:new(title, row_base, spinner, fin_icon, timeout)
+---@param refresh_rate integer
+function M:new(title, row_base, spinner, fin_icon, timeout, refresh_rate)
     assert(#spinner ~= 0, "empty spinner is not allowd")
     local mgr = setmetatable({
-        title = nil,
-        title_msg = title,
-        title_state = TITLESTATE.closed,
-        title_timer = 100,
+        title = {
+            title = title,
+            window = {
+                state = WINDOWSTATE.closed,
+                window = nil,
+                timer = timeout,
+            },
+        },
         messages = {},
         row_base = row_base,
         spinner = spinner,
         spinner_idx = 1,
         fin_icon = fin_icon,
         timeout = timeout,
+        refresh_rate = refresh_rate,
         timer = vim.uv.new_timer(),
     }, {
         __index = M,
     })
-    mgr.timer:start(0, 100, vim.schedule_wrap(function()
+    mgr.timer:start(0, mgr.refresh_rate, vim.schedule_wrap(function()
         for _, tkwin in ipairs(mgr.messages) do
-            if tkwin.removable and tkwin.timer > 0 then
-                tkwin.timer = tkwin.timer - 100
-            elseif tkwin.removable then
-                mgr:__remove_message(tkwin.token)
+            if tkwin.window.state == WINDOWSTATE.closing then
+                if tkwin.window.timer > 0 then
+                    tkwin.window.timer = tkwin.window.timer - mgr.refresh_rate
+                else
+                    mgr:__remove_message(tkwin.token)
+                end
             end
         end
 
-        if mgr.title_state == TITLESTATE.showing then
+        if mgr.title.window.state == WINDOWSTATE.showing then
             if #mgr.messages == 0 then
-                mgr.title_state = TITLESTATE.closing
-                mgr.title_timer = mgr.timeout
+                mgr.title.window.state = WINDOWSTATE.closing
+                mgr.title.window.timer = mgr.timeout
             end
-        elseif mgr.title_state == TITLESTATE.closing then
+        elseif mgr.title.window.state == WINDOWSTATE.closing then
             if #mgr.messages == 0 then
-                if mgr.title_timer > 0 then
-                    mgr.title_timer = mgr.title_timer - 100
+                if mgr.title.window.timer > 0 then
+                    mgr.title.window.timer = mgr.title.window.timer - mgr.refresh_rate
                 else
-                    mgr.title:close()
-                    mgr.title = nil
-                    mgr.title_state = TITLESTATE.closed
+                    mgr.title.window.window:close()
+                    mgr.title.window.window = nil
+                    mgr.title.window.state = WINDOWSTATE.closed
                 end
             else
-                mgr.title_state = TITLESTATE.showing
+                mgr.title.window.state = WINDOWSTATE.showing
             end
-        elseif mgr.title_state == TITLESTATE.closed then
+        elseif mgr.title.window.state == WINDOWSTATE.closed then
             if #mgr.messages ~= 0 then
-                mgr.title = window:new(mgr.title_msg, 1, 30, "LightMagenta")
-                mgr.title_state = TITLESTATE.showing
+                mgr.title.window.window = window:new(mgr.title_msg, 1, 30, "LightMagenta")
+                mgr.title.window.state = WINDOWSTATE.showing
             end
         end
 
@@ -96,17 +109,24 @@ end
 function M:update(message, token, remove)
     for _, tkwin in ipairs(self.messages) do
         if tkwin.token == token then
-            tkwin.window:update(message)
-            if remove then
-                tkwin.removable = true
-                tkwin.timer = self.timeout
+            assert(tkwin.window.state ~= WINDOWSTATE.closed)
+            if tkwin.window.state == WINDOWSTATE.showing then
+                tkwin.window.window:update(message)
+                if remove then
+                    tkwin.window.state = WINDOWSTATE.closing
+                    tkwin.window.timer = self.timeout
+                end
             end
             return
         end
     end
     table.insert(self.messages, 1, {
         token = token,
-        window = window:new(message, 1, 30)
+        window = {
+            state = WINDOWSTATE.showing,
+            window = window:new(message, 1, 30),
+            timer = self.timeout
+        }
     })
 end
 
@@ -114,24 +134,20 @@ end
 function M:__update_windows_row()
     local diff = 0
     for _, tkwin in ipairs(self.messages) do
-        tkwin.window:update(nil, self.row_base() + diff)
+        assert(tkwin.window.state ~= WINDOWSTATE.closed)
+        tkwin.window.window:update(nil, self.row_base() + diff)
         diff = diff - 1
     end
-    if self.title_state == TITLESTATE.showing then
-        self:__update_title(self.row_base() + diff, false)
-    elseif self.title_state == TITLESTATE.closing then
-        self:__update_title(self.row_base() + diff, true)
-    end
+    self:__update_title(self.row_base() + diff)
 end
 
 ---@package
 ---@param row? integer
----@param fin_icon boolean
-function M:__update_title(row, fin_icon)
-    if fin_icon then
-        self.title:update(self.fin_icon .. " " .. self.title_msg, row)
-    else
-        self.title:update(self:__advance_spinner() .. " " .. self.title_msg, row)
+function M:__update_title(row)
+    if self.title.window.state == WINDOWSTATE.showing then
+        self.title.window.window:update(self:__advance_spinner() .. " " .. self.title.title, row)
+    elseif self.title.window.state == WINDOWSTATE.closing then
+        self.title.window.window:update(self.fin_icon .. " " .. self.title.title, row)
     end
 end
 
@@ -140,7 +156,8 @@ end
 function M:__remove_message(token)
     for pos, tkwin in ipairs(self.messages) do
         if tkwin.token == token then
-            tkwin.window:close()
+            assert(tkwin.window.state ~= WINDOWSTATE.closed)
+            tkwin.window.window:close()
             table.remove(self.messages, pos)
             break
         end
