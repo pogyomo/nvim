@@ -29,20 +29,12 @@ function M.update_by_client_id(client_id, token, value)
         local row_base = function()
             return vim.o.lines - 3
         end
-        M.client_to_winmanager[client_id] = winmgr:new(title, row_base, spinner, "✓", 1000, function()
-            M.client_to_winmanager[client_id] = nil
-        end)
+        M.client_to_winmanager[client_id] = winmgr:new(title, row_base, spinner, "✓", 1000)
     end
     local manager = M.client_to_winmanager[client_id]
 
     local message = string.format("[%s] %s", value.title, value.message or "completed")
-    if value.kind == "begin" then
-        manager:append(message, token)
-    elseif value.kind == "report" then
-        manager:update(message, token, false)
-    elseif value.kind == "end" then
-        manager:update(message, token, true)
-    end
+    manager:update(message, token, value.kind == "end")
 end
 
 return M
