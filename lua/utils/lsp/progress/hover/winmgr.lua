@@ -110,10 +110,15 @@ function M:update(message, token, remove)
     for _, tkwin in ipairs(self.messages) do
         if tkwin.token == token then
             assert(tkwin.window.state ~= WINDOWSTATE.closed)
+            tkwin.window.window:update(message)
             if tkwin.window.state == WINDOWSTATE.showing then
-                tkwin.window.window:update(message)
                 if remove then
                     tkwin.window.state = WINDOWSTATE.closing
+                    tkwin.window.timer = self.timeout
+                end
+            elseif tkwin.window.state == WINDOWSTATE.closing then
+                if not remove then
+                    tkwin.window.state = WINDOWSTATE.showing
                     tkwin.window.timer = self.timeout
                 end
             end
