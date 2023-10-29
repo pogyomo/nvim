@@ -57,7 +57,6 @@ function M:new(title, row_base, spinner, fin_icon, timeout)
                 tkwin.timer = tkwin.timer - 100
             elseif tkwin.removable then
                 mgr:__remove_message(tkwin.token)
-                mgr:__update_windows_row()
             end
         end
 
@@ -105,29 +104,10 @@ function M:update(message, token, remove)
             return
         end
     end
-    self:__append(message, token)
-end
-
----Append a new progress message.
----@param message string
----@param token ProgressToken
-function M:__append(message, token)
     table.insert(self.messages, 1, {
         token = token,
         window = window:new(message, 1, 30)
     })
-    self:__update_windows_row()
-end
-
----@package
----@param row? integer
----@param fin_icon boolean
-function M:__update_title(row, fin_icon)
-    if fin_icon then
-        self.title:update(self.fin_icon .. " " .. self.title_msg, row)
-    else
-        self.title:update(self:__advance_spinner() .. " " .. self.title_msg, row)
-    end
 end
 
 ---@package
@@ -141,6 +121,17 @@ function M:__update_windows_row()
         self:__update_title(self.row_base() + diff, false)
     elseif self.title_state == TITLESTATE.closing then
         self:__update_title(self.row_base() + diff, true)
+    end
+end
+
+---@package
+---@param row? integer
+---@param fin_icon boolean
+function M:__update_title(row, fin_icon)
+    if fin_icon then
+        self.title:update(self.fin_icon .. " " .. self.title_msg, row)
+    else
+        self.title:update(self:__advance_spinner() .. " " .. self.title_msg, row)
     end
 end
 
