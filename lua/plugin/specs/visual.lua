@@ -66,7 +66,7 @@ return {
             ---@diagnostic disable-next-line
             vim.ui.input = function(...)
                 require("lazy").load({ plugins = { "dressing.nvim" } })
-                return vim.ui.select(...)
+                return vim.ui.input(...)
             end
             ---@diagnostic disable-next-line
             vim.ui.select = function(...)
