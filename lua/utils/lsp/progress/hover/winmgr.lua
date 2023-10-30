@@ -133,6 +133,7 @@ function M:update(message, token, remove)
             timer = self.timeout
         }
     })
+    self:__update_windows_row()
 end
 
 ---@package
