@@ -12,8 +12,8 @@ return {
             }
         },
         config = function(_, opts)
-            local module = require("utils.module")
-            local mods   = module.require {
+            local module     = require("utils.module")
+            local mods       = module.require {
                 "todo-comments"
             }
 
@@ -73,6 +73,18 @@ return {
                 require("lazy").load({ plugins = { "dressing.nvim" } })
                 return vim.ui.select(...)
             end
+        end
+    },
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        opts = {},
+        config = function(_, opts)
+            local module = require("utils.module")
+            local mods   = module.require {
+                "rainbow-delimiters.setup"
+            }
+
+            mods["rainbow-delimiters.setup"].setup(opts)
         end
     }
 }
