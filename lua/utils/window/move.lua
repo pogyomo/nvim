@@ -11,7 +11,7 @@ return function(win, diff_row, diff_col, key_dir)
     local dir = (key_dir == "left" or key_dir == "right") and "col" or "row"
     local setter = function(val)
         local config = vim.tbl_extend("force", vim.api.nvim_win_get_config(win), {
-            [dir] = val
+            [dir] = val,
         })
         vim.api.nvim_win_set_config(win, config)
     end
@@ -22,6 +22,6 @@ return function(win, diff_row, diff_col, key_dir)
     if key_dir == "left" or key_dir == "right" then
         setter(getter() + (key_dir == "right" and diff_col or -diff_col))
     else
-        setter(getter() + (key_dir == "down"  and diff_row or -diff_row))
+        setter(getter() + (key_dir == "down" and diff_row or -diff_row))
     end
 end

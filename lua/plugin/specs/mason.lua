@@ -4,11 +4,11 @@ return {
         ui = {
             border = "rounded",
             height = 0.8,
-        }
+        },
     },
     config = function(_, opts)
         local module = require("utils.module")
-        local mods   = module.require {
+        local mods = module.require {
             "mason",
         }
 
@@ -21,9 +21,9 @@ return {
             pattern = "mason",
             callback = function()
                 vim.opt.winblend = 10
-            end
+            end,
         })
 
         mods["mason"].setup(opts)
-    end
+    end,
 }

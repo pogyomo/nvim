@@ -5,7 +5,7 @@ return {
         {
             "<Leader>f",
             mode = "n",
-        }
+        },
     },
     cmd = {
         "ToggleTerm",
@@ -19,7 +19,7 @@ return {
     },
     config = function()
         local module = require("utils.module")
-        local mods   = module.require {
+        local mods = module.require {
             "toggleterm",
             "toggleterm.terminal",
         }
@@ -31,12 +31,12 @@ return {
             direction = "float",
             float_opts = {
                 border = "rounded",
-            }
+            },
         }
         vim.keymap.set("n", "<Leader>f", function()
             floatterm:toggle()
         end, {
-            desc = "toggle floating terminal"
+            desc = "toggle floating terminal",
         })
-    end
+    end,
 }

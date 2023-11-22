@@ -3,16 +3,16 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "williamboman/mason-lspconfig.nvim",
-        "folke/neodev.nvim"
+        "folke/neodev.nvim",
     },
     config = function()
         local module = require("utils.module")
-        local mods   = module.require {
+        local mods = module.require {
             "lspconfig",
             "mason-lspconfig",
             "cmp_nvim_lsp",
             { "utils.lsp.progress.hover", as = "progress-hover" },
-            "neodev"
+            "neodev",
         }
 
         -- Setup neodev before lspconfig
@@ -26,8 +26,8 @@ return {
                 "clangd",
                 "lua_ls",
                 "rust_analyzer",
-                "denols"
-            }
+                "denols",
+            },
         }
 
         -- Default config of each lsp.
@@ -36,7 +36,7 @@ return {
         mods["mason-lspconfig"].setup_handlers {
             function(name)
                 mods["lspconfig"][name].setup {
-                    capabilities = capabilities
+                    capabilities = capabilities,
                 }
             end,
             ["lua_ls"] = function()
@@ -45,18 +45,18 @@ return {
                     settings = {
                         Lua = {
                             workspace = {
-                                checkThirdParty = false
+                                checkThirdParty = false,
                             },
                             runtime = {
-                                version = "LuaJIT"
+                                version = "LuaJIT",
                             },
                             diagnostics = {
-                                globals = { "vim" }
-                            }
-                        }
-                    }
+                                globals = { "vim" },
+                            },
+                        },
+                    },
                 }
-            end
+            end,
         }
-    end
+    end,
 }

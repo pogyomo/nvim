@@ -5,10 +5,10 @@
 local function have_neighbor_to(win, dir)
     local neighbor = vim.api.nvim_win_call(win, function()
         vim.cmd.wincmd(({
-            left  = "h",
+            left = "h",
             right = "l",
-            up    = "k",
-            down  = "j"
+            up = "k",
+            down = "j",
         })[dir])
         return vim.api.nvim_get_current_win()
     end)

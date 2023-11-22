@@ -14,43 +14,43 @@ return {
         "saadparwaiz1/cmp_luasnip",
 
         -- Visual
-        "onsails/lspkind.nvim"
+        "onsails/lspkind.nvim",
     },
     config = function()
         local module = require("utils.module")
-        local mods   = module.require {
+        local mods = module.require {
             "cmp",
             "luasnip",
-            "lspkind"
+            "lspkind",
         }
 
         -- Set the transparency of completion menu.
         vim.opt.pumblend = 10
 
         -- Settings for insert mode.
-        mods["cmp"].setup{
+        mods["cmp"].setup {
             snippet = {
                 expand = function(args)
                     mods["luasnip"].lsp_expand(args.body)
-                end
+                end,
             },
             window = {
                 documentation = {
-                    border = "rounded"
-                }
+                    border = "rounded",
+                },
             },
             formatting = {
                 format = mods["lspkind"].cmp_format {
                     mode = "symbol_text",
                     -- List all possible source name
                     menu = {
-                        buffer =   "[Buffer]",
-                        cmdline =  "[Cmd]",
-                        luasnip =  "[LuaSnip]",
+                        buffer = "[Buffer]",
+                        cmdline = "[Cmd]",
+                        luasnip = "[LuaSnip]",
                         nvim_lsp = "[LSP]",
-                        path =     "[Path]"
-                    }
-                }
+                        path = "[Path]",
+                    },
+                },
             },
             mapping = {
                 ["<Tab>"] = mods["cmp"].mapping(function(fallback)
@@ -62,42 +62,42 @@ return {
                         fallback()
                     end
                 end, { "i", "s" }),
-                ["<CR>"]  = mods["cmp"].mapping.confirm{ select = false },
+                ["<CR>"] = mods["cmp"].mapping.confirm { select = false },
                 ["<C-n>"] = mods["cmp"].mapping.select_next_item {
-                    behavior = mods["cmp"].SelectBehavior.Select
+                    behavior = mods["cmp"].SelectBehavior.Select,
                 },
                 ["<C-p>"] = mods["cmp"].mapping.select_prev_item {
-                    behavior = mods["cmp"].SelectBehavior.Select
+                    behavior = mods["cmp"].SelectBehavior.Select,
                 },
                 ["<C-b>"] = mods["cmp"].mapping.scroll_docs(-4),
-                ["<C-f>"] = mods["cmp"].mapping.scroll_docs(4)
+                ["<C-f>"] = mods["cmp"].mapping.scroll_docs(4),
             },
             sources = mods["cmp"].config.sources({
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
-                { name = "nvim_lsp_signature_help" }
+                { name = "nvim_lsp_signature_help" },
             }, {
                 { name = "buffer" },
-                { name = "path" }
-            })
+                { name = "path" },
+            }),
         }
 
         -- Command line settings (when "/")
         mods["cmp"].setup.cmdline({ "/", "?" }, {
             mapping = mods["cmp"].mapping.preset.cmdline(),
             sources = {
-                { name = "buffer" }
-            }
+                { name = "buffer" },
+            },
         })
 
         -- Command line settings (when ":")
         mods["cmp"].setup.cmdline(":", {
             mapping = mods["cmp"].mapping.preset.cmdline(),
             sources = mods["cmp"].config.sources({
-                { name = "path" }
+                { name = "path" },
             }, {
-                { name = "cmdline" }
-            })
+                { name = "cmdline" },
+            }),
         })
-    end
+    end,
 }

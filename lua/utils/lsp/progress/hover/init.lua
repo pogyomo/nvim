@@ -4,7 +4,7 @@ local spinner = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" }
 ---@class ProgressHover
 ---@field client_to_winmanager ClientToWinManager
 local M = {
-    client_to_winmanager = {}
+    client_to_winmanager = {},
 }
 
 function M.setup()

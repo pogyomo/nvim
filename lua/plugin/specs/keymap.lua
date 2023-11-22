@@ -7,25 +7,22 @@ return {
             local mods = module.require {
                 "cmp",
                 { "nvim-autopairs", as = "autopairs" },
-                { "nvim-autopairs.completion.cmp", as = "autopairs_cmp" }
+                { "nvim-autopairs.completion.cmp", as = "autopairs_cmp" },
             }
 
             mods["autopairs"].setup()
-            mods["cmp"].event:on(
-                "confirm_done",
-                mods["autopairs_cmp"].on_confirm_done()
-            )
-        end
+            mods["cmp"].event:on("confirm_done", mods["autopairs_cmp"].on_confirm_done())
+        end,
     },
     {
         "pogyomo/submode.nvim",
         dev = true,
         config = function()
             local module = require("utils.module")
-            local mods   = module.require {
+            local mods = module.require {
                 "submode",
                 { "utils.window.resize", as = "resize" },
-                { "utils.window.move",   as = "move" }
+                { "utils.window.move", as = "move" },
             }
 
             local function append_leave(map)
@@ -38,24 +35,34 @@ return {
             mods["submode"].setup()
 
             mods["submode"].create("LspOperator", {
-                mode  = "n",
+                mode = "n",
                 enter = "<Plug>(submode-lsp-operator)",
-                leave = { "q", "<ESC>" }
+                leave = { "q", "<ESC>" },
             }, {
                 lhs = "d",
-                rhs = function() vim.lsp.buf.definition() end
+                rhs = function()
+                    vim.lsp.buf.definition()
+                end,
             }, {
                 lhs = "D",
-                rhs = function() vim.lsp.buf.declaration() end
+                rhs = function()
+                    vim.lsp.buf.declaration()
+                end,
             }, {
                 lhs = "H",
-                rhs = function() vim.lsp.buf.hover() end
+                rhs = function()
+                    vim.lsp.buf.hover()
+                end,
             }, {
                 lhs = "i",
-                rhs = function() vim.lsp.buf.implementation() end
+                rhs = function()
+                    vim.lsp.buf.implementation()
+                end,
             }, {
                 lhs = "r",
-                rhs = function() vim.lsp.buf.references() end
+                rhs = function()
+                    vim.lsp.buf.references()
+                end,
             })
 
             local is_precise = false
@@ -72,7 +79,7 @@ return {
                 leave_cb = function()
                     is_precise = false
                     is_move = false
-                end
+                end,
             }, {
                 lhs = { "i", "r" },
                 rhs = function(lhs)
@@ -81,49 +88,60 @@ return {
                     else
                         is_move = not is_move
                     end
-                end
+                end,
             }, {
                 lhs = { "l", "h", "j", "k" },
                 rhs = function(lhs)
                     local diff_row = is_precise and 1 or 2
                     local diff_col = is_precise and 1 or 5
                     if is_move then
-                        mods["move"](0, diff_row, diff_col, ({
-                            ["l"] = "right",
-                            ["h"] = "left",
-                            ["j"] = "down",
-                            ["k"] = "up"
-                        })[lhs])
+                        mods["move"](
+                            0,
+                            diff_row,
+                            diff_col,
+                            ({
+                                ["l"] = "right",
+                                ["h"] = "left",
+                                ["j"] = "down",
+                                ["k"] = "up",
+                            })[lhs]
+                        )
                     else
-                        mods["resize"](0, diff_row, diff_col, ({
-                            ["l"] = "right",
-                            ["h"] = "left",
-                            ["j"] = "down",
-                            ["k"] = "up"
-                        })[lhs])
+                        mods["resize"](
+                            0,
+                            diff_row,
+                            diff_col,
+                            ({
+                                ["l"] = "right",
+                                ["h"] = "left",
+                                ["j"] = "down",
+                                ["k"] = "up",
+                            })[lhs]
+                        )
                     end
-                end
+                end,
             })
 
             mods["submode"].create("DocReader", {
-                mode = "n"
+                mode = "n",
             }, {
                 lhs = "<Enter>",
-                rhs = "<C-]>"
+                rhs = "<C-]>",
             }, {
                 lhs = "u",
-                rhs = "<cmd>po<cr>"
+                rhs = "<cmd>po<cr>",
             }, {
                 lhs = { "r", "U" },
-                rhs = "<cmd>ta<cr>"
+                rhs = "<cmd>ta<cr>",
             }, {
                 lhs = "i",
-                rhs = append_leave("<Insert>")
+                rhs = append_leave("<Insert>"),
             })
 
             vim.api.nvim_create_augroup("DocReaderAug", {})
             vim.api.nvim_create_autocmd({
-                "BufEnter", "BufLeave"
+                "BufEnter",
+                "BufLeave",
             }, {
                 group = "DocReaderAug",
                 callback = function(opt)
@@ -135,7 +153,7 @@ return {
                     elseif mods["submode"].mode() == "DocReader" then
                         mods["submode"].leave()
                     end
-                end
+                end,
             })
             vim.api.nvim_create_autocmd("CmdwinEnter", {
                 group = "DocReaderAug",
@@ -143,7 +161,7 @@ return {
                     if mods["submode"].mode() == "DocReader" then
                         mods["submode"].leave()
                     end
-                end
+                end,
             })
             vim.api.nvim_create_autocmd("CmdlineEnter", {
                 group = "DocReaderAug",
@@ -151,7 +169,7 @@ return {
                     if mods["submode"].mode() == "DocReader" then
                         mods["submode"].leave()
                     end
-                end
+                end,
             })
             vim.api.nvim_create_autocmd("CursorMoved", {
                 group = "DocReaderAug",
@@ -164,8 +182,8 @@ return {
                     end
 
                     mods["submode"].enter("DocReader")
-                end
+                end,
             })
-        end
-    }
+        end,
+    },
 }

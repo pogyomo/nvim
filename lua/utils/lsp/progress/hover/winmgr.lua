@@ -62,43 +62,47 @@ function M:new(title, row_base, spinner, fin_icon, timeout, refresh_rate)
     }, {
         __index = M,
     })
-    mgr.timer:start(0, mgr.refresh_rate, vim.schedule_wrap(function()
-        for _, tkwin in ipairs(mgr.messages) do
-            if tkwin.window.state == WINDOWSTATE.closing then
-                if tkwin.window.timer > 0 then
-                    tkwin.window.timer = tkwin.window.timer - mgr.refresh_rate
-                else
-                    mgr:__remove_message(tkwin.token)
+    mgr.timer:start(
+        0,
+        mgr.refresh_rate,
+        vim.schedule_wrap(function()
+            for _, tkwin in ipairs(mgr.messages) do
+                if tkwin.window.state == WINDOWSTATE.closing then
+                    if tkwin.window.timer > 0 then
+                        tkwin.window.timer = tkwin.window.timer - mgr.refresh_rate
+                    else
+                        mgr:__remove_message(tkwin.token)
+                    end
                 end
             end
-        end
 
-        if mgr.title.window.state == WINDOWSTATE.showing then
-            if #mgr.messages == 0 then
-                mgr.title.window.state = WINDOWSTATE.closing
-                mgr.title.window.timer = mgr.timeout
-            end
-        elseif mgr.title.window.state == WINDOWSTATE.closing then
-            if #mgr.messages == 0 then
-                if mgr.title.window.timer > 0 then
-                    mgr.title.window.timer = mgr.title.window.timer - mgr.refresh_rate
-                else
-                    mgr.title.window.window:close()
-                    mgr.title.window.window = nil
-                    mgr.title.window.state = WINDOWSTATE.closed
+            if mgr.title.window.state == WINDOWSTATE.showing then
+                if #mgr.messages == 0 then
+                    mgr.title.window.state = WINDOWSTATE.closing
+                    mgr.title.window.timer = mgr.timeout
                 end
-            else
-                mgr.title.window.state = WINDOWSTATE.showing
+            elseif mgr.title.window.state == WINDOWSTATE.closing then
+                if #mgr.messages == 0 then
+                    if mgr.title.window.timer > 0 then
+                        mgr.title.window.timer = mgr.title.window.timer - mgr.refresh_rate
+                    else
+                        mgr.title.window.window:close()
+                        mgr.title.window.window = nil
+                        mgr.title.window.state = WINDOWSTATE.closed
+                    end
+                else
+                    mgr.title.window.state = WINDOWSTATE.showing
+                end
+            elseif mgr.title.window.state == WINDOWSTATE.closed then
+                if #mgr.messages ~= 0 then
+                    mgr.title.window.window = window:new(mgr.title_msg, 1, 30, "LightMagenta")
+                    mgr.title.window.state = WINDOWSTATE.showing
+                end
             end
-        elseif mgr.title.window.state == WINDOWSTATE.closed then
-            if #mgr.messages ~= 0 then
-                mgr.title.window.window = window:new(mgr.title_msg, 1, 30, "LightMagenta")
-                mgr.title.window.state = WINDOWSTATE.showing
-            end
-        end
 
-        mgr:__update_windows_row()
-    end))
+            mgr:__update_windows_row()
+        end)
+    )
     return mgr
 end
 
@@ -130,8 +134,8 @@ function M:update(message, token, remove)
         window = {
             state = WINDOWSTATE.showing,
             window = window:new(message, 1, 30),
-            timer = self.timeout
-        }
+            timer = self.timeout,
+        },
     })
     self:__update_windows_row()
 end

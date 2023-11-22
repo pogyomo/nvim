@@ -5,8 +5,8 @@
 ---@return string # Actual name of the module.
 ---@return string # Alias of the module.
 local function parse_mod(mod)
-    vim.validate{
-        mod = { mod, { "string", "table" } }
+    vim.validate {
+        mod = { mod, { "string", "table" } },
     }
 
     if type(mod) == "string" then
@@ -22,8 +22,8 @@ local M = {}
 ---@param mods Module[]
 ---@return any
 function M.require(mods)
-    vim.validate{
-        mods = { mods, "table" }
+    vim.validate {
+        mods = { mods, "table" },
     }
 
     local ret = {}

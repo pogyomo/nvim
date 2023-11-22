@@ -1,13 +1,13 @@
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
-        "nvim-tree/nvim-web-devicons"
+        "nvim-tree/nvim-web-devicons",
     },
     config = function()
         local module = require("utils.module")
-        local mods   = module.require {
+        local mods = module.require {
             "lualine",
-            "submode"
+            "submode",
         }
 
         local function is_in_range(l, r, value)
@@ -47,42 +47,46 @@ return {
         local filename_symbols = {
             modified = "+",
             readonly = "-",
-            unnamed  = "no name"
+            unnamed = "no name",
         }
         local fileformat_symbols = {
             unix = " unix",
-            dos  = " dos",
-            mac  = " mac"
+            dos = " dos",
+            mac = " mac",
         }
 
         local status_line = {
             lualine_a = {
-                { "mode",  fmt = string.lower },
-                function() return mods["submode"].mode() or "" end
+                { "mode", fmt = string.lower },
+                function()
+                    return mods["submode"].mode() or ""
+                end,
             },
             lualine_b = {
-                "branch", "diff", "diagnostics"
+                "branch",
+                "diff",
+                "diagnostics",
             },
             lualine_c = {
-                { "filename", symbols = filename_symbols }
+                { "filename", symbols = filename_symbols },
             },
             lualine_x = {
                 "encoding",
                 { "fileformat", symbols = fileformat_symbols },
-                "filetype"
+                "filetype",
             },
             lualine_y = {
-                "progress"
+                "progress",
             },
             lualine_z = {
-                "%l/%L:%c"
-            }
+                "%l/%L:%c",
+            },
         }
 
         local status_tab = {
             lualine_a = {},
             lualine_b = {
-                { "tabs", max_length = vim.o.columns, mode = 2 }
+                { "tabs", max_length = vim.o.columns, mode = 2 },
             },
             lualine_c = {},
             lualine_x = {},
@@ -90,13 +94,13 @@ return {
                 {
                     function()
                         local clock = current_time_clock_emoji()
-                        local date  = vim.fn.strftime("%Y/%m/%d %H:%M:%S")
+                        local date = vim.fn.strftime("%Y/%m/%d %H:%M:%S")
                         return ("%s %s"):format(clock, date)
                     end,
                     color = "lualine_b_normal",
-                }
+                },
             },
-            lualine_z = {}
+            lualine_z = {},
         }
 
         local status_bar = {
@@ -105,7 +109,7 @@ return {
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = {}
+            lualine_z = {},
         }
 
         mods["lualine"].setup {
@@ -114,16 +118,16 @@ return {
                 globalstatus = true,
                 refresh = {
                     statusline = 200,
-                    tabline    = 200,
-                    winbar     = 200
-                }
+                    tabline = 200,
+                    winbar = 200,
+                },
             },
-            sections         = status_line,
+            sections = status_line,
             inactive_section = status_line,
-            tabline          = status_tab,
-            winbar           = status_bar,
-            inactive_winbar  = status_bar,
-            extensions = { "lazy", "mason", "toggleterm" }
+            tabline = status_tab,
+            winbar = status_bar,
+            inactive_winbar = status_bar,
+            extensions = { "lazy", "mason", "toggleterm" },
         }
-    end
+    end,
 }
