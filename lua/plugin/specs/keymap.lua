@@ -94,30 +94,16 @@ return {
                 rhs = function(lhs)
                     local diff_row = is_precise and 1 or 2
                     local diff_col = is_precise and 1 or 5
+                    local key_to_dir = {
+                        ["l"] = "right",
+                        ["h"] = "left",
+                        ["j"] = "down",
+                        ["k"] = "up",
+                    }
                     if is_move then
-                        mods["move"](
-                            0,
-                            diff_row,
-                            diff_col,
-                            ({
-                                ["l"] = "right",
-                                ["h"] = "left",
-                                ["j"] = "down",
-                                ["k"] = "up",
-                            })[lhs]
-                        )
+                        mods["move"](0, diff_row, diff_col, key_to_dir[lhs])
                     else
-                        mods["resize"](
-                            0,
-                            diff_row,
-                            diff_col,
-                            ({
-                                ["l"] = "right",
-                                ["h"] = "left",
-                                ["j"] = "down",
-                                ["k"] = "up",
-                            })[lhs]
-                        )
+                        mods["resize"](0, diff_row, diff_col, key_to_dir[lhs])
                     end
                 end,
             })
