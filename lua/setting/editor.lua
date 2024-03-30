@@ -20,3 +20,6 @@ vim.o.termguicolors = true
 -- Search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+
+-- Folding
+vim.o.foldmethod = "marker"
