@@ -2,6 +2,23 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
+    cmd = {
+        "TSUpdate",
+        "TSEnable",
+        "TSToggle",
+        "TSDisable",
+        "TSInstall",
+        "TSBufEnable",
+        "TSBufToggle",
+        "TSEditQuery",
+        "TSUninstall",
+        "TSBufDisable",
+        "TSConfigInfo",
+        "TSModuleInfo",
+        "TSUpdateSync",
+        "TSInstallInfo",
+        "TSInstallSync",
+    },
     opts = {
         ensure_installed = {
             "bibtex",
