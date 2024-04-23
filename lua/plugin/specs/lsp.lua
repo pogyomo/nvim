@@ -30,6 +30,13 @@ return {
         -- Default config of each lsp.
         local capabilities = mods["cmp_nvim_lsp"].default_capabilities()
 
+        -- mason-lspconfig doesn't manage gdscript, so manually configure the lsp.
+        mods["lspconfig"].gdscript.setup {
+            capabilities = capabilities,
+            -- FIXME: If we write this using vim.lsp.rpc.connect instead of using `ncat`, this doesn't works well.
+            cmd = { "ncat", "127.0.0.1", "6005" },
+        }
+
         mods["mason-lspconfig"].setup_handlers {
             function(name)
                 mods["lspconfig"][name].setup {
