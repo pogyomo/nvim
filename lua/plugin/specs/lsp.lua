@@ -11,14 +11,11 @@ return {
             "lspconfig",
             "mason-lspconfig",
             "cmp_nvim_lsp",
-            { "utils.lsp.progress.hover", as = "progress-hover" },
             "neodev",
         }
 
         -- Setup neodev before lspconfig
         mods["neodev"].setup()
-
-        mods["progress-hover"].setup()
 
         -- Specify lsps to install
         mods["mason-lspconfig"].setup {
