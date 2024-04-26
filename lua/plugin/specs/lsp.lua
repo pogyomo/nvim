@@ -15,6 +15,7 @@ return {
         }
 
         -- Keymaps for lsp actions
+        -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("register-lsp-keymaps", {}),
             callback = function(ev)
