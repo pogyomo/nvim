@@ -4,6 +4,7 @@ return {
     dependencies = {
         "williamboman/mason-lspconfig.nvim",
         "folke/neodev.nvim",
+        "pogyomo/submode.nvim",
     },
     config = function()
         local module = require("utils.module")
