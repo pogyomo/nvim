@@ -29,41 +29,9 @@ return {
                 return ("%s<cmd>lua require('submode'):leave()<cr>"):format(map)
             end
 
-            vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)")
             vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
 
             mods["submode"].setup()
-
-            mods["submode"].create("LspOperator", {
-                mode = "n",
-                enter = "<Plug>(submode-lsp-operator)",
-                leave = { "q", "<ESC>" },
-            }, {
-                lhs = "d",
-                rhs = function()
-                    vim.lsp.buf.definition()
-                end,
-            }, {
-                lhs = "D",
-                rhs = function()
-                    vim.lsp.buf.declaration()
-                end,
-            }, {
-                lhs = "H",
-                rhs = function()
-                    vim.lsp.buf.hover()
-                end,
-            }, {
-                lhs = "i",
-                rhs = function()
-                    vim.lsp.buf.implementation()
-                end,
-            }, {
-                lhs = "r",
-                rhs = function()
-                    vim.lsp.buf.references()
-                end,
-            })
 
             local is_precise = false
             local is_move = false
