@@ -4,7 +4,6 @@ return {
     dependencies = {
         "williamboman/mason-lspconfig.nvim",
         "folke/neodev.nvim",
-        "pogyomo/submode.nvim",
     },
     config = function()
         local module = require("utils.module")
@@ -13,39 +12,28 @@ return {
             "mason-lspconfig",
             "cmp_nvim_lsp",
             "neodev",
-            "submode",
         }
 
         -- Keymaps for lsp actions
-        vim.keymap.set("n", "<Leader>l", "<Plug>(submode-lsp-operator)")
-        mods["submode"].create("LspOperator", {
-            mode = "n",
-            enter = "<Plug>(submode-lsp-operator)",
-            leave = { "q", "<ESC>" },
-        }, {
-            lhs = "d",
-            rhs = function()
-                vim.lsp.buf.definition()
-            end,
-        }, {
-            lhs = "D",
-            rhs = function()
-                vim.lsp.buf.declaration()
-            end,
-        }, {
-            lhs = "H",
-            rhs = function()
-                vim.lsp.buf.hover()
-            end,
-        }, {
-            lhs = "i",
-            rhs = function()
-                vim.lsp.buf.implementation()
-            end,
-        }, {
-            lhs = "r",
-            rhs = function()
-                vim.lsp.buf.references()
+        vim.api.nvim_create_autocmd("LspAttach", {
+            group = vim.api.nvim_create_augroup("register-lsp-keymaps", {}),
+            callback = function(ev)
+                local opts = { buffer = ev.buf }
+
+                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                vim.keymap.set("n", "gf", function()
+                    vim.lsp.buf.format { async = true }
+                end, opts)
+                vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+                vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+                vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
+                vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts)
+                vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
+                vim.keymap.set("n", "g]", vim.diagnostic.goto_next, opts)
+                vim.keymap.set("n", "g[", vim.diagnostic.goto_prev, opts)
             end,
         })
 
