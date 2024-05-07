@@ -3,8 +3,18 @@ vim.g.mapleader = " "
 
 -- Alias of keymaps
 vim.keymap.set("n", "<Leader>t", "<Plug>(core-tab-manager)", { remap = true })
-vim.keymap.set("n", "<Leader>w", "<Plug>(core-window-manager)", { remap = true })
-vim.keymap.set("n", "<Leader>s", "<Plug>(core-window-spliter)", { remap = true })
+vim.keymap.set(
+    "n",
+    "<Leader>w",
+    "<Plug>(core-window-manager)",
+    { remap = true }
+)
+vim.keymap.set(
+    "n",
+    "<Leader>s",
+    "<Plug>(core-window-spliter)",
+    { remap = true }
+)
 
 -- Keymaps to manage tabs
 for _, key in ipairs { "l", "h" } do

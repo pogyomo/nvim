@@ -36,9 +36,16 @@ return {
             vim.notify(("[formatter.lua] installing %s"):format(name))
             pkg:install():once("closed", function()
                 if pkg:is_installed() then
-                    vim.notify(("[formatter.lua] %s was successfully installed"):format(name))
+                    vim.notify(
+                        ("[formatter.lua] %s was successfully installed"):format(
+                            name
+                        )
+                    )
                 else
-                    vim.notify(("[formatter.lua] failed to install %s"):format(name), vim.log.levels.ERROR)
+                    vim.notify(
+                        ("[formatter.lua] failed to install %s"):format(name),
+                        vim.log.levels.ERROR
+                    )
                 end
             end)
             ::continue::

@@ -23,25 +23,41 @@ end
 ---@param diff_col integer Diff to be used when resize height.
 ---@param key_dir "left" | "right" | "up" | "down" Direction to resize.
 local function resize_normal(win, diff_row, diff_col, key_dir)
-    local dir = (key_dir == "left" or key_dir == "right") and "width" or "height"
+    local dir = (key_dir == "left" or key_dir == "right") and "width"
+        or "height"
     local setter = vim.api["nvim_win_set_" .. dir]
     local getter = vim.api["nvim_win_get_" .. dir]
 
     if key_dir == "left" or key_dir == "right" then
         if have_neighbor_to(win, "right") then
-            setter(win, getter(win) + (key_dir == "right" and diff_col or -diff_col))
+            setter(
+                win,
+                getter(win) + (key_dir == "right" and diff_col or -diff_col)
+            )
         else
-            setter(win, getter(win) + (key_dir == "right" and -diff_col or diff_col))
+            setter(
+                win,
+                getter(win) + (key_dir == "right" and -diff_col or diff_col)
+            )
         end
     else
-        if not have_neighbor_to(win, "down") and not have_neighbor_to(win, "up") then
+        if
+            not have_neighbor_to(win, "down")
+            and not have_neighbor_to(win, "up")
+        then
             return
         end
 
         if have_neighbor_to(win, "down") then
-            setter(win, getter(win) + (key_dir == "down" and diff_row or -diff_row))
+            setter(
+                win,
+                getter(win) + (key_dir == "down" and diff_row or -diff_row)
+            )
         else
-            setter(win, getter(win) + (key_dir == "down" and -diff_row or diff_row))
+            setter(
+                win,
+                getter(win) + (key_dir == "down" and -diff_row or diff_row)
+            )
         end
     end
 end
@@ -52,12 +68,16 @@ end
 ---@param diff_col integer Diff to be used when resize height.
 ---@param key_dir "left" | "right" | "up" | "down" Direction to resize.
 local function resize_float(win, diff_row, diff_col, key_dir)
-    local dir = (key_dir == "left" or key_dir == "right") and "width" or "height"
+    local dir = (key_dir == "left" or key_dir == "right") and "width"
+        or "height"
     local setter = vim.api["nvim_win_set_" .. dir]
     local getter = vim.api["nvim_win_get_" .. dir]
 
     if key_dir == "left" or key_dir == "right" then
-        setter(win, getter(win) + (key_dir == "right" and diff_col or -diff_col))
+        setter(
+            win,
+            getter(win) + (key_dir == "right" and diff_col or -diff_col)
+        )
     else
         setter(win, getter(win) + (key_dir == "down" and diff_row or -diff_row))
     end

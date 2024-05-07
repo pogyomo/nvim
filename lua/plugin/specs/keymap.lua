@@ -11,7 +11,10 @@ return {
             }
 
             mods["autopairs"].setup()
-            mods["cmp"].event:on("confirm_done", mods["autopairs_cmp"].on_confirm_done())
+            mods["cmp"].event:on(
+                "confirm_done",
+                mods["autopairs_cmp"].on_confirm_done()
+            )
         end,
     },
     {
@@ -99,7 +102,10 @@ return {
             }, {
                 group = "DocReaderAug",
                 callback = function(opt)
-                    if vim.opt.ft:get() == "help" and opt.event == "BufEnter" then
+                    if
+                        vim.opt.ft:get() == "help"
+                        and opt.event == "BufEnter"
+                    then
                         if vim.o.modifiable then
                             return
                         end
