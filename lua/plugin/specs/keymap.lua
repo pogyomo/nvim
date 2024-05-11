@@ -99,6 +99,9 @@ return {
             }, {
                 lhs = "i",
                 rhs = append_leave("<Insert>"),
+            }, {
+                lhs = "q",
+                rhs = "<cmd>q<cr>",
             })
 
             vim.api.nvim_create_augroup("DocReaderAug", {})
