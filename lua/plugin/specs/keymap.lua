@@ -18,6 +18,12 @@ return {
         end,
     },
     {
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+        opts = {},
+    },
+    {
         "pogyomo/submode.nvim",
         dev = true,
         config = function()
