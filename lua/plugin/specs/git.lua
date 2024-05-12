@@ -6,5 +6,5 @@ return {
         "sindrets/diffview.nvim",
         "nvim-telescope/telescope.nvim",
     },
-    config = {},
+    opts = {},
 }
