@@ -24,9 +24,6 @@ return {
             "lspkind",
         }
 
-        -- Set the transparency of completion menu.
-        vim.opt.pumblend = 10
-
         -- Settings for insert mode.
         mods["cmp"].setup {
             snippet = {
@@ -35,7 +32,11 @@ return {
                 end,
             },
             window = {
+                completion = {
+                    winblend = 10,
+                },
                 documentation = {
+                    winblend = 10,
                     border = "rounded",
                 },
             },
