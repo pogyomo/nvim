@@ -40,7 +40,7 @@ return {
             enable = true,
             disable = function(lang, bufnr)
                 -- NOTE: I need to disable treesitter on command window.
-                --       See: https://github.com/nvim-treesitter/nvim-treesitter/issues/3961
+                --       See: https://github.com/neovim/neovim/issues/26346
                 local bufname = vim.api.nvim_buf_get_name(bufnr)
                 return lang == "vim" and bufname:match("%[Command Line%]")
             end,
