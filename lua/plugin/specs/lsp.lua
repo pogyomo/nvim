@@ -52,6 +52,7 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "denols",
+                "pylsp",
             },
         }
 
