@@ -96,7 +96,6 @@ return {
                 lhs = "q",
                 rhs = "<cmd>q<cr>",
             })
-
             vim.api.nvim_create_augroup("DocReaderAugroup", {})
             vim.api.nvim_create_autocmd("BufEnter", {
                 group = "DocReaderAugroup",
