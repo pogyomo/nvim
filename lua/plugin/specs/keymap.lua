@@ -34,10 +34,6 @@ return {
                 { "utils.window.move", as = "move" },
             }
 
-            local function append_leave(map)
-                return ("%s<cmd>lua require('submode'):leave()<cr>"):format(map)
-            end
-
             vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
 
             mods["submode"].setup()
@@ -97,60 +93,33 @@ return {
                 lhs = { "r", "U" },
                 rhs = "<cmd>ta<cr>",
             }, {
-                lhs = "i",
-                rhs = append_leave("<Insert>"),
-            }, {
                 lhs = "q",
                 rhs = "<cmd>q<cr>",
             })
 
-            vim.api.nvim_create_augroup("DocReaderAug", {})
-            vim.api.nvim_create_autocmd({
-                "BufEnter",
-                "BufLeave",
-            }, {
-                group = "DocReaderAug",
-                callback = function(opt)
-                    if
-                        vim.opt.ft:get() == "help"
-                        and opt.event == "BufEnter"
-                    then
-                        if vim.o.modifiable then
-                            return
-                        end
+            vim.api.nvim_create_augroup("DocReaderAugroup", {})
+            vim.api.nvim_create_autocmd("BufEnter", {
+                group = "DocReaderAugroup",
+                callback = function()
+                    if vim.opt.ft:get() == "help" and not vim.bo.modifiable then
                         mods["submode"].enter("DocReader")
-                    elseif mods["submode"].mode() == "DocReader" then
+                    end
+                end,
+            })
+            vim.api.nvim_create_autocmd("BufLeave", {
+                group = "DocReaderAugroup",
+                callback = function()
+                    if mods["submode"].mode() == "DocReader" then
                         mods["submode"].leave()
                     end
                 end,
             })
             vim.api.nvim_create_autocmd("CmdwinEnter", {
-                group = "DocReaderAug",
+                group = "DocReaderAugroup",
                 callback = function()
                     if mods["submode"].mode() == "DocReader" then
                         mods["submode"].leave()
                     end
-                end,
-            })
-            vim.api.nvim_create_autocmd("CmdlineEnter", {
-                group = "DocReaderAug",
-                callback = function()
-                    if mods["submode"].mode() == "DocReader" then
-                        mods["submode"].leave()
-                    end
-                end,
-            })
-            vim.api.nvim_create_autocmd("CursorMoved", {
-                group = "DocReaderAug",
-                callback = function()
-                    if vim.opt.ft:get() ~= "help" or vim.o.modifiable then
-                        return
-                    end
-                    if mods["submode"].mode() == "DocReader" then
-                        return
-                    end
-
-                    mods["submode"].enter("DocReader")
                 end,
             })
         end,

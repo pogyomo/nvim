@@ -51,6 +51,7 @@ return {
             local mods = module.require {
                 "notify",
             }
+
             mods["notify"].setup(opts)
             vim.notify = mods["notify"]
         end,
