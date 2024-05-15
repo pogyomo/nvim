@@ -1,49 +1,132 @@
+-- Execute a command named `name` with temporary options in `opts`.
+local function exec_cmd_with_options(cmd, opts)
+    local save_opts = {}
+    for opt, val in pairs(opts) do
+        save_opts[opt] = vim.o[opt]
+        vim.o[opt] = val
+    end
+    vim.cmd[cmd]()
+    for opt, val in pairs(save_opts) do
+        vim.o[opt] = val
+    end
+end
+
 -- Register space as leader key.
 vim.g.mapleader = " "
 
--- Alias of keymaps
-vim.keymap.set("n", "<Leader>t", "<Plug>(core-tab-manager)", { remap = true })
-vim.keymap.set(
-    "n",
-    "<Leader>w",
-    "<Plug>(core-window-manager)",
-    { remap = true }
-)
-vim.keymap.set(
-    "n",
-    "<Leader>s",
-    "<Plug>(core-window-spliter)",
-    { remap = true }
-)
+-- Entry point for some operation.
+vim.keymap.set("n", "<Leader>t", "<Plug>(core-tab-manager)", {
+    remap = true,
+    desc = "entry point for tab management",
+})
+vim.keymap.set("n", "<Leader>w", "<Plug>(core-window-manager)", {
+    remap = true,
+    desc = "entry point for window management",
+})
+vim.keymap.set("n", "<Leader>s", "<Plug>(core-window-splitter)", {
+    remap = true,
+    desc = "entry point for splitting window",
+})
+vim.keymap.set("n", "<Leader>b", "<Plug>(core-buffer-manager)", {
+    remap = true,
+    desc = "entry point for buffer management",
+})
 
 -- Keymaps to manage tabs
-for _, key in ipairs { "l", "h" } do
-    vim.keymap.set("n", "<Plug>(core-tab-manager)" .. key, function()
-        return key == "l" and "gt" or "gT"
-    end, { expr = true })
-end
-for _, key in ipairs { "L", "H" } do
-    vim.keymap.set("n", "<Plug>(core-tab-manager)" .. key, function()
-        return ("<cmd>%stabmove<cr>"):format(key == "L" and "+" or "-")
-    end, { expr = true })
-end
+vim.keymap.set("n", "<Plug>(core-tab-manager)h", "gT", {
+    desc = "go to previous tab",
+})
+vim.keymap.set("n", "<Plug>(core-tab-manager)l", "gt", {
+    desc = "go to next tab",
+})
+vim.keymap.set("n", "<Plug>(core-tab-manager)H", "<cmd>-tabmove<cr>", {
+    desc = "move current tab to the left",
+})
+vim.keymap.set("n", "<Plug>(core-tab-manager)L", "<cmd>+tabmove<cr>", {
+    desc = "move current tab to the right",
+})
 
 -- Keymaps to move around windows
-for _, key in ipairs { "l", "h", "j", "k", "L", "H", "J", "K" } do
-    vim.keymap.set("n", "<Plug>(core-window-manager)" .. key, "<C-w>" .. key)
-end
+vim.keymap.set("n", "<Plug>(core-window-manager)h", "<C-w>h", {
+    desc = "go to left window",
+})
+vim.keymap.set("n", "<Plug>(core-window-manager)j", "<C-w>j", {
+    desc = "go to bottom window",
+})
+vim.keymap.set("n", "<Plug>(core-window-manager)k", "<C-w>k", {
+    desc = "go to top window",
+})
+vim.keymap.set("n", "<Plug>(core-window-manager)l", "<C-w>l", {
+    desc = "go to right window",
+})
+vim.keymap.set("n", "<Plug>(core-window-manager)H", "<C-w>h", {
+    desc = "move current window to left",
+})
+vim.keymap.set("n", "<Plug>(core-window-manager)J", "<C-w>j", {
+    desc = "move current window to bottom",
+})
+vim.keymap.set("n", "<Plug>(core-window-manager)K", "<C-w>k", {
+    desc = "move current window to top",
+})
+vim.keymap.set("n", "<Plug>(core-window-manager)L", "<C-w>l", {
+    desc = "move current window to right",
+})
 
 -- Keymaps to split window
-for _, key in ipairs { "l", "h", "j", "k" } do
-    vim.keymap.set("n", "<Plug>(core-window-spliter)" .. key, function()
-        local prefix = (key == "h" or key == "l") and "v" or ""
-        return ("<cmd>%ssp<cr><C-w>%s"):format(prefix, key)
-    end, { expr = true })
-end
+vim.keymap.set("n", "<Plug>(core-window-splitter)h", function()
+    exec_cmd_with_options("vsplit", { splitright = false })
+end, {
+    desc = "go to previous buffer",
+})
+vim.keymap.set("n", "<Plug>(core-window-splitter)j", function()
+    exec_cmd_with_options("split", { splitbelow = true })
+end, {
+    desc = "go to previous buffer",
+})
+vim.keymap.set("n", "<Plug>(core-window-splitter)k", function()
+    exec_cmd_with_options("split", { splitbelow = false })
+end, {
+    desc = "go to previous buffer",
+})
+vim.keymap.set("n", "<Plug>(core-window-splitter)l", function()
+    exec_cmd_with_options("vsplit", { splitright = true })
+end, {
+    desc = "go to previous buffer",
+})
+vim.keymap.set("n", "<Plug>(core-window-splitter)H", function()
+    exec_cmd_with_options("vnew", { splitright = false })
+end, {
+    desc = "go to previous buffer",
+})
+vim.keymap.set("n", "<Plug>(core-window-splitter)J", function()
+    exec_cmd_with_options("new", { splitbelow = true })
+end, {
+    desc = "go to previous buffer",
+})
+vim.keymap.set("n", "<Plug>(core-window-splitter)K", function()
+    exec_cmd_with_options("new", { splitbelow = false })
+end, {
+    desc = "go to previous buffer",
+})
+vim.keymap.set("n", "<Plug>(core-window-splitter)L", function()
+    exec_cmd_with_options("vnew", { splitright = true })
+end, {
+    desc = "go to previous buffer",
+})
+
+-- Keymaps to manage buffers
+vim.keymap.set("n", "<Plug>(core-buffer-manager)h", "<cmd>bprev<cr>", {
+    desc = "go to previous buffer",
+})
+vim.keymap.set("n", "<Plug>(core-buffer-manager)l", "<cmd>bnext<cr>", {
+    desc = "go to next buffer",
+})
 
 -- Keymaps to move display line.
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 
 -- Keymaps to leave from insert mode.
-vim.keymap.set("i", "jj", "<ESC>")
+vim.keymap.set("i", "jj", "<ESC>", {
+    desc = "leave from insert mode",
+})
