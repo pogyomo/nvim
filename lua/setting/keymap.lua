@@ -76,42 +76,42 @@ vim.keymap.set("n", "<Plug>(core-window-manager)L", "<C-w>l", {
 vim.keymap.set("n", "<Plug>(core-window-splitter)h", function()
     exec_cmd_with_options("vsplit", { splitright = false })
 end, {
-    desc = "go to previous buffer",
+    desc = "split current window to left",
 })
 vim.keymap.set("n", "<Plug>(core-window-splitter)j", function()
     exec_cmd_with_options("split", { splitbelow = true })
 end, {
-    desc = "go to previous buffer",
+    desc = "split current window to bottom",
 })
 vim.keymap.set("n", "<Plug>(core-window-splitter)k", function()
     exec_cmd_with_options("split", { splitbelow = false })
 end, {
-    desc = "go to previous buffer",
+    desc = "split current window to top",
 })
 vim.keymap.set("n", "<Plug>(core-window-splitter)l", function()
     exec_cmd_with_options("vsplit", { splitright = true })
 end, {
-    desc = "go to previous buffer",
+    desc = "split current window to right",
 })
 vim.keymap.set("n", "<Plug>(core-window-splitter)H", function()
     exec_cmd_with_options("vnew", { splitright = false })
 end, {
-    desc = "go to previous buffer",
+    desc = "create a new window to left",
 })
 vim.keymap.set("n", "<Plug>(core-window-splitter)J", function()
     exec_cmd_with_options("new", { splitbelow = true })
 end, {
-    desc = "go to previous buffer",
+    desc = "create a new window to bottom",
 })
 vim.keymap.set("n", "<Plug>(core-window-splitter)K", function()
     exec_cmd_with_options("new", { splitbelow = false })
 end, {
-    desc = "go to previous buffer",
+    desc = "create a new window to top",
 })
 vim.keymap.set("n", "<Plug>(core-window-splitter)L", function()
     exec_cmd_with_options("vnew", { splitright = true })
 end, {
-    desc = "go to previous buffer",
+    desc = "create a new window to right",
 })
 
 -- Keymaps to manage buffers
