@@ -36,7 +36,7 @@ return {
             mods["submode"].setup()
 
             vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
-            mods["submode"].create("WinResize", {
+            mods["submode"].create("WinResizer", {
                 mode = "n",
                 enter = "<Plug>(submode-win-resizer)",
                 leave = { "q", "<ESC>" },
