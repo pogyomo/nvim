@@ -31,53 +31,34 @@ return {
             local mods = module.require {
                 "submode",
                 { "utils.window.resize", as = "resize" },
-                { "utils.window.move", as = "move" },
             }
-
-            vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
 
             mods["submode"].setup()
 
-            local is_precise = false
-            local is_move = false
-            mods["submode"].create("WinManipulator", {
+            vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
+            mods["submode"].create("WinResize", {
                 mode = "n",
-                mode_name = function()
-                    local mode_name = is_move and "WinMove" or "WinResize"
-                    local postfix = is_precise and " - precise" or ""
-                    return ("%s%s"):format(mode_name, postfix)
-                end,
                 enter = "<Plug>(submode-win-resizer)",
                 leave = { "q", "<ESC>" },
-                leave_cb = function()
-                    is_precise = false
-                    is_move = false
+            }, {
+                lhs = "h",
+                rhs = function()
+                    mods["resize"](0, 2, 2, "left")
                 end,
             }, {
-                lhs = { "i", "r" },
-                rhs = function(lhs)
-                    if lhs == "i" then
-                        is_precise = not is_precise
-                    else
-                        is_move = not is_move
-                    end
+                lhs = "j",
+                rhs = function()
+                    mods["resize"](0, 2, 2, "down")
                 end,
             }, {
-                lhs = { "l", "h", "j", "k" },
-                rhs = function(lhs)
-                    local diff_row = is_precise and 1 or 2
-                    local diff_col = is_precise and 1 or 5
-                    local key_to_dir = {
-                        ["l"] = "right",
-                        ["h"] = "left",
-                        ["j"] = "down",
-                        ["k"] = "up",
-                    }
-                    if is_move then
-                        mods["move"](0, diff_row, diff_col, key_to_dir[lhs])
-                    else
-                        mods["resize"](0, diff_row, diff_col, key_to_dir[lhs])
-                    end
+                lhs = "k",
+                rhs = function()
+                    mods["resize"](0, 2, 2, "up")
+                end,
+            }, {
+                lhs = "l",
+                rhs = function()
+                    mods["resize"](0, 2, 2, "right")
                 end,
             })
 
