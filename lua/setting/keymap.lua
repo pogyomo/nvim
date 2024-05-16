@@ -27,7 +27,7 @@ vim.keymap.set("n", "<Leader>s", "<Plug>(core-window-splitter)", {
     remap = true,
     desc = "entry point for splitting window",
 })
-vim.keymap.set("n", "<Leader>b", "<Plug>(core-buffer-manager)", {
+vim.keymap.set("n", "<Leader>e", "<Plug>(core-buffer-manager)", {
     remap = true,
     desc = "entry point for buffer management",
 })
@@ -120,6 +120,9 @@ vim.keymap.set("n", "<Plug>(core-buffer-manager)h", "<cmd>bprev<cr>", {
 })
 vim.keymap.set("n", "<Plug>(core-buffer-manager)l", "<cmd>bnext<cr>", {
     desc = "go to next buffer",
+})
+vim.keymap.set("n", "<Plug>(core-buffer-manager)d", "<cmd>bdelete<cr>", {
+    desc = "delete current buffer",
 })
 
 -- Keymaps to move display line.
