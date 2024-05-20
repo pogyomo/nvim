@@ -1,16 +1,3 @@
--- Execute a command named `name` with temporary options in `opts`.
-local function exec_cmd_with_options(cmd, opts)
-    local save_opts = {}
-    for opt, val in pairs(opts) do
-        save_opts[opt] = vim.o[opt]
-        vim.o[opt] = val
-    end
-    vim.cmd[cmd]()
-    for opt, val in pairs(save_opts) do
-        vim.o[opt] = val
-    end
-end
-
 -- Register space as leader key.
 vim.g.mapleader = " "
 
@@ -73,44 +60,28 @@ vim.keymap.set("n", "<Plug>(core-window-manager)L", "<C-w>l", {
 })
 
 -- Keymaps to split window
-vim.keymap.set("n", "<Plug>(core-window-splitter)h", function()
-    exec_cmd_with_options("vsplit", { splitright = false })
-end, {
+vim.keymap.set("n", "<Plug>(core-window-splitter)h", "<cmd>top vsplit<cr>", {
     desc = "split current window to left",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)j", function()
-    exec_cmd_with_options("split", { splitbelow = true })
-end, {
+vim.keymap.set("n", "<Plug>(core-window-splitter)j", "<cmd>below split<cr>", {
     desc = "split current window to bottom",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)k", function()
-    exec_cmd_with_options("split", { splitbelow = false })
-end, {
+vim.keymap.set("n", "<Plug>(core-window-splitter)k", "<cmd>top split<cr>", {
     desc = "split current window to top",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)l", function()
-    exec_cmd_with_options("vsplit", { splitright = true })
-end, {
+vim.keymap.set("n", "<Plug>(core-window-splitter)l", "<cmd>below vsplit<cr>", {
     desc = "split current window to right",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)H", function()
-    exec_cmd_with_options("vnew", { splitright = false })
-end, {
+vim.keymap.set("n", "<Plug>(core-window-splitter)H", "<cmd>top vnew<cr>", {
     desc = "create a new window to left",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)J", function()
-    exec_cmd_with_options("new", { splitbelow = true })
-end, {
+vim.keymap.set("n", "<Plug>(core-window-splitter)J", "<cmd>below new<cr>", {
     desc = "create a new window to bottom",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)K", function()
-    exec_cmd_with_options("new", { splitbelow = false })
-end, {
+vim.keymap.set("n", "<Plug>(core-window-splitter)K", "<cmd>top new<cr>", {
     desc = "create a new window to top",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)L", function()
-    exec_cmd_with_options("vnew", { splitright = true })
-end, {
+vim.keymap.set("n", "<Plug>(core-window-splitter)L", "<cmd>below vnew<cr>", {
     desc = "create a new window to right",
 })
 
