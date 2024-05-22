@@ -46,16 +46,16 @@ vim.keymap.set("n", "<Plug>(core-window-manager)k", "<C-w>k", {
 vim.keymap.set("n", "<Plug>(core-window-manager)l", "<C-w>l", {
     desc = "go to right window",
 })
-vim.keymap.set("n", "<Plug>(core-window-manager)H", "<C-w>h", {
+vim.keymap.set("n", "<Plug>(core-window-manager)H", "<C-w>H", {
     desc = "move current window to left",
 })
-vim.keymap.set("n", "<Plug>(core-window-manager)J", "<C-w>j", {
+vim.keymap.set("n", "<Plug>(core-window-manager)J", "<C-w>J", {
     desc = "move current window to bottom",
 })
-vim.keymap.set("n", "<Plug>(core-window-manager)K", "<C-w>k", {
+vim.keymap.set("n", "<Plug>(core-window-manager)K", "<C-w>K", {
     desc = "move current window to top",
 })
-vim.keymap.set("n", "<Plug>(core-window-manager)L", "<C-w>l", {
+vim.keymap.set("n", "<Plug>(core-window-manager)L", "<C-w>L", {
     desc = "move current window to right",
 })
 
