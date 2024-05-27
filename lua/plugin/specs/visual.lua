@@ -88,4 +88,8 @@ return {
             mods["rainbow-delimiters.setup"].setup(opts)
         end,
     },
+    {
+        "j-hui/fidget.nvim",
+        opts = {},
+    },
 }
