@@ -37,4 +37,11 @@ require("lazy").setup("plugin.specs", {
         path = os.getenv("LAZY_DEV_PATH") or "~/projects",
         fallback = true,
     },
+    performance = {
+        rtp = {
+            disable_plugins = {
+                "netrwPlugin",
+            },
+        },
+    },
 })
