@@ -16,6 +16,7 @@ vim.o.showcmd = false
 vim.o.number = true
 vim.o.cursorline = true
 vim.o.termguicolors = true
+vim.o.signcolumn = "yes"
 
 -- Search
 vim.o.ignorecase = true

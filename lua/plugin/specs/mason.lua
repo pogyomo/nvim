@@ -12,9 +12,6 @@ return {
             "mason",
         }
 
-        -- Always show signcolumn.
-        vim.opt.signcolumn = "yes"
-
         -- Set transparency to mason's floating window.
         vim.api.nvim_create_autocmd("FileType", {
             group = vim.api.nvim_create_augroup("__mason_menu", {}),

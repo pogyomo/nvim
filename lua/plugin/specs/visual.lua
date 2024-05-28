@@ -11,15 +11,6 @@ return {
                 CHANGED = { icon = " ", color = "hint" },
             },
         },
-        config = function(_, opts)
-            local module = require("utils.module")
-            local mods = module.require {
-                "todo-comments",
-            }
-
-            vim.o.signcolumn = "yes"
-            mods["todo-comments"].setup(opts)
-        end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
