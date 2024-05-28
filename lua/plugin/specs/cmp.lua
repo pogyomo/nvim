@@ -83,7 +83,7 @@ return {
             }),
         }
 
-        -- Command line settings (when "/")
+        -- Command line settings (when "/" or "?")
         mods["cmp"].setup.cmdline({ "/", "?" }, {
             mapping = mods["cmp"].mapping.preset.cmdline(),
             sources = {
