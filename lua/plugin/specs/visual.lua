@@ -53,31 +53,10 @@ return {
     },
     {
         "stevearc/dressing.nvim",
-        lazy = true,
-        init = function()
-            ---@diagnostic disable-next-line
-            vim.ui.input = function(...)
-                require("lazy").load { plugins = { "dressing.nvim" } }
-                return vim.ui.input(...)
-            end
-            ---@diagnostic disable-next-line
-            vim.ui.select = function(...)
-                require("lazy").load { plugins = { "dressing.nvim" } }
-                return vim.ui.select(...)
-            end
-        end,
+        opts = {},
     },
     {
         "HiPhish/rainbow-delimiters.nvim",
-        opts = {},
-        config = function(_, opts)
-            local module = require("utils.module")
-            local mods = module.require {
-                "rainbow-delimiters.setup",
-            }
-
-            mods["rainbow-delimiters.setup"].setup(opts)
-        end,
     },
     {
         "j-hui/fidget.nvim",
