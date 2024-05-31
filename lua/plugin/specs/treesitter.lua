@@ -26,6 +26,7 @@ return {
             "cpp",
             "go",
             "java",
+            "json",
             "latex",
             "lua",
             "markdown",
