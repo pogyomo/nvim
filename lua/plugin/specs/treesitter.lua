@@ -18,6 +18,7 @@ return {
         "TSUpdateSync",
         "TSInstallInfo",
         "TSInstallSync",
+        "TSInstallFromGrammar",
     },
     opts = {
         ensure_installed = {
