@@ -6,6 +6,10 @@ return {
         "sindrets/diffview.nvim",
         "nvim-telescope/telescope.nvim",
     },
+    cmd = {
+        "Neogit",
+        "NeogitResetState",
+    },
     opts = {},
     config = function(_, opts)
         local module = require("utils.module")
