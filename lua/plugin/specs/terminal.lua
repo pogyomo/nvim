@@ -18,15 +18,9 @@ return {
         "ToggleTermSendVisualSelection",
     },
     config = function()
-        local module = require("utils.module")
-        local mods = module.require {
-            "toggleterm",
-            "toggleterm.terminal",
-        }
-        local terminal = mods["toggleterm.terminal"].Terminal
+        require("toggleterm").setup()
 
-        mods["toggleterm"].setup()
-
+        local terminal = require("toggleterm.terminal").Terminal
         local floatterm = terminal:new {
             direction = "float",
             float_opts = {

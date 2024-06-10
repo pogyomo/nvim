@@ -20,6 +20,7 @@ return {
         "TSInstallSync",
         "TSInstallFromGrammar",
     },
+    main = "nvim-treesitter.configs",
     opts = {
         ensure_installed = {
             "bibtex",
@@ -54,12 +55,4 @@ return {
             enable = true,
         },
     },
-    config = function(_, opts)
-        local module = require("utils.module")
-        local mods = module.require {
-            "nvim-treesitter.configs",
-        }
-
-        mods["nvim-treesitter.configs"].setup(opts)
-    end,
 }

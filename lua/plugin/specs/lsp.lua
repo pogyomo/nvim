@@ -19,14 +19,6 @@ return {
             "stevearc/conform.nvim",
         },
         config = function()
-            local module = require("utils.module")
-            local mods = module.require {
-                "lspconfig",
-                "mason-lspconfig",
-                "cmp_nvim_lsp",
-                "conform",
-            }
-
             -- Keymaps for lsp actions
             -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -36,7 +28,7 @@ return {
 
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "gf", function()
-                        mods["conform"].format { async = true }
+                        require("conform").format { async = true }
                     end, opts)
                     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -56,7 +48,7 @@ return {
             })
 
             -- Specify lsps to install
-            mods["mason-lspconfig"].setup {
+            require("mason-lspconfig").setup {
                 ensure_installed = {
                     "clangd",
                     "lua_ls",
@@ -67,21 +59,23 @@ return {
             }
 
             -- Default config of each lsp.
-            local capabilities = mods["cmp_nvim_lsp"].default_capabilities()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+            local lspconfig = require("lspconfig")
 
             -- mason-lspconfig doesn't manage gdscript, so manually configure the lsp.
-            mods["lspconfig"].gdscript.setup {
+            lspconfig.gdscript.setup {
                 capabilities = capabilities,
             }
 
-            mods["mason-lspconfig"].setup_handlers {
+            require("mason-lspconfig").setup_handlers {
                 function(name)
-                    mods["lspconfig"][name].setup {
+                    lspconfig[name].setup {
                         capabilities = capabilities,
                     }
                 end,
                 ["lua_ls"] = function()
-                    mods["lspconfig"].lua_ls.setup {
+                    lspconfig.lua_ls.setup {
                         capabilities = capabilities,
                         settings = {
                             Lua = {
@@ -99,7 +93,7 @@ return {
                     }
                 end,
                 ["rust_analyzer"] = function()
-                    mods["lspconfig"].rust_analyzer.setup {
+                    lspconfig.rust_analyzer.setup {
                         capabilities = capabilities,
                         settings = {
                             ["rust-analyzer"] = {

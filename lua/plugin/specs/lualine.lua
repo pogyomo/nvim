@@ -4,17 +4,12 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
-        local module = require("utils.module")
-        local mods = module.require {
-            "lualine",
-            "submode",
-        }
-
         local filename_symbols = {
             modified = "+",
             readonly = "-",
             unnamed = "no name",
         }
+
         local fileformat_symbols = {
             unix = " unix",
             dos = " dos",
@@ -25,7 +20,7 @@ return {
             lualine_a = {
                 { "mode", fmt = string.lower },
                 function()
-                    return mods["submode"].mode() or ""
+                    return require("submode").mode() or ""
                 end,
             },
             lualine_b = {
@@ -78,7 +73,7 @@ return {
             lualine_z = {},
         }
 
-        mods["lualine"].setup {
+        require("lualine").setup {
             options = {
                 theme = "auto",
                 globalstatus = true,

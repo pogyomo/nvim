@@ -11,12 +11,4 @@ return {
         "NeogitResetState",
     },
     opts = {},
-    config = function(_, opts)
-        local module = require("utils.module")
-        local mods = module.require {
-            "neogit",
-        }
-
-        mods["neogit"].setup(opts)
-    end,
 }

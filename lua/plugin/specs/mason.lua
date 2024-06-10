@@ -7,11 +7,6 @@ return {
         },
     },
     config = function(_, opts)
-        local module = require("utils.module")
-        local mods = module.require {
-            "mason",
-        }
-
         -- Set transparency to mason's floating window.
         vim.api.nvim_create_autocmd("FileType", {
             group = vim.api.nvim_create_augroup("__mason_menu", {}),
@@ -21,6 +16,6 @@ return {
             end,
         })
 
-        mods["mason"].setup(opts)
+        require("mason").setup(opts)
     end,
 }

@@ -17,19 +17,13 @@ return {
         },
     },
     config = function(_, opts)
-        local module = require("utils.module")
-        local mods = module.require {
-            "conform",
-            "mason-registry",
-        }
-
         local ensure_installed = {
             "clang-format",
             "stylua",
         }
 
         for _, name in ipairs(ensure_installed) do
-            local pkg = mods["mason-registry"].get_package(name)
+            local pkg = require("mason-registry").get_package(name)
             if pkg:is_installed() then
                 goto continue
             end
@@ -51,6 +45,6 @@ return {
             ::continue::
         end
 
-        mods["conform"].setup(opts)
+        require("conform").setup(opts)
     end,
 }

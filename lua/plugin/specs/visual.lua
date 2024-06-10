@@ -37,14 +37,6 @@ return {
                 return require("notify")(...)
             end
         end,
-        config = function(_, opts)
-            local module = require("utils.module")
-            local mods = module.require {
-                "notify",
-            }
-
-            mods["notify"].setup(opts)
-        end,
     },
     {
         "thentenaar/vim-syntax-obscure",
@@ -78,12 +70,7 @@ return {
         "folke/tokyonight.nvim",
         opts = { style = "storm" },
         config = function(_, opts)
-            local module = require("utils.module")
-            local mods = module.require {
-                "tokyonight",
-            }
-
-            mods["tokyonight"].setup(opts)
+            require("tokyonight").setup(opts)
             vim.cmd.colorscheme("tokyonight")
         end,
     },

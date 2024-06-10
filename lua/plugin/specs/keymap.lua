@@ -3,17 +3,10 @@ return {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         config = function()
-            local module = require("utils.module")
-            local mods = module.require {
-                "cmp",
-                { "nvim-autopairs", as = "autopairs" },
-                { "nvim-autopairs.completion.cmp", as = "autopairs_cmp" },
-            }
-
-            mods["autopairs"].setup()
-            mods["cmp"].event:on(
+            require("nvim-autopairs").setup()
+            require("cmp").event:on(
                 "confirm_done",
-                mods["autopairs_cmp"].on_confirm_done()
+                require("nvim-autopairs.completion.cmp").on_confirm_done()
             )
         end,
     },
@@ -37,42 +30,39 @@ return {
         "pogyomo/submode.nvim",
         dev = true,
         config = function()
-            local module = require("utils.module")
-            local mods = module.require {
-                "submode",
-                { "utils.window.resize", as = "resize" },
-            }
+            local submode = require("submode")
+            local resize = require("utils.window.resize")
 
-            mods["submode"].setup()
+            submode.setup()
 
             vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
-            mods["submode"].create("WinResizer", {
+            submode.create("WinResizer", {
                 mode = "n",
                 enter = "<Plug>(submode-win-resizer)",
                 leave = { "q", "<ESC>" },
             }, {
                 lhs = "h",
                 rhs = function()
-                    mods["resize"](0, 2, 2, "left")
+                    resize(0, 2, 2, "left")
                 end,
             }, {
                 lhs = "j",
                 rhs = function()
-                    mods["resize"](0, 2, 2, "down")
+                    resize(0, 2, 2, "down")
                 end,
             }, {
                 lhs = "k",
                 rhs = function()
-                    mods["resize"](0, 2, 2, "up")
+                    resize(0, 2, 2, "up")
                 end,
             }, {
                 lhs = "l",
                 rhs = function()
-                    mods["resize"](0, 2, 2, "right")
+                    resize(0, 2, 2, "right")
                 end,
             })
 
-            mods["submode"].create("DocReader", {
+            submode.create("DocReader", {
                 mode = "n",
             }, {
                 lhs = "<Enter>",
@@ -92,15 +82,15 @@ return {
                 group = "DocReaderAugroup",
                 callback = function()
                     if vim.opt.ft:get() == "help" and not vim.bo.modifiable then
-                        mods["submode"].enter("DocReader")
+                        submode.enter("DocReader")
                     end
                 end,
             })
             vim.api.nvim_create_autocmd({ "BufLeave", "CmdwinEnter" }, {
                 group = "DocReaderAugroup",
                 callback = function()
-                    if mods["submode"].mode() == "DocReader" then
-                        mods["submode"].leave()
+                    if submode.mode() == "DocReader" then
+                        submode.leave()
                     end
                 end,
             })
