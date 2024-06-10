@@ -21,14 +21,6 @@ return {
                 enabled = false,
             },
         },
-        config = function(_, opts)
-            local module = require("utils.module")
-            local mods = module.require {
-                "ibl",
-            }
-
-            mods["ibl"].setup(opts)
-        end,
     },
     {
         "rcarriga/nvim-notify",
