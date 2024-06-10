@@ -48,6 +48,8 @@ return {
             end,
         },
 
+        -- Enable this for fixing indentation at some language.
+        -- reference: https://zenn.dev/uga_rosa/articles/9eb5063f8f9b75
         indent = {
             enable = true,
         },
