@@ -18,6 +18,16 @@ return {
         end,
     },
     {
+        "folke/flash.nvim",
+        opts = {
+            modes = {
+                search = {
+                    enabled = true,
+                },
+            },
+        },
+    },
+    {
         "kylechui/nvim-surround",
         version = "*",
         event = "VeryLazy",
