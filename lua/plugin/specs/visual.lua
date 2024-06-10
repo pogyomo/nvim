@@ -24,11 +24,19 @@ return {
     },
     {
         "rcarriga/nvim-notify",
+        lazy = true,
         opts = {
             timeout = 1000,
             fps = 60,
             stages = "fade",
         },
+        init = function()
+            ---@diagnostic disable-next-line
+            vim.notify = function(...)
+                require("lazy").load { plugins = { "nvim-notify" } }
+                return require("notify")(...)
+            end
+        end,
         config = function(_, opts)
             local module = require("utils.module")
             local mods = module.require {
@@ -36,7 +44,6 @@ return {
             }
 
             mods["notify"].setup(opts)
-            vim.notify = mods["notify"]
         end,
     },
     {
@@ -45,6 +52,19 @@ return {
     },
     {
         "stevearc/dressing.nvim",
+        lazy = true,
+        init = function()
+            ---@diagnostic disable-next-line
+            vim.ui.input = function(...)
+                require("lazy").load { plugins = { "dressing.nvim" } }
+                return vim.ui.input(...)
+            end
+            ---@diagnostic disable-next-line
+            vim.ui.select = function(...)
+                require("lazy").load { plugins = { "dressing.nvim" } }
+                return vim.ui.select(...)
+            end
+        end,
         opts = {},
     },
     {
