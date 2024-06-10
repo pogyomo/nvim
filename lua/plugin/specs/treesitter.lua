@@ -47,6 +47,10 @@ return {
                 return lang == "vim" and bufname:match("%[Command Line%]")
             end,
         },
+
+        indent = {
+            enable = true,
+        },
     },
     config = function(_, opts)
         local module = require("utils.module")
