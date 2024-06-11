@@ -35,9 +35,17 @@ return {
         },
         config = function()
             local submode = require("submode")
-            local resize = require("winresize").resize
+            local winresize = require("winresize")
 
             submode.setup()
+
+            ---Just a wrapper for rhs of keymap.
+            ---@param key "left" | "right" | "up" | "down"
+            local function resize_rhs(key)
+                return function()
+                    winresize.resize(0, 2, 1, key)
+                end
+            end
 
             vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
             submode.create("WinResizer", {
@@ -46,24 +54,16 @@ return {
                 leave = { "q", "<ESC>" },
             }, {
                 lhs = "h",
-                rhs = function()
-                    resize(0, 2, 2, "left")
-                end,
+                rhs = resize_rhs("left"),
             }, {
                 lhs = "j",
-                rhs = function()
-                    resize(0, 2, 2, "down")
-                end,
+                rhs = resize_rhs("down"),
             }, {
                 lhs = "k",
-                rhs = function()
-                    resize(0, 2, 2, "up")
-                end,
+                rhs = resize_rhs("up"),
             }, {
                 lhs = "l",
-                rhs = function()
-                    resize(0, 2, 2, "right")
-                end,
+                rhs = resize_rhs("right"),
             })
 
             submode.create("DocReader", {
