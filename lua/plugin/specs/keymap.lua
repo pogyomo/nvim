@@ -39,7 +39,7 @@ return {
 
             submode.setup()
 
-            ---Just a wrapper for rhs of keymap.
+            ---Just a wrapper of resize for keymap.
             ---@param key "left" | "right" | "up" | "down"
             local function resize_rhs(key)
                 return function()
