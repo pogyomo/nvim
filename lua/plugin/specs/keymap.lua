@@ -43,7 +43,8 @@ return {
             ---@param key "left" | "right" | "up" | "down"
             local function resize_rhs(key)
                 return function()
-                    winresize.resize(0, 2, 1, key)
+                    local amount = (key == "left" or key == "right") and 2 or 1
+                    winresize.resize(0, amount, key)
                 end
             end
 
