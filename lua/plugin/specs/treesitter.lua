@@ -39,14 +39,11 @@ return {
             "zig",
         },
 
+        -- NOTE:
+        -- The highlight in command window broken.
+        -- See: https://github.com/neovim/neovim/issues/26346
         highlight = {
             enable = true,
-            disable = function(lang, bufnr)
-                -- NOTE: I need to disable treesitter on command window.
-                --       See: https://github.com/neovim/neovim/issues/26346
-                local bufname = vim.api.nvim_buf_get_name(bufnr)
-                return lang == "vim" and bufname:match("%[Command Line%]")
-            end,
         },
 
         -- Enable this for fixing indentation at some language.
