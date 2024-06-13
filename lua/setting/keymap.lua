@@ -60,28 +60,28 @@ vim.keymap.set("n", "<Plug>(core-window-manager)L", "<C-w>L", {
 })
 
 -- Keymaps to split window
-vim.keymap.set("n", "<Plug>(core-window-splitter)h", "<cmd>top vsplit<cr>", {
+vim.keymap.set("n", "<Plug>(core-window-splitter)h", "<cmd>abo vsplit<cr>", {
     desc = "split current window to left",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)j", "<cmd>below split<cr>", {
+vim.keymap.set("n", "<Plug>(core-window-splitter)j", "<cmd>bel split<cr>", {
     desc = "split current window to bottom",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)k", "<cmd>top split<cr>", {
+vim.keymap.set("n", "<Plug>(core-window-splitter)k", "<cmd>abo split<cr>", {
     desc = "split current window to top",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)l", "<cmd>below vsplit<cr>", {
+vim.keymap.set("n", "<Plug>(core-window-splitter)l", "<cmd>bel vsplit<cr>", {
     desc = "split current window to right",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)H", "<cmd>top vnew<cr>", {
+vim.keymap.set("n", "<Plug>(core-window-splitter)H", "<cmd>abo vnew<cr>", {
     desc = "create a new window to left",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)J", "<cmd>below new<cr>", {
+vim.keymap.set("n", "<Plug>(core-window-splitter)J", "<cmd>bel new<cr>", {
     desc = "create a new window to bottom",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)K", "<cmd>top new<cr>", {
+vim.keymap.set("n", "<Plug>(core-window-splitter)K", "<cmd>abo new<cr>", {
     desc = "create a new window to top",
 })
-vim.keymap.set("n", "<Plug>(core-window-splitter)L", "<cmd>below vnew<cr>", {
+vim.keymap.set("n", "<Plug>(core-window-splitter)L", "<cmd>bel vnew<cr>", {
     desc = "create a new window to right",
 })
 
