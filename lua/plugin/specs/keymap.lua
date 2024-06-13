@@ -37,8 +37,6 @@ return {
             local submode = require("submode")
             local winresize = require("winresize")
 
-            submode.setup()
-
             ---Just a wrapper of resize for keymap.
             ---@param key "left" | "right" | "up" | "down"
             local function resize_rhs(key)
@@ -76,7 +74,10 @@ return {
                 lhs = "u",
                 rhs = "<cmd>po<cr>",
             }, {
-                lhs = { "r", "U" },
+                lhs = "r",
+                rhs = "<cmd>ta<cr>",
+            }, {
+                lhs = "U",
                 rhs = "<cmd>ta<cr>",
             }, {
                 lhs = "q",
