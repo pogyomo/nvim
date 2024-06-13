@@ -30,6 +30,7 @@ return {
     {
         "pogyomo/submode.nvim",
         dev = true,
+        lazy = true,
         dependencies = {
             { "pogyomo/winresize.nvim", dev = true },
         },
@@ -51,38 +52,18 @@ return {
                 mode = "n",
                 enter = "<Plug>(submode-win-resizer)",
                 leave = { "q", "<ESC>" },
-            }, {
-                lhs = "h",
-                rhs = resize_rhs("left"),
-            }, {
-                lhs = "j",
-                rhs = resize_rhs("down"),
-            }, {
-                lhs = "k",
-                rhs = resize_rhs("up"),
-            }, {
-                lhs = "l",
-                rhs = resize_rhs("right"),
             })
+            submode.default("WinResizer", "h", resize_rhs("left"))
+            submode.default("WinResizer", "j", resize_rhs("down"))
+            submode.default("WinResizer", "k", resize_rhs("up"))
+            submode.default("WinResizer", "l", resize_rhs("right"))
 
-            submode.create("DocReader", {
-                mode = "n",
-            }, {
-                lhs = "<Enter>",
-                rhs = "<C-]>",
-            }, {
-                lhs = "u",
-                rhs = "<cmd>po<cr>",
-            }, {
-                lhs = "r",
-                rhs = "<cmd>ta<cr>",
-            }, {
-                lhs = "U",
-                rhs = "<cmd>ta<cr>",
-            }, {
-                lhs = "q",
-                rhs = "<cmd>q<cr>",
-            })
+            submode.create("DocReader", { mode = "n" })
+            submode.default("DocReader", "<Enter>", "<C-]>")
+            submode.default("DocReader", "u", "<cmd>po<cr>")
+            submode.default("DocReader", "r", "<cmd>ta<cr>")
+            submode.default("DocReader", "U", "<cmd>ta<cr>")
+            submode.default("DocReader", "q", "<cmd>q<cr>")
             vim.api.nvim_create_augroup("DocReaderAugroup", {})
             vim.api.nvim_create_autocmd("BufEnter", {
                 group = "DocReaderAugroup",
