@@ -52,22 +52,24 @@ return {
                 mode = "n",
                 enter = "<Plug>(submode-win-resizer)",
                 leave = { "q", "<ESC>" },
-            }, function(default)
-                default("h", resize_rhs("left"))
-                default("j", resize_rhs("down"))
-                default("k", resize_rhs("up"))
-                default("l", resize_rhs("right"))
-            end)
+                default = function(register)
+                    register("h", resize_rhs("left"))
+                    register("j", resize_rhs("down"))
+                    register("k", resize_rhs("up"))
+                    register("l", resize_rhs("right"))
+                end,
+            })
 
             submode.create("DocReader", {
                 mode = "n",
-            }, function(default)
-                default("<Enter>", "<C-]>")
-                default("u", "<cmd>po<cr>")
-                default("r", "<cmd>ta<cr>")
-                default("U", "<cmd>ta<cr>")
-                default("q", "<cmd>q<cr>")
-            end)
+                default = function(register)
+                    register("<Enter>", "<C-]>")
+                    register("u", "<cmd>po<cr>")
+                    register("r", "<cmd>ta<cr>")
+                    register("U", "<cmd>ta<cr>")
+                    register("q", "<cmd>q<cr>")
+                end,
+            })
             vim.api.nvim_create_augroup("DocReaderAugroup", {})
             vim.api.nvim_create_autocmd("BufEnter", {
                 group = "DocReaderAugroup",
