@@ -48,7 +48,7 @@ return {
             end
 
             vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
-            submode.create("WinResizer", {
+            submode.create("win-resizer", {
                 mode = "n",
                 enter = "<Plug>(submode-win-resizer)",
                 leave = { "q", "<ESC>" },
@@ -60,7 +60,7 @@ return {
                 end,
             })
 
-            submode.create("DocReader", {
+            submode.create("doc-reader", {
                 mode = "n",
                 default = function(register)
                     register("<Enter>", "<C-]>")
@@ -70,19 +70,19 @@ return {
                     register("q", "<cmd>q<cr>")
                 end,
             })
-            vim.api.nvim_create_augroup("DocReaderAugroup", {})
+            local group = vim.api.nvim_create_augroup("doc-reader-group", {})
             vim.api.nvim_create_autocmd("BufEnter", {
-                group = "DocReaderAugroup",
+                group = group,
                 callback = function()
                     if vim.opt.ft:get() == "help" and not vim.bo.modifiable then
-                        submode.enter("DocReader")
+                        submode.enter("doc-reader")
                     end
                 end,
             })
             vim.api.nvim_create_autocmd({ "BufLeave", "CmdwinEnter" }, {
-                group = "DocReaderAugroup",
+                group = group,
                 callback = function()
-                    if submode.mode() == "DocReader" then
+                    if submode.mode() == "doc-reader" then
                         submode.leave()
                     end
                 end,
