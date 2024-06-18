@@ -41,6 +41,7 @@ return {
     {
         "stevearc/dressing.nvim",
         lazy = true,
+        opts = {},
         init = function()
             ---@diagnostic disable-next-line
             vim.ui.input = function(...)
@@ -53,7 +54,6 @@ return {
                 return vim.ui.select(...)
             end
         end,
-        opts = {},
     },
     {
         "HiPhish/rainbow-delimiters.nvim",
