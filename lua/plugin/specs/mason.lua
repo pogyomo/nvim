@@ -6,16 +6,13 @@ return {
             height = 0.8,
         },
     },
-    config = function(_, opts)
-        -- Set transparency to mason's floating window.
+    init = function()
         vim.api.nvim_create_autocmd("FileType", {
-            group = vim.api.nvim_create_augroup("__mason_menu", {}),
+            group = vim.api.nvim_create_augroup("set-mason-winblend", {}),
             pattern = "mason",
             callback = function()
                 vim.opt.winblend = 10
             end,
         })
-
-        require("mason").setup(opts)
     end,
 }
