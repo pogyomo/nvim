@@ -5,6 +5,9 @@ return {
         -- Snippet engine
         "L3MON4D3/LuaSnip",
 
+        -- Snippent
+        { "pogyomo/cppguard.nvim", dev = true },
+
         -- Sources
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -19,6 +22,10 @@ return {
     config = function()
         local cmp = require("cmp")
         local luasnip = require("luasnip")
+
+        luasnip.add_snippets("cpp", {
+            require("cppguard").snippet_luasnip("guard"),
+        })
 
         -- Settings for insert mode.
         cmp.setup {
