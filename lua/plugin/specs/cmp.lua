@@ -54,6 +54,7 @@ return {
                         luasnip = "[LuaSnip]",
                         nvim_lsp = "[LSP]",
                         path = "[Path]",
+                        neorg = "[Neorg]",
                     },
                 },
             },
@@ -82,6 +83,7 @@ return {
                 { name = "luasnip" },
                 { name = "nvim_lsp_signature_help" },
                 { name = "lazydev" },
+                { name = "neorg" },
             }, {
                 { name = "buffer" },
                 { name = "path" },
