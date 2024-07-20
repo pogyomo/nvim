@@ -10,6 +10,7 @@ return {
             rust = { "rustfmt" },
             cpp = { "clang_format" },
             lua = { "stylua" },
+            typescript = { "prettier" },
         },
         format_on_save = {
             lsp_fallback = true,
@@ -22,6 +23,7 @@ return {
         local ensure_installed = {
             "clang-format",
             "stylua",
+            "prettier",
         }
         for _, name in ipairs(ensure_installed) do
             if not mason_registry.has_package(name) then
