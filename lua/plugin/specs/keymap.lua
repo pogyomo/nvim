@@ -28,6 +28,14 @@ return {
         opts = {},
     },
     {
+        "echasnovski/mini.ai",
+        opts = {
+            custom_textobjects = {
+                ["$"] = { "%b$$", "^.().*().$" },
+            },
+        },
+    },
+    {
         "pogyomo/submode.nvim",
         dev = true,
         lazy = true,
