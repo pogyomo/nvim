@@ -13,19 +13,39 @@ return {
             typescript = { "prettier" },
             markdown = { "prettier" },
         },
-        format_on_save = {
-            lsp_fallback = true,
+        default_format_opts = {
+            lsp_format = "fallback",
             timeout_ms = 500,
         },
     },
     init = function()
-        local mason_registry = require("mason-registry")
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = vim.api.nvim_create_augroup("format-on-save", {}),
+            callback = function(args)
+                require("conform").format { bufnr = args.buf }
+            end,
+        })
 
+        vim.api.nvim_create_user_command("EnableFormatOnSave", function()
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = vim.api.nvim_create_augroup("format-on-save", {}),
+                callback = function(args)
+                    require("conform").format { bufnr = args.buf }
+                end,
+            })
+        end, {})
+
+        vim.api.nvim_create_user_command("DisableFormatOnSave", function()
+            vim.api.nvim_del_augroup_by_name("format-on-save")
+        end, {})
+
+        local mason_registry = require("mason-registry")
         local ensure_installed = {
             "clang-format",
             "stylua",
             "prettier",
         }
+
         for _, name in ipairs(ensure_installed) do
             if not mason_registry.has_package(name) then
                 goto continue
