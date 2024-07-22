@@ -71,4 +71,12 @@ return {
             vim.cmd.colorscheme("tokyonight")
         end,
     },
+    {
+        "kevinhwang91/nvim-bqf",
+        ft = "qf",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = {},
+    },
 }
