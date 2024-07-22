@@ -71,16 +71,4 @@ return {
             vim.cmd.colorscheme("tokyonight")
         end,
     },
-    {
-        "rachartier/tiny-inline-diagnostic.nvim",
-        event = "VeryLazy",
-        opts = {
-            options = {
-                throttle = 0,
-            },
-        },
-        init = function()
-            vim.diagnostic.config { virtual_text = false }
-        end,
-    },
 }
