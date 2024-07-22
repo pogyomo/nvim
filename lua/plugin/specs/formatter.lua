@@ -36,7 +36,9 @@ return {
         end, {})
 
         vim.api.nvim_create_user_command("DisableFormatOnSave", function()
-            vim.api.nvim_del_augroup_by_name("format-on-save")
+            if vim.fn.exists("#format-on-save") == 1 then
+                vim.api.nvim_del_augroup_by_name("format-on-save")
+            end
         end, {})
 
         local mason_registry = require("mason-registry")
