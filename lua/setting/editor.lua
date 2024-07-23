@@ -26,8 +26,12 @@ vim.o.smartcase = true
 vim.o.foldmethod = "marker"
 
 -- Quickfix
-vim.o.qftf = "{info -> v:lua._G.myqftf(info)}"
-function _G.myqftf(info)
+vim.o.qftf = "{info -> v:lua._G.qftf(info)}"
+
+---Formatting function can be used in `qftf`.
+---@param info table
+---@return string[]
+function _G.qftf(info)
     local items
     if info.quickfix == 1 then
         items = vim.fn.getqflist({ id = info.id, items = 0 }).items
@@ -35,6 +39,7 @@ function _G.myqftf(info)
         items = vim.fn.getloclist(info.winid, { id = info.id, items = 0 }).items
     end
 
+    ---Append spaces to the left of `s` so its length become `n`.
     ---@param s string
     ---@param n integer
     ---@return string
@@ -45,6 +50,7 @@ function _G.myqftf(info)
         return s
     end
 
+    ---Append spaces to the right of `s` so its length become `n`.
     ---@param s string
     ---@param n integer
     ---@return string
