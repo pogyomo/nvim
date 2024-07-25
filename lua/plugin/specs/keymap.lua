@@ -23,6 +23,7 @@ return {
     },
     {
         "echasnovski/mini.ai",
+        event = "VeryLazy",
         opts = {
             custom_textobjects = {
                 ["$"] = { "%b$$", "^.().*().$" },
