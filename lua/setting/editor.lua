@@ -28,6 +28,19 @@ vim.o.foldmethod = "marker"
 -- Quickfix
 vim.o.qftf = "{info -> v:lua._G.qftf(info)}"
 
+-- Diagnostic
+vim.diagnostic.config {
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+        },
+    },
+    severity_sort = true,
+}
+
 ---Formatting function can be used in `qftf`.
 ---@param info table
 ---@return string[]
