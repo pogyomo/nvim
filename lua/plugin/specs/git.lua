@@ -1,14 +1,20 @@
 return {
-    "NeogitOrg/neogit",
-    branch = "master",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        "sindrets/diffview.nvim",
-        "nvim-telescope/telescope.nvim",
+    {
+        "lewis6991/gitsigns.nvim",
+        opts = {},
     },
-    cmd = {
-        "Neogit",
-        "NeogitResetState",
+    {
+        "NeogitOrg/neogit",
+        branch = "master",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+        cmd = {
+            "Neogit",
+            "NeogitResetState",
+        },
+        opts = {},
     },
-    opts = {},
 }
