@@ -116,7 +116,13 @@ return {
                 tabline = status_tab,
                 winbar = status_bar,
                 inactive_winbar = status_bar,
-                extensions = { "lazy", "mason", "oil", "toggleterm" },
+                extensions = {
+                    "lazy",
+                    "mason",
+                    "oil",
+                    "quickfix",
+                    "toggleterm",
+                },
             }
         end,
     },
