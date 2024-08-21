@@ -11,6 +11,10 @@ return {
         end,
     },
     {
+        "windwp/nvim-ts-autotag",
+        opts = {},
+    },
+    {
         "folke/flash.nvim",
         event = "VeryLazy",
         opts = {},
