@@ -54,7 +54,7 @@ return {
                     "lua_ls",
                     "rust_analyzer",
                     "pylsp",
-                    "tsserver",
+                    "ts_ls",
                 },
             }
 
