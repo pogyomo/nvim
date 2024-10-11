@@ -22,6 +22,30 @@ vim.o.signcolumn = "yes"
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Automatically clear hlsearch
+-- from https://www.reddit.com/r/neovim/comments/1ct2w2h/lua_adaptation_of_vimcool_auto_nohlsearch
+local auto_hlsearch = vim.api.nvim_create_augroup("auto-hlsearch", {})
+vim.api.nvim_create_autocmd("CursorMoved", {
+    group = auto_hlsearch,
+    callback = function()
+        if vim.v.hlsearch == 1 and vim.fn.searchcount().exact_match == 0 then
+            vim.schedule(function()
+                vim.cmd.nohlsearch()
+            end)
+        end
+    end,
+})
+vim.api.nvim_create_autocmd("InsertEnter", {
+    group = auto_hlsearch,
+    callback = function()
+        if vim.v.hlsearch == 1 then
+            vim.schedule(function()
+                vim.cmd.nohlsearch()
+            end)
+        end
+    end,
+})
+
 -- Folding
 vim.o.foldmethod = "marker"
 
