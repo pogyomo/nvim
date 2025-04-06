@@ -54,6 +54,7 @@ vim.o.qftf = "{info -> v:lua._G.qftf(info)}"
 
 -- Diagnostic
 vim.diagnostic.config {
+    virtual_text = true,
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "",
