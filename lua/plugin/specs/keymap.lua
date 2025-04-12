@@ -15,11 +15,6 @@ return {
         opts = {},
     },
     {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = {},
-    },
-    {
         "kylechui/nvim-surround",
         version = "*",
         event = "VeryLazy",
