@@ -3,7 +3,7 @@ return {
     version = "*",
     keys = {
         {
-            "<Leader>f",
+            "<C-t>",
             mode = "n",
         },
     },
@@ -27,7 +27,7 @@ return {
                 border = "rounded",
             },
         }
-        vim.keymap.set("n", "<Leader>f", function()
+        vim.keymap.set({ "n", "t" }, "<C-t>", function()
             floatterm:toggle()
         end, {
             desc = "toggle floating terminal",
