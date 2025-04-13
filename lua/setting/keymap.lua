@@ -2,10 +2,6 @@
 vim.g.mapleader = " "
 
 -- Entry point for some operation.
-vim.keymap.set("n", "<Leader>t", "<Plug>(core-tab-manager)", {
-    remap = true,
-    desc = "entry point for tab management",
-})
 vim.keymap.set("n", "<Leader>w", "<Plug>(core-window-manager)", {
     remap = true,
     desc = "entry point for window management",
@@ -14,23 +10,9 @@ vim.keymap.set("n", "<Leader>s", "<Plug>(core-window-splitter)", {
     remap = true,
     desc = "entry point for splitting window",
 })
-vim.keymap.set("n", "<Leader>e", "<Plug>(core-buffer-manager)", {
+vim.keymap.set("n", "<Leader>e", "<Plug>(core-buffers)", {
     remap = true,
     desc = "entry point for buffer management",
-})
-
--- Keymaps to manage tabs
-vim.keymap.set("n", "<Plug>(core-tab-manager)h", "gT", {
-    desc = "go to previous tab",
-})
-vim.keymap.set("n", "<Plug>(core-tab-manager)l", "gt", {
-    desc = "go to next tab",
-})
-vim.keymap.set("n", "<Plug>(core-tab-manager)H", "<cmd>-tabmove<cr>", {
-    desc = "move current tab to the left",
-})
-vim.keymap.set("n", "<Plug>(core-tab-manager)L", "<cmd>+tabmove<cr>", {
-    desc = "move current tab to the right",
 })
 
 -- Keymaps to move around windows
@@ -86,14 +68,17 @@ vim.keymap.set("n", "<Plug>(core-window-splitter)L", "<cmd>bel vnew<cr>", {
 })
 
 -- Keymaps to manage buffers
-vim.keymap.set("n", "<Plug>(core-buffer-manager)h", "<cmd>bprev<cr>", {
+vim.keymap.set("n", "<Plug>(core-buffers)h", "<cmd>bprev<cr>", {
     desc = "go to previous buffer",
 })
-vim.keymap.set("n", "<Plug>(core-buffer-manager)l", "<cmd>bnext<cr>", {
+vim.keymap.set("n", "<Plug>(core-buffers)l", "<cmd>bnext<cr>", {
     desc = "go to next buffer",
 })
-vim.keymap.set("n", "<Plug>(core-buffer-manager)d", "<cmd>bdelete<cr>", {
+vim.keymap.set("n", "<Plug>(core-buffers)d", "<cmd>bdelete<cr>", {
     desc = "delete current buffer",
+})
+vim.keymap.set("n", "<Plug>(core-buffers)e", "<cmd>Telescope buffers<cr>", {
+    desc = "travel buffers",
 })
 
 -- Keymaps to move display line.
