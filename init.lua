@@ -1,4 +1,4 @@
-require("setting.editor")
-require("setting.keymap")
-require("setting.gui")
+require("config.editor")
+require("config.keymap")
+require("config.gui")
 require("plugin")
