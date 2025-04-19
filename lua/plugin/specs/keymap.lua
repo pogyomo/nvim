@@ -61,34 +61,6 @@ return {
                     register("l", resize_rhs("right"))
                 end,
             })
-
-            submode.create("doc-reader", {
-                mode = "n",
-                default = function(register)
-                    register("<Enter>", "<C-]>")
-                    register("u", "<cmd>po<cr>")
-                    register("r", "<cmd>ta<cr>")
-                    register("U", "<cmd>ta<cr>")
-                    register("q", "<cmd>q<cr>")
-                end,
-            })
-            local group = vim.api.nvim_create_augroup("doc-reader-group", {})
-            vim.api.nvim_create_autocmd("BufEnter", {
-                group = group,
-                callback = function()
-                    if vim.opt.ft:get() == "help" and not vim.bo.modifiable then
-                        submode.enter("doc-reader")
-                    end
-                end,
-            })
-            vim.api.nvim_create_autocmd({ "BufLeave", "CmdwinEnter" }, {
-                group = group,
-                callback = function()
-                    if submode.mode() == "doc-reader" then
-                        submode.leave()
-                    end
-                end,
-            })
         end,
     },
 }

@@ -85,6 +85,20 @@ vim.keymap.set("n", "<Plug>(core-buffers)e", "<cmd>Telescope buffers<cr>", {
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 
+-- keymaps for help
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "help",
+    group = vim.api.nvim_create_augroup("define-doc-keymaps", {}),
+    callback = function()
+        local opts = { buffer = 0 }
+        vim.keymap.set("n", "<Enter>", "<C-]>", opts)
+        vim.keymap.set("n", "u", "<cmd>po<cr>", opts)
+        vim.keymap.set("n", "r", "<cmd>ta<cr>", opts)
+        vim.keymap.set("n", "U", "<cmd>ta<cr>", opts)
+        vim.keymap.set("n", "q", "<cmd>q<cr>", opts)
+    end,
+})
+
 -- Keymaps to leave from insert mode.
 vim.keymap.set("i", "jj", "<ESC>", {
     desc = "leave from insert mode",
