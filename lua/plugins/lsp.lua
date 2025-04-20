@@ -71,11 +71,12 @@ return {
                 automatic_installation = false,
                 ensure_installed = {
                     "clangd",
+                    "cmake",
                     "lua_ls",
-                    "rust_analyzer",
                     "pylsp",
-                    "ts_ls",
+                    "rust_analyzer",
                     "tinymist",
+                    "ts_ls",
                 },
                 handlers = {
                     function(name)
