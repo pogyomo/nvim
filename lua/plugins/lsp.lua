@@ -61,7 +61,7 @@ return {
                 severity_sort = true,
             }
 
-            -- Default config of each server.
+            -- Add capabilities for all server.
             vim.lsp.config("*", {
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
             })
