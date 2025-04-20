@@ -49,6 +49,7 @@ return {
 
             -- Specify lsps to install
             require("mason-lspconfig").setup {
+                automatic_installation = false,
                 ensure_installed = {
                     "clangd",
                     "lua_ls",

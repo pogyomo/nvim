@@ -14,16 +14,10 @@ if not vim.uv.fs_stat(lazy_path) then
 end
 vim.opt.rtp:prepend(lazy_path)
 
--- Register autocmd to set transparency to lazy's menu.
-vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("__lazy_menu", {}),
-    pattern = "lazy",
-    callback = function()
-        vim.opt.winblend = 10
-    end,
-})
-
-require("lazy").setup("plugin.specs", {
+require("lazy").setup {
+    spec = {
+        { import = "plugins" },
+    },
     ui = {
         border = "rounded",
     },
@@ -44,4 +38,4 @@ require("lazy").setup("plugin.specs", {
             },
         },
     },
-})
+}

@@ -29,8 +29,6 @@ return {
         }
         vim.keymap.set({ "n", "t" }, "<C-t>", function()
             floatterm:toggle()
-        end, {
-            desc = "toggle floating terminal",
-        })
+        end)
     end,
 }
