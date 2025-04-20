@@ -41,13 +41,13 @@ return {
             end
         end, {})
 
-        local mason_registry = require("mason-registry")
         local ensure_installed = {
             "clang-format",
             "stylua",
             "prettier",
         }
 
+        local mason_registry = require("mason-registry")
         for _, name in ipairs(ensure_installed) do
             if not mason_registry.has_package(name) then
                 goto continue
