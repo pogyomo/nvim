@@ -47,27 +47,31 @@ return {
                 end,
             })
 
-            -- Specify servers to install
-            local ensure_installed = {
-                "clangd",
-                "lua_ls",
-                "rust_analyzer",
-                "pylsp",
-                "ts_ls",
-                "tinymist",
-            }
-            require("mason-lspconfig").setup {
-                automatic_installation = false,
-                ensure_installed = ensure_installed,
-            }
-
             -- Default config of each server.
             vim.lsp.config("*", {
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
             })
 
-            -- Setup servers
-            vim.lsp.enable(vim.fn.extend(ensure_installed, { "gdscript" }))
+            -- Install and enable servers
+            require("mason-lspconfig").setup {
+                automatic_installation = false,
+                ensure_installed = {
+                    "clangd",
+                    "lua_ls",
+                    "rust_analyzer",
+                    "pylsp",
+                    "ts_ls",
+                    "tinymist",
+                },
+                handlers = {
+                    function(name)
+                        vim.lsp.enable(name)
+                    end,
+                },
+            }
+
+            -- gdscript server is provided by godot itself, so just enable here.
+            vim.lsp.enable("gdscript")
         end,
     },
 }
