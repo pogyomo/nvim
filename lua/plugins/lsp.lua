@@ -47,6 +47,20 @@ return {
                 end,
             })
 
+            -- Diagnostic
+            vim.diagnostic.config {
+                virtual_text = true,
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                        [vim.diagnostic.severity.HINT] = "",
+                    },
+                },
+                severity_sort = true,
+            }
+
             -- Default config of each server.
             vim.lsp.config("*", {
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
