@@ -47,66 +47,27 @@ return {
                 end,
             })
 
-            -- Specify lsps to install
+            -- Specify servers to install
+            local ensure_installed = {
+                "clangd",
+                "lua_ls",
+                "rust_analyzer",
+                "pylsp",
+                "ts_ls",
+                "tinymist",
+            }
             require("mason-lspconfig").setup {
                 automatic_installation = false,
-                ensure_installed = {
-                    "clangd",
-                    "lua_ls",
-                    "rust_analyzer",
-                    "pylsp",
-                    "ts_ls",
-                    "tinymist",
-                },
+                ensure_installed = ensure_installed,
             }
 
-            -- Default config of each lsp.
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            -- Default config of each server.
+            vim.lsp.config("*", {
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+            })
 
-            local lspconfig = require("lspconfig")
-
-            -- mason-lspconfig doesn't manage gdscript, so manually configure the lsp.
-            lspconfig.gdscript.setup {
-                capabilities = capabilities,
-            }
-
-            require("mason-lspconfig").setup_handlers {
-                function(name)
-                    lspconfig[name].setup {
-                        capabilities = capabilities,
-                    }
-                end,
-                ["lua_ls"] = function()
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                workspace = {
-                                    checkThirdParty = false,
-                                },
-                                runtime = {
-                                    version = "LuaJIT",
-                                },
-                                diagnostics = {
-                                    globals = { "vim" },
-                                },
-                            },
-                        },
-                    }
-                end,
-                ["rust_analyzer"] = function()
-                    lspconfig.rust_analyzer.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            ["rust-analyzer"] = {
-                                check = {
-                                    command = "clippy",
-                                },
-                            },
-                        },
-                    }
-                end,
-            }
+            -- Setup servers
+            vim.lsp.enable(vim.fn.extend(ensure_installed, { "gdscript" }))
         end,
     },
 }
