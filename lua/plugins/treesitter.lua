@@ -23,7 +23,6 @@ return {
     main = "nvim-treesitter.configs",
     opts = {
         ensure_installed = {
-            "bibtex",
             "c",
             "cpp",
             "css",
@@ -32,7 +31,6 @@ return {
             "java",
             "javascript",
             "json",
-            "latex",
             "lua",
             "markdown",
             "rust",

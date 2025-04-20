@@ -78,7 +78,6 @@ return {
                     "lua_ls",
                     "pylsp",
                     "rust_analyzer",
-                    "tinymist",
                     "ts_ls",
                 },
                 handlers = {
