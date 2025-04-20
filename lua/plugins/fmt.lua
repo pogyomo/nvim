@@ -7,11 +7,14 @@ return {
     },
     opts = {
         formatters_by_ft = {
-            rust = { "rustfmt" },
             cpp = { "clang_format" },
+            css = { "prettier" },
+            html = { "prettier" },
+            javascript = { "prettier" },
             lua = { "stylua" },
-            typescript = { "prettier" },
             markdown = { "prettier" },
+            rust = { "rustfmt" },
+            typescript = { "prettier" },
         },
         default_format_opts = {
             lsp_format = "fallback",
@@ -43,8 +46,8 @@ return {
 
         local ensure_installed = {
             "clang-format",
-            "stylua",
             "prettier",
+            "stylua",
         }
 
         local mason_registry = require("mason-registry")

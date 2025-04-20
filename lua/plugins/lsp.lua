@@ -72,6 +72,9 @@ return {
                 ensure_installed = {
                     "clangd",
                     "cmake",
+                    "cssls",
+                    "eslint",
+                    "html",
                     "lua_ls",
                     "pylsp",
                     "rust_analyzer",
