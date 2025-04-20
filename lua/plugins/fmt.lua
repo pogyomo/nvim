@@ -11,6 +11,7 @@ return {
             css = { "prettier" },
             html = { "prettier" },
             javascript = { "prettier" },
+            json = { "prettier" },
             lua = { "stylua" },
             markdown = { "prettier" },
             rust = { "rustfmt" },

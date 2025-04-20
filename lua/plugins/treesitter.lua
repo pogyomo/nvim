@@ -26,7 +26,6 @@ return {
             "c",
             "cpp",
             "css",
-            "go",
             "html",
             "java",
             "javascript",

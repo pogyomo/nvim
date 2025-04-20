@@ -75,6 +75,7 @@ return {
                     "cssls",
                     "eslint",
                     "html",
+                    "jsonls",
                     "lua_ls",
                     "pylsp",
                     "rust_analyzer",
