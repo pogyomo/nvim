@@ -1,91 +1,36 @@
--- Register space as leader key.
 vim.g.mapleader = " "
 
--- Entry point for some operation.
-vim.keymap.set("n", "<Leader>w", "<Plug>(core-window-manager)", {
-    remap = true,
-    desc = "entry point for window management",
-})
-vim.keymap.set("n", "<Leader>s", "<Plug>(core-window-splitter)", {
-    remap = true,
-    desc = "entry point for splitting window",
-})
-vim.keymap.set("n", "<Leader>e", "<Plug>(core-buffers)", {
-    remap = true,
-    desc = "entry point for buffer management",
-})
+-- Move around windows
+vim.keymap.set("n", "<Leader>wh", "<C-w>h")
+vim.keymap.set("n", "<Leader>wj", "<C-w>j")
+vim.keymap.set("n", "<Leader>wk", "<C-w>k")
+vim.keymap.set("n", "<Leader>wl", "<C-w>l")
+vim.keymap.set("n", "<Leader>wH", "<C-w>H")
+vim.keymap.set("n", "<Leader>wJ", "<C-w>J")
+vim.keymap.set("n", "<Leader>wK", "<C-w>K")
+vim.keymap.set("n", "<Leader>wL", "<C-w>L")
 
--- Keymaps to move around windows
-vim.keymap.set("n", "<Plug>(core-window-manager)h", "<C-w>h", {
-    desc = "go to left window",
-})
-vim.keymap.set("n", "<Plug>(core-window-manager)j", "<C-w>j", {
-    desc = "go to bottom window",
-})
-vim.keymap.set("n", "<Plug>(core-window-manager)k", "<C-w>k", {
-    desc = "go to top window",
-})
-vim.keymap.set("n", "<Plug>(core-window-manager)l", "<C-w>l", {
-    desc = "go to right window",
-})
-vim.keymap.set("n", "<Plug>(core-window-manager)H", "<C-w>H", {
-    desc = "move current window to left",
-})
-vim.keymap.set("n", "<Plug>(core-window-manager)J", "<C-w>J", {
-    desc = "move current window to bottom",
-})
-vim.keymap.set("n", "<Plug>(core-window-manager)K", "<C-w>K", {
-    desc = "move current window to top",
-})
-vim.keymap.set("n", "<Plug>(core-window-manager)L", "<C-w>L", {
-    desc = "move current window to right",
-})
+-- Split window
+vim.keymap.set("n", "<Leader>sh", "<cmd>abo vsplit<cr>")
+vim.keymap.set("n", "<Leader>sj", "<cmd>bel split<cr>")
+vim.keymap.set("n", "<Leader>sk", "<cmd>abo split<cr>")
+vim.keymap.set("n", "<Leader>sl", "<cmd>bel vsplit<cr>")
+vim.keymap.set("n", "<Leader>sH", "<cmd>abo vnew<cr>")
+vim.keymap.set("n", "<Leader>sJ", "<cmd>bel new<cr>")
+vim.keymap.set("n", "<Leader>sK", "<cmd>abo new<cr>")
+vim.keymap.set("n", "<Leader>sL", "<cmd>bel vnew<cr>")
 
--- Keymaps to split window
-vim.keymap.set("n", "<Plug>(core-window-splitter)h", "<cmd>abo vsplit<cr>", {
-    desc = "split current window to left",
-})
-vim.keymap.set("n", "<Plug>(core-window-splitter)j", "<cmd>bel split<cr>", {
-    desc = "split current window to bottom",
-})
-vim.keymap.set("n", "<Plug>(core-window-splitter)k", "<cmd>abo split<cr>", {
-    desc = "split current window to top",
-})
-vim.keymap.set("n", "<Plug>(core-window-splitter)l", "<cmd>bel vsplit<cr>", {
-    desc = "split current window to right",
-})
-vim.keymap.set("n", "<Plug>(core-window-splitter)H", "<cmd>abo vnew<cr>", {
-    desc = "create a new window to left",
-})
-vim.keymap.set("n", "<Plug>(core-window-splitter)J", "<cmd>bel new<cr>", {
-    desc = "create a new window to bottom",
-})
-vim.keymap.set("n", "<Plug>(core-window-splitter)K", "<cmd>abo new<cr>", {
-    desc = "create a new window to top",
-})
-vim.keymap.set("n", "<Plug>(core-window-splitter)L", "<cmd>bel vnew<cr>", {
-    desc = "create a new window to right",
-})
+-- Manage buffers
+vim.keymap.set("n", "<Leader>eh", "<cmd>bprev<cr>")
+vim.keymap.set("n", "<Leader>el", "<cmd>bnext<cr>")
+vim.keymap.set("n", "<Leader>ed", "<cmd>bdelete<cr>")
+vim.keymap.set("n", "<Leader>ee", "<cmd>Telescope buffers<cr>")
 
--- Keymaps to manage buffers
-vim.keymap.set("n", "<Plug>(core-buffers)h", "<cmd>bprev<cr>", {
-    desc = "go to previous buffer",
-})
-vim.keymap.set("n", "<Plug>(core-buffers)l", "<cmd>bnext<cr>", {
-    desc = "go to next buffer",
-})
-vim.keymap.set("n", "<Plug>(core-buffers)d", "<cmd>bdelete<cr>", {
-    desc = "delete current buffer",
-})
-vim.keymap.set("n", "<Plug>(core-buffers)e", "<cmd>Telescope buffers<cr>", {
-    desc = "travel buffers",
-})
-
--- Keymaps to move display line.
+-- Move over displayed lines.
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 
--- Keymaps to leave from insert mode.
-vim.keymap.set("i", "jj", "<ESC>", {
+-- Leave from insert mode.
+vim.keymap.set("i", "jj", "<esc>", {
     desc = "leave from insert mode",
 })
