@@ -68,6 +68,7 @@ return {
 
             -- Install and enable servers
             require("mason-lspconfig").setup {
+                automatic_enable = true,
                 automatic_installation = false,
                 ensure_installed = {
                     "clangd",
