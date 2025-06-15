@@ -1,13 +1,5 @@
 {
-  "[c]": {
-    "fmt": {
-      "provider": "clang-format"
-    },
-    "lsp": {
-      "provider": "clangd"
-    }
-  },
-  "[cpp]": {
+  "[c,cpp]": {
     "fmt": {
       "provider": "clang-format"
     },
@@ -36,15 +28,7 @@
       "provider": "html"
     }
   },
-  "[javascript]": {
-    "fmt": {
-      "provider": "prettier"
-    },
-    "lsp": {
-      "provider": "ts_ls"
-    }
-  },
-  "[typescript]": {
+  "[javascript,typescript]": {
     "fmt": {
       "provider": "prettier"
     },

@@ -37,8 +37,8 @@ function M.global_settings(settings)
         },
     }
     for key, value in pairs(settings) do
-        local ft = string.match(key, "^%[(%g+)%]$")
-        if ft == nil then
+        local fts = M.__extract_fts(key)
+        if fts == nil then
             res[key] = vim.tbl_deep_extend("force", res[key], value)
         end
     end
@@ -54,12 +54,32 @@ function M.ft_settings(settings)
     local global_settings = M.global_settings(settings)
     local res = {}
     for key, value in pairs(settings) do
-        local ft = string.match(key, "^%[(%g+)%]$")
-        if ft ~= nil then
-            res[ft] = vim.tbl_deep_extend("force", global_settings, value)
+        local fts = M.__extract_fts(key)
+        if fts ~= nil then
+            for _, ft in ipairs(fts) do
+                res[ft] = vim.tbl_deep_extend("force", global_settings, value)
+            end
         end
     end
     return res
+end
+
+--- Get filetypes from "[...]".
+---
+--- @param key string
+---
+--- @return table | nil # nil if key is not "[...]".
+function M.__extract_fts(key)
+    local inner = string.match(key, "^%[(%g+)%]$")
+    if inner == nil then
+        return nil
+    end
+
+    local fts = {}
+    for ft in string.gmatch(inner, "([^,]+)") do
+        fts[#fts + 1] = ft
+    end
+    return fts
 end
 
 return M
