@@ -1,0 +1,97 @@
+{
+  "[c]": {
+    "fmt": {
+      "provider": "clang-format"
+    },
+    "lsp": {
+      "provider": "clangd"
+    }
+  },
+  "[cpp]": {
+    "fmt": {
+      "provider": "clang-format"
+    },
+    "lsp": {
+      "provider": "clangd"
+    }
+  },
+  "[cmake]": {
+    "lsp": {
+      "provider": "cmake"
+    }
+  },
+  "[css]": {
+    "fmt": {
+      "provider": "prettier"
+    },
+    "lsp": {
+      "provider": "cssls"
+    }
+  },
+  "[html]": {
+    "fmt": {
+      "provider": "prettier"
+    },
+    "lsp": {
+      "provider": "html"
+    }
+  },
+  "[javascript]": {
+    "fmt": {
+      "provider": "prettier"
+    },
+    "lsp": {
+      "provider": "ts_ls"
+    }
+  },
+  "[typescript]": {
+    "fmt": {
+      "provider": "prettier"
+    },
+    "lsp": {
+      "provider": "ts_ls"
+    }
+  },
+  "[json]": {
+    "fmt": {
+      "provider": "prettier"
+    },
+    "lsp": {
+      "provider": "jsonls"
+    }
+  },
+  "[rust]": {
+    "fmt": {
+      "provider": "rustfmt",
+      "ensure_installed": false
+    },
+    "lsp": {
+      "provider": "rust_analyzer",
+      "settings": {
+        "rust-analyzer": {
+          "check": {
+            "command": "clippy"
+          }
+        }
+      }
+    }
+  },
+  "[lua]": {
+    "fmt": {
+      "provider": "stylua"
+    },
+    "lsp": {
+      "provider": "lua_ls",
+      "settings": {
+        "Lua": {
+          "workspace": {
+            "checkThirdParty": false
+          },
+          "runtime": {
+            "version": "LuaJIT"
+          }
+        }
+      }
+    }
+  }
+}
