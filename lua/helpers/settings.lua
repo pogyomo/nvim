@@ -20,6 +20,10 @@ end
 --- @return table
 function M.global_settings(settings)
     local res = {
+        indent = {
+            style = "space",
+            size = 4,
+        },
         fmt = {
             privider = nil,
             ensure_installed = true,
