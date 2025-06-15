@@ -1,25 +1,19 @@
-local M = {}
-
---- Load user provided settings.json, returns its content.
----
---- @return table
-function M.load()
-    local path = vim.fs.joinpath(vim.fn.stdpath("config"), "settings.json")
-    local fp = io.open(path)
-    local settings = {}
-    if fp then
-        settings = vim.json.decode(fp:read("*a"))
-    end
-    return settings
-end
+local M = {
+    settings = nil,
+    global_settings = nil,
+    ft_settings = nil,
+}
 
 --- Returns global settings
 ---
---- @param settings table Settings loaded by load()
----
 --- @return table
-function M.global_settings(settings)
-    local res = {
+function M.get_global_settings()
+    if M.global_settings then
+        return M.global_settings
+    end
+    M.__load()
+
+    M.global_settings = {
         indent = {
             style = "space",
             size = 4,
@@ -36,24 +30,28 @@ function M.global_settings(settings)
             settings = {},
         },
     }
-    for key, value in pairs(settings) do
+    for key, value in pairs(M.settings) do
         local fts = M.__extract_fts(key)
         if fts == nil then
-            res[key] = vim.tbl_deep_extend("force", res[key], value)
+            M.global_settings[key] =
+                vim.tbl_deep_extend("force", M.global_settings[key], value)
         end
     end
-    return res
+    return M.global_settings
 end
 
 --- Returns settings for all filetype from loaded settings.
 ---
---- @param settings table Settings loaded by load()
----
 --- @return table
-function M.ft_settings(settings)
-    local global_settings = M.global_settings(settings)
+function M.get_ft_settings()
+    if M.ft_settings ~= nil then
+        return M.ft_settings
+    end
+    M.__load()
+
+    local global_settings = M.get_global_settings()
     local res = {}
-    for key, value in pairs(settings) do
+    for key, value in pairs(M.settings) do
         local fts = M.__extract_fts(key)
         if fts ~= nil then
             for _, ft in ipairs(fts) do
@@ -62,6 +60,21 @@ function M.ft_settings(settings)
         end
     end
     return res
+end
+
+--- Load user provided settings.json.
+function M.__load()
+    if M.settings ~= nil then
+        return
+    end
+
+    local path = vim.fs.joinpath(vim.fn.stdpath("config"), "settings.json")
+    local fp = io.open(path)
+    local settings = {}
+    if fp then
+        settings = vim.json.decode(fp:read("*a"))
+    end
+    M.settings = settings
 end
 
 --- Get filetypes from "[...]".

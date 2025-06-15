@@ -20,8 +20,7 @@ return {
         },
         config = function()
             local helper = require("helpers.settings")
-            local settings = helper.load()
-            local ft_settings = helper.ft_settings(settings)
+            local ft_settings = helper.get_ft_settings()
 
             -- Keymaps for lsp actions
             -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf

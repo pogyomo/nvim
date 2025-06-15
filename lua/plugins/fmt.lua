@@ -8,9 +8,8 @@ return {
     config = function()
         local helper = require("helpers.settings")
         local conform = require("conform")
-        local settings = helper.load()
-        local global_settings = helper.global_settings(settings)
-        local ft_settings = helper.ft_settings(settings)
+        local global_settings = helper.get_global_settings()
+        local ft_settings = helper.get_ft_settings()
 
         -- Collect formatters infomations
         local ensure_installed = {}

@@ -1,7 +1,6 @@
 local helper = require("helpers.settings")
-local settings = helper.load()
-local global_settings = helper.global_settings(settings)
-local ft_settings = helper.ft_settings(settings)
+local global_settings = helper.get_global_settings()
+local ft_settings = helper.get_ft_settings()
 
 --- Set indent style by settings.json
 ---
