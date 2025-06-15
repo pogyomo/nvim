@@ -19,6 +19,9 @@ return {
             "stevearc/conform.nvim",
         },
         config = function()
+            local helper = require("helpers.settings")
+            local ft_settings = helper.get_ft_settings()
+
             -- Keymaps for lsp actions
             -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -66,31 +69,35 @@ return {
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
             })
 
-            -- Install and enable servers
-            require("mason-lspconfig").setup {
-                automatic_enable = true,
-                automatic_installation = false,
-                ensure_installed = {
-                    "clangd",
-                    "cmake",
-                    "cssls",
-                    "eslint",
-                    "html",
-                    "jsonls",
-                    "lua_ls",
-                    "pylsp",
-                    "rust_analyzer",
-                    "ts_ls",
-                },
-                handlers = {
-                    function(name)
-                        vim.lsp.enable(name)
-                    end,
-                },
-            }
+            -- Collect lsp infomations and enable these.
+            local ensure_installed = {}
+            for _, value in pairs(ft_settings) do
+                if value["lsp"] and value["lsp"]["provider"] then
+                    local provider = value["lsp"]["provider"]
 
-            -- gdscript server is provided by godot itself, so just enable here.
-            vim.lsp.enable("gdscript")
+                    if value["lsp"]["ensure_installed"] then
+                        if
+                            not vim.list_contains(ensure_installed, provider)
+                        then
+                            ensure_installed[#ensure_installed + 1] = provider
+                        end
+                    end
+                    if value["lsp"]["settings"] then
+                        vim.lsp.config(provider, {
+                            settings = value["lsp"]["settings"],
+                        })
+                    end
+                    vim.lsp.enable(provider)
+                end
+            end
+
+            -- Install required servers
+            require("mason-lspconfig").setup {
+                automatic_enable = {
+                    exclude = ensure_installed,
+                },
+                ensure_installed = ensure_installed,
+            }
         end,
     },
 }

@@ -1,9 +1,31 @@
+local helper = require("helpers.settings")
+local global_settings = helper.get_global_settings()
+local ft_settings = helper.get_ft_settings()
+
+--- Set indent style by settings.json
+---
+--- @param opts table Settings.
+--- @param buf ?integer nil for global
+local function set_indent_style(opts, buf)
+    local o = buf and vim.bo[buf] or vim.o
+    o.softtabstop = opts["indent"]["size"]
+    o.shiftwidth = opts["indent"]["size"]
+    o.tabstop = opts["indent"]["size"]
+    o.expandtab = opts["indent"]["style"] == "space" and true or false
+    o.cindent = true
+end
+
 -- Tab and indent
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
-vim.o.tabstop = 4
-vim.o.expandtab = true
-vim.o.cindent = true
+set_indent_style(global_settings)
+vim.api.nvim_create_autocmd("Filetype", {
+    group = vim.api.nvim_create_augroup("set-indent-style", {}),
+    callback = function(arg)
+        local bo = vim.bo[arg.buf]
+        if ft_settings[bo.filetype] then
+            set_indent_style(ft_settings[bo.filetype], arg.buf)
+        end
+    end,
+})
 
 -- Disable mouse
 vim.o.mouse = ""
