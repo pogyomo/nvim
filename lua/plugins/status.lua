@@ -112,11 +112,10 @@ return {
                 lualine_b = {},
                 lualine_c = {
                     function()
-                        local loc = navic.get_location { highlight = true }
-                        if string.len(loc) == 0 then
-                            return " " -- don't hide winbar if location not found
+                        if navic.is_available() then
+                            return navic.get_location { highlight = true }
                         else
-                            return loc
+                            return " " -- don't hide winbar if location not found
                         end
                     end,
                 },
