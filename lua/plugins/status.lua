@@ -30,8 +30,23 @@ return {
         "nvim-lualine/lualine.nvim",
         dependencies = {
             "nvim-tree/nvim-web-devicons",
+            "SmiteshP/nvim-navic",
         },
+        init = function()
+            -- Suppress flick on startup
+            vim.o.winbar = " "
+        end,
         config = function()
+            local navic = require("nvim-navic")
+
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("nvim-navic-on-attach", {}),
+                callback = function(ev)
+                    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+                    navic.attach(client, ev.buf)
+                end,
+            })
+
             local filename_symbols = {
                 modified = "+",
                 readonly = "-",
@@ -95,7 +110,16 @@ return {
             local status_bar = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = {},
+                lualine_c = {
+                    function()
+                        local loc = navic.get_location { highlight = true }
+                        if string.len(loc) == 0 then
+                            return " " -- don't hide winbar if location not found
+                        else
+                            return loc
+                        end
+                    end,
+                },
                 lualine_x = {},
                 lualine_y = {},
                 lualine_z = {},
