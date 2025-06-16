@@ -87,14 +87,14 @@ end
 ---
 --- @return table | nil # nil if key is not "[...]".
 function M.__extract_fts(key)
-    local inner = string.match(key, "^%[(%g+)%]$")
+    local inner = string.match(key, "^%[(.*)%]$")
     if inner == nil then
         return nil
     end
 
     local fts = {}
     for ft in string.gmatch(inner, "([^,]+)") do
-        fts[#fts + 1] = ft
+        fts[#fts + 1] = ft:match("^%s*(.-)%s*$")
     end
     return fts
 end
