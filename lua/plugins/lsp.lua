@@ -82,10 +82,8 @@ return {
                             ensure_installed[#ensure_installed + 1] = provider
                         end
                     end
-                    if value["lsp"]["settings"] then
-                        vim.lsp.config(provider, {
-                            settings = value["lsp"]["settings"],
-                        })
+                    if value["lsp"]["config"] then
+                        vim.lsp.config(provider, value["lsp"]["config"])
                     end
                     vim.lsp.enable(provider)
                 end

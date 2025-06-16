@@ -51,10 +51,12 @@
     },
     "lsp": {
       "provider": "rust_analyzer",
-      "settings": {
-        "rust-analyzer": {
-          "check": {
-            "command": "clippy"
+      "config": {
+        "settings": {
+          "rust-analyzer": {
+            "check": {
+              "command": "clippy"
+            }
           }
         }
       }
@@ -66,13 +68,15 @@
     },
     "lsp": {
       "provider": "lua_ls",
-      "settings": {
-        "Lua": {
-          "workspace": {
-            "checkThirdParty": false
-          },
-          "runtime": {
-            "version": "LuaJIT"
+      "config": {
+        "settings": {
+          "Lua": {
+            "workspace": {
+              "checkThirdParty": false
+            },
+            "runtime": {
+              "version": "LuaJIT"
+            }
           }
         }
       }

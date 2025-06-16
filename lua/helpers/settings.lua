@@ -27,7 +27,7 @@ function M.get_global_settings()
         lsp = {
             privider = nil,
             ensure_installed = true,
-            settings = {},
+            config = {},
         },
     }
     for key, value in pairs(M.settings) do
