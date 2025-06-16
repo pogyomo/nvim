@@ -32,6 +32,7 @@ return {
             "json",
             "lua",
             "markdown",
+            "php",
             "rust",
             "toml",
             "typescript",
