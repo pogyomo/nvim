@@ -72,7 +72,13 @@ function M.__load()
     local fp = io.open(path)
     local settings = {}
     if fp then
-        settings = vim.json.decode(fp:read("*a"))
+        local success, e = pcall(function()
+            settings = vim.json.decode(fp:read("*a"))
+        end)
+        if not success then
+            vim.notify(e, vim.log.levels.ERROR)
+            settings = {}
+        end
     end
     M.settings = settings
 end
