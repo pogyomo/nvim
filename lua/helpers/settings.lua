@@ -54,9 +54,7 @@ function M.get_ft_settings()
     for key, value in pairs(M.settings) do
         local fts = M.__extract_fts(key)
         if fts ~= nil then
-            for _, ft in ipairs(fts) do
-                res[ft] = vim.tbl_deep_extend("force", global_settings, value)
-            end
+            res[fts] = vim.tbl_deep_extend("force", global_settings, value)
         end
     end
     return res

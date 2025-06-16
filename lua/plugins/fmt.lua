@@ -15,7 +15,7 @@ return {
         local ensure_installed = {}
         local formatters_by_ft = {}
         local format_on_save_by_ft = {}
-        for ft, value in pairs(ft_settings) do
+        for fts, value in pairs(ft_settings) do
             if value["fmt"] and value["fmt"]["provider"] then
                 local provider = value["fmt"]["provider"]
 
@@ -25,11 +25,13 @@ return {
                     end
                 end
                 local use_lsp_format = value["fmt"]["use_lsp_format"]
-                formatters_by_ft[ft] = {
-                    provider,
-                    lsp_format = use_lsp_format and "fallback" or "never",
-                }
-                format_on_save_by_ft[ft] = value["fmt"]["format_on_save"]
+                for _, ft in ipairs(fts) do
+                    formatters_by_ft[ft] = {
+                        provider,
+                        lsp_format = use_lsp_format and "fallback" or "never",
+                    }
+                    format_on_save_by_ft[ft] = value["fmt"]["format_on_save"]
+                end
             end
         end
 
