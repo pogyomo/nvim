@@ -16,5 +16,9 @@ return {
         view_options = {
             show_hidden = true,
         },
+        keymaps = {
+            ["<esc>"] = { "actions.close", mode = "n" },
+            ["q"] = { "actions.close", mode = "n" },
+        },
     },
 }
