@@ -24,7 +24,6 @@ vim.keymap.set("n", "<Leader>sL", "<cmd>bel vnew<cr>")
 vim.keymap.set("n", "<Leader>eh", "<cmd>bprev<cr>")
 vim.keymap.set("n", "<Leader>el", "<cmd>bnext<cr>")
 vim.keymap.set("n", "<Leader>ed", "<cmd>bdelete<cr>")
-vim.keymap.set("n", "<Leader>ee", "<cmd>Telescope buffers<cr>")
 
 -- Move over displayed lines.
 vim.keymap.set("n", "j", "gj")
