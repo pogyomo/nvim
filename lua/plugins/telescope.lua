@@ -7,7 +7,7 @@ return {
     cmd = "Telescope",
     keys = {
         {
-            "<C-P>",
+            "<Leader><Leader>",
             "<cmd>Telescope<cr>",
             mode = "n",
         },
