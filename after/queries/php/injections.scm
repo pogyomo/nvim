@@ -1,9 +1,6 @@
 ;; extends
 
-(assignment_expression
-  left: (variable_name
-          (name) @_id
-          (#match? @_id "sql|query"))
-  right: (encapsed_string
-           (string_content) @injection.content
-           (#set! injection.language "sql")))
+(encapsed_string
+  (string_content) @injection.content
+  (#match? @injection.content "^\\W*(SELECT|INSERT|UPDATE|DELETE|CEATE|ALTER)")
+  (#set! injection.language "sql"))
