@@ -44,6 +44,14 @@
       "provider": "jsonls"
     }
   },
+  "[php]": {
+    "fmt": {
+      "use_lsp_format": true
+    },
+    "lsp": {
+      "provider": "intelephense"
+    }
+  },
   "[rust]": {
     "fmt": {
       "provider": "rustfmt",

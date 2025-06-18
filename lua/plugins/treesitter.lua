@@ -34,6 +34,7 @@ return {
             "markdown",
             "php",
             "rust",
+            "sql",
             "toml",
             "typescript",
             "vimdoc",
