@@ -3,6 +3,7 @@ return {
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
+    event = "CmdlineEnter",
     keys = {
         {
             "<C-e>",
