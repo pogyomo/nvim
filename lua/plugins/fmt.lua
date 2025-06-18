@@ -16,20 +16,28 @@ return {
         local formatters_by_ft = {}
         local format_on_save_by_ft = {}
         for fts, value in pairs(ft_settings) do
-            if value["fmt"] and value["fmt"]["provider"] then
+            if value["fmt"] then
                 local provider = value["fmt"]["provider"]
 
-                if value["fmt"]["ensure_installed"] then
+                if provider and value["fmt"]["ensure_installed"] then
                     if not vim.list_contains(ensure_installed, provider) then
                         ensure_installed[#ensure_installed + 1] = provider
                     end
                 end
+
                 local use_lsp_format = value["fmt"]["use_lsp_format"]
                 for _, ft in ipairs(fts) do
-                    formatters_by_ft[ft] = {
-                        provider,
-                        lsp_format = use_lsp_format and "fallback" or "never",
-                    }
+                    local lsp_format = use_lsp_format and "fallback" or "never"
+                    if provider then
+                        formatters_by_ft[ft] = {
+                            provider,
+                            lsp_format = lsp_format,
+                        }
+                    else
+                        formatters_by_ft[ft] = {
+                            lsp_format = lsp_format,
+                        }
+                    end
                     format_on_save_by_ft[ft] = value["fmt"]["format_on_save"]
                 end
             end
