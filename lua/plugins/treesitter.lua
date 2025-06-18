@@ -41,9 +41,6 @@ return {
             "zig",
         },
 
-        -- NOTE:
-        -- The highlight in command window broken.
-        -- See: https://github.com/neovim/neovim/issues/26346
         highlight = {
             enable = true,
         },
