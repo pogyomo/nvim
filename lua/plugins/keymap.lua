@@ -49,10 +49,9 @@ return {
                 end
             end
 
-            vim.keymap.set("n", "<Leader>r", "<Plug>(submode-win-resizer)")
             submode.create("win-resizer", {
                 mode = "n",
-                enter = "<Plug>(submode-win-resizer)",
+                enter = "<Leader>r",
                 leave = { "q", "<ESC>" },
                 default = function(register)
                     register("h", resize_rhs("left"))
