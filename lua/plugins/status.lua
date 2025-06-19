@@ -72,6 +72,19 @@ return {
                     "diagnostics",
                 },
                 lualine_c = {
+                    {
+                        function()
+                            local clients = vim.lsp.get_clients {
+                                bufnr = vim.fn.bufnr("%"),
+                            }
+                            return vim.iter(clients)
+                                :map(function(client)
+                                    return client.name
+                                end)
+                                :join(" ")
+                        end,
+                        icon = "",
+                    },
                     { "filename", symbols = filename_symbols },
                 },
                 lualine_x = {
