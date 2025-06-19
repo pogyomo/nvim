@@ -33,6 +33,7 @@ return {
             "lua",
             "markdown",
             "php",
+            "phpdoc",
             "query",
             "rust",
             "sql",
