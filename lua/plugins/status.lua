@@ -43,7 +43,12 @@ return {
                 group = vim.api.nvim_create_augroup("nvim-navic-on-attach", {}),
                 callback = function(ev)
                     local client = vim.lsp.get_client_by_id(ev.data.client_id)
-                    navic.attach(client, ev.buf)
+                    if
+                        client
+                        and client.server_capabilities.documentSymbolProvider
+                    then
+                        navic.attach(client, ev.buf)
+                    end
                 end,
             })
 
