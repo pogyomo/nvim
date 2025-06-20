@@ -50,14 +50,15 @@ function M.get_ft_settings()
     M.__load()
 
     local global_settings = M.get_global_settings()
-    local res = {}
+    M.ft_settings = {}
     for key, value in pairs(M.settings) do
         local fts = M.__extract_fts(key)
         if fts ~= nil then
-            res[fts] = vim.tbl_deep_extend("force", global_settings, value)
+            M.ft_settings[fts] =
+                vim.tbl_deep_extend("force", global_settings, value)
         end
     end
-    return res
+    return M.ft_settings
 end
 
 --- Load user provided settings.json.
