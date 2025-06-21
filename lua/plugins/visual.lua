@@ -39,23 +39,6 @@ return {
         end,
     },
     {
-        "stevearc/dressing.nvim",
-        lazy = true,
-        opts = {},
-        init = function()
-            ---@diagnostic disable-next-line
-            vim.ui.input = function(...)
-                require("lazy").load { plugins = { "dressing.nvim" } }
-                return vim.ui.input(...)
-            end
-            ---@diagnostic disable-next-line
-            vim.ui.select = function(...)
-                require("lazy").load { plugins = { "dressing.nvim" } }
-                return vim.ui.select(...)
-            end
-        end,
-    },
-    {
         "HiPhish/rainbow-delimiters.nvim",
     },
     {
