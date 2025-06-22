@@ -2,6 +2,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
     },
     branch = "0.1.x",
     cmd = "Telescope",
@@ -27,14 +28,29 @@ return {
             mode = "n",
         },
     },
-    opts = {
-        defaults = {
-            winblend = 10,
-            mappings = {
-                i = {
-                    ["<esc>"] = require("telescope.actions").close,
+    init = function()
+        ---@diagnostic disable-next-line
+        vim.ui.select = function(...)
+            require("lazy").load { plugins = { "telescope.nvim" } }
+            vim.ui.select(...)
+        end
+    end,
+    config = function()
+        require("telescope").setup {
+            extensions = {
+                ["ui-select"] = {
+                    require("telescope.themes").get_dropdown {},
                 },
             },
-        },
-    },
+            defaults = {
+                winblend = 10,
+                mappings = {
+                    i = {
+                        ["<esc>"] = require("telescope.actions").close,
+                    },
+                },
+            },
+        }
+        require("telescope").load_extension("ui-select")
+    end,
 }
