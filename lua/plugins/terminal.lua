@@ -4,7 +4,8 @@ return {
     keys = {
         {
             "<C-t>",
-            mode = "n",
+            "<cmd>ToggleTerm direction=float<cr>",
+            mode = { "n", "t" },
         },
     },
     cmd = {
@@ -17,18 +18,5 @@ return {
         "ToggleTermSendVisualLines",
         "ToggleTermSendVisualSelection",
     },
-    config = function()
-        require("toggleterm").setup()
-
-        local terminal = require("toggleterm.terminal").Terminal
-        local floatterm = terminal:new {
-            direction = "float",
-            float_opts = {
-                border = "rounded",
-            },
-        }
-        vim.keymap.set({ "n", "t" }, "<C-t>", function()
-            floatterm:toggle()
-        end)
-    end,
+    opts = {},
 }
