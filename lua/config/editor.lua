@@ -4,14 +4,14 @@ local ft_settings = helper.get_ft_settings()
 
 --- Set indent style by settings.json
 ---
---- @param opts table Settings.
+--- @param setting table Settings.
 --- @param buf ?integer nil for global
-local function set_indent_style(opts, buf)
+local function set_indent_style(setting, buf)
     local o = buf and vim.bo[buf] or vim.o
-    o.softtabstop = opts["indent"]["size"]
-    o.shiftwidth = opts["indent"]["size"]
-    o.tabstop = opts["indent"]["size"]
-    o.expandtab = opts["indent"]["style"] == "space" and true or false
+    o.softtabstop = setting["indent"]["size"]
+    o.shiftwidth = setting["indent"]["size"]
+    o.tabstop = setting["indent"]["size"]
+    o.expandtab = setting["indent"]["style"] == "space" and true or false
     o.cindent = true
 end
 
@@ -21,8 +21,12 @@ vim.api.nvim_create_autocmd("Filetype", {
     group = vim.api.nvim_create_augroup("set-indent-style", {}),
     callback = function(arg)
         local bo = vim.bo[arg.buf]
-        if ft_settings[bo.filetype] then
-            set_indent_style(ft_settings[bo.filetype], arg.buf)
+        for fts, setting in pairs(ft_settings) do
+            for _, ft in ipairs(fts) do
+                if ft == bo.filetype then
+                    set_indent_style(setting, arg.buf)
+                end
+            end
         end
     end,
 })
