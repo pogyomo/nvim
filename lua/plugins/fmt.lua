@@ -4,6 +4,7 @@ return {
     cmd = { "ConformInfo" },
     dependencies = {
         "williamboman/mason.nvim",
+        "zapling/mason-conform.nvim",
     },
     config = function()
         local helper = require("helpers.settings")
@@ -43,39 +44,6 @@ return {
             end
         end
 
-        -- Install formatters
-        local mason_registry = require("mason-registry")
-        for _, name in ipairs(ensure_installed) do
-            if not mason_registry.has_package(name) then
-                goto continue
-            end
-            local pkg = mason_registry.get_package(name)
-            if pkg:is_installed() then
-                goto continue
-            end
-            vim.notify(("[formatter.lua] installing %s"):format(name))
-            pkg:install():once(
-                "closed",
-                vim.schedule_wrap(function()
-                    if pkg:is_installed() then
-                        vim.notify(
-                            ("[formatter.lua] %s was successfully installed"):format(
-                                name
-                            )
-                        )
-                    else
-                        vim.notify(
-                            ("[formatter.lua] failed to install %s"):format(
-                                name
-                            ),
-                            vim.log.levels.ERROR
-                        )
-                    end
-                end)
-            )
-            ::continue::
-        end
-
         -- Configure formatters
         local use_lsp_format = global_settings["fmt"]["use_lsp_format"]
         conform.setup {
@@ -85,6 +53,9 @@ return {
                 timeout_ms = 500,
             },
         }
+
+        -- Install formatters
+        require("mason-conform").setup {}
 
         -- Configure format on save
         vim.api.nvim_create_autocmd("BufWritePre", {
