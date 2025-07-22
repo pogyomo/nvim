@@ -42,7 +42,7 @@ return {
         }
 
         vim.api.nvim_create_autocmd("FileType", {
-            group = vim.api.nvim_create_augroup("", {}),
+            group = vim.api.nvim_create_augroup("treesitter-start-by-ft", {}),
             callback = function(ev)
                 local ft = vim.bo[ev.buf].filetype
                 local lang = vim.treesitter.language.get_lang(ft)
