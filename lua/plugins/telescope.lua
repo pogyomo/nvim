@@ -4,7 +4,7 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
     },
-    branch = "0.1.x",
+    branch = "master",
     cmd = "Telescope",
     keys = {
         {
