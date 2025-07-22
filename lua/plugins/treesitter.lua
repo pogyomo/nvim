@@ -19,7 +19,7 @@ return {
 
         --- @param lang string
         --- @return boolean
-        local function has_indent(lang)
+        local function has_indents(lang)
             return #vim.treesitter.query.get_files(lang, "indents") > 0
         end
 
@@ -63,7 +63,7 @@ return {
 
                 if vim.list_contains(ft_use_vim_regex_indent, ft) then
                     vim.bo[ev.buf].syntax = "on"
-                elseif has_indent(lang) then
+                elseif has_indents(lang) then
                     local e = "v:lua.require'nvim-treesitter'.indentexpr()"
                     vim.bo[ev.buf].indentexpr = e
                 end
