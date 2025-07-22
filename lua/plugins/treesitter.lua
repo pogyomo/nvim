@@ -3,7 +3,7 @@ return {
     lazy = false,
     branch = "main",
     build = ":TSUpdate",
-    init = function()
+    config = function()
         --- @param lang string
         --- @return boolean
         local function has_highlights(lang)
