@@ -61,7 +61,7 @@ return {
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup("format-on-save", {}),
             callback = function(args)
-                if format_on_save_by_ft[vim.bo.filetype] then
+                if format_on_save_by_ft[vim.bo[args.buf].filetype] then
                     require("conform").format { bufnr = args.buf }
                 end
             end,
