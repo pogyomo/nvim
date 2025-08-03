@@ -55,8 +55,7 @@ return {
         end,
     },
     {
-        -- "kevinhwang91/nvim-bqf",
-        "pogyomo/nvim-bqf", -- Temporary use forked one until merged or fixed.
+        "kevinhwang91/nvim-bqf",
         ft = "qf",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
