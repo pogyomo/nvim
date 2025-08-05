@@ -34,7 +34,7 @@ return {
                 require("nvim-treesitter.parsers").ld65 = {
                     install_info = {
                         url = "https://github.com/pogyomo/tree-sitter-ld65",
-                        revision = "297a5ee1bb3141ee659aceb7d591202d1786089f",
+                        revision = "28e0b5848359af2e7545c2effc067f5429254569",
                         queries = "queries",
                     },
                     tier = 2,
