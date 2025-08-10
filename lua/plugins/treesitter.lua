@@ -32,9 +32,9 @@ return {
             pattern = "TSUpdate",
             callback = function()
                 require("nvim-treesitter.parsers").ld65 = {
+                    --- @diagnostic disable-next-line
                     install_info = {
                         url = "https://github.com/pogyomo/tree-sitter-ld65",
-                        revision = "c103932a077b73f1a10b411a9e3514b61adc11bb",
                         queries = "queries",
                     },
                     tier = 2,
