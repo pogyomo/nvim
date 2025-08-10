@@ -63,6 +63,10 @@ return {
 
                 if vim.list_contains(ft_use_vim_regex_indent, ft) then
                     vim.bo[ev.buf].syntax = "on"
+                    if ft == "php" then
+                        -- Indentation of html in php broken with this option set.
+                        vim.bo[ev.buf].indentexpr = ""
+                    end
                 elseif has_indents(lang) then
                     local e = "v:lua.require'nvim-treesitter'.indentexpr()"
                     vim.bo[ev.buf].indentexpr = e
