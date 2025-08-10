@@ -27,6 +27,21 @@ return {
             "php",
         }
 
+        -- Register parsers not in nvim-treesitter
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "TSUpdate",
+            callback = function()
+                require("nvim-treesitter.parsers").ld65 = {
+                    --- @diagnostic disable-next-line
+                    install_info = {
+                        url = "https://github.com/pogyomo/tree-sitter-ld65",
+                        queries = "queries",
+                    },
+                    tier = 2,
+                }
+            end,
+        })
+
         require("nvim-treesitter").install {
             "c",
             "cpp",
@@ -35,6 +50,7 @@ return {
             "java",
             "javascript",
             "json",
+            "ld65",
             "lua",
             "markdown",
             "php",
