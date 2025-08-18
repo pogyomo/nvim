@@ -28,7 +28,7 @@
       "provider": "html"
     }
   },
-  "[javascript,typescript]": {
+  "[javascript,typescript,javascriptreact,typescriptreact]": {
     "fmt": {
       "provider": "prettier"
     },
