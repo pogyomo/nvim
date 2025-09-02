@@ -15,6 +15,18 @@ return {
             "Neogit",
             "NeogitResetState",
         },
+        keys = {
+            {
+                "]c",
+                "<cmd>Gitsigns next_hunk<cr>",
+                mode = "n",
+            },
+            {
+                "[c",
+                "<cmd>Gitsigns prev_hunk<cr>",
+                mode = "n",
+            },
+        },
         opts = {},
     },
 }

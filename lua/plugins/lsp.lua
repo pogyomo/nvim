@@ -40,29 +40,8 @@ return {
                     vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
                     vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts)
-                    vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
-                    vim.keymap.set("n", "g]", function()
-                        vim.diagnostic.jump { count = 1 }
-                    end, opts)
-                    vim.keymap.set("n", "g[", function()
-                        vim.diagnostic.jump { count = -1 }
-                    end, opts)
                 end,
             })
-
-            -- Diagnostic
-            vim.diagnostic.config {
-                virtual_text = true,
-                signs = {
-                    text = {
-                        [vim.diagnostic.severity.ERROR] = "",
-                        [vim.diagnostic.severity.WARN] = "",
-                        [vim.diagnostic.severity.INFO] = "",
-                        [vim.diagnostic.severity.HINT] = "",
-                    },
-                },
-                severity_sort = true,
-            }
 
             -- Add capabilities for all server.
             vim.lsp.config("*", {
