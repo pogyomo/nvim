@@ -55,6 +55,8 @@ return {
             "ca65",
             "cpp",
             "css",
+            "go",
+            "gomod",
             "html",
             "java",
             "javascript",

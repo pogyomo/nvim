@@ -89,5 +89,13 @@
         }
       }
     }
+  },
+  "[go]": {
+    "fmt": {
+      "provider": "gofmt"
+    },
+    "lsp": {
+      "provider": "gopls"
+    }
   }
 }
