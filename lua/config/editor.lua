@@ -17,7 +17,7 @@ end
 
 -- Tab and indent
 set_indent_style(global_settings)
-vim.api.nvim_create_autocmd("Filetype", {
+vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("set-indent-style", {}),
     callback = function(arg)
         local bo = vim.bo[arg.buf]
