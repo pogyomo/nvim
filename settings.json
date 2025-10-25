@@ -46,7 +46,7 @@
   },
   "[php]": {
     "fmt": {
-      "use_lsp_format": true
+      "use_lsp_format": false
     },
     "lsp": {
       "provider": "intelephense"
