@@ -44,13 +44,6 @@ return {
             end
         end
 
-        -- Configure global formatters
-        formatters_by_ft["*"] = {}
-        for _, provider in ipairs(global_settings["formatter.uses"]) do
-            formatters_by_ft["*"][#formatters_by_ft["*"] + 1] =
-                bridge.get_conform_name(provider)
-        end
-
         -- Configure formatters
         conform.setup {
             formatters_by_ft = formatters_by_ft,
