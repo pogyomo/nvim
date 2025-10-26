@@ -11,6 +11,7 @@ return {
         local conform = require("conform")
         local global_settings = settings.get_global_settings()
         local ft_settings = settings.get_ft_settings()
+        vim.notify(vim.inspect(ft_settings))
 
         -- Collect formatter infomations
         local ensure_installed = {}
@@ -44,14 +45,16 @@ return {
             end
         end
 
+        -- Configure global formatters
+        formatters_by_ft["*"] = {}
+        for _, provider in ipairs(global_settings["formatter.uses"]) do
+            formatters_by_ft["*"][#formatters_by_ft["*"] + 1] =
+                bridge.get_conform_name(provider)
+        end
+
         -- Configure formatters
-        local use_lsp_format = global_settings["formatter.use_lsp_format"]
         conform.setup {
             formatters_by_ft = formatters_by_ft,
-            default_format_opts = {
-                lsp_format = use_lsp_format and "fallback" or "never",
-                timeout_ms = 500,
-            },
         }
 
         -- Install formatters
