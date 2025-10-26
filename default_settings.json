@@ -16,6 +16,7 @@
     "markdown",
     "php",
     "phpdoc",
+    "python",
     "query",
     "rust",
     "sql",
@@ -61,7 +62,8 @@
       }
     },
     "gopls": {},
-    "tailwindcss": {}
+    "tailwindcss": {},
+    "pyright": {}
   },
   "formatter.providers": {
     "clang-format": {},
@@ -76,7 +78,9 @@
     "stylua": {},
     "gofmt": {
       "ensure_installed": false
-    }
+    },
+    "black": {},
+    "isort": {}
   },
   "[c,cpp]": {
     "formatter.uses": ["clang-format"],
@@ -116,5 +120,9 @@
   "[go]": {
     "formatter.uses": ["gofmt"],
     "lsp.uses": ["gopls"]
+  },
+  "[python]": {
+    "formatter.uses": ["black", "isort"],
+    "lsp.uses": ["pyright"]
   }
 }
