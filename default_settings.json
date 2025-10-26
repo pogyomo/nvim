@@ -8,7 +8,6 @@
     "jsonls": {},
     "intelephense": {},
     "rust_analyzer": {
-      "ensure_installed": false,
       "config": {
         "settings": {
           "rust-analyzer": {

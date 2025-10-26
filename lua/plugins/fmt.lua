@@ -13,10 +13,10 @@ return {
         local ft_settings = helper.get_ft_settings()
 
         -- Collect formatter infomations
-        local ensure_installed = {}
+        local ignore_install = {}
         for name, setting in pairs(global_settings["fmt.providers"]) do
-            if setting["ensure_installed"] then
-                ensure_installed[#ensure_installed + 1] = name
+            if not setting["ensure_installed"] then
+                ignore_install[#ignore_install + 1] = name
             end
         end
 
@@ -49,7 +49,9 @@ return {
         }
 
         -- Install formatters
-        require("mason-conform").setup {}
+        require("mason-conform").setup {
+            ignore_install = ignore_install,
+        }
 
         -- Configure format on save
         vim.api.nvim_create_autocmd("BufWritePre", {
