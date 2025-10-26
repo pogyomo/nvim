@@ -1,14 +1,13 @@
 {
   "tree-sitter.uses": [
     "c",
-    "c_sharp",
     "ca65",
+    "cmake",
     "cpp",
     "css",
     "go",
     "gomod",
     "html",
-    "java",
     "javascript",
     "json",
     "ld65",
@@ -22,8 +21,7 @@
     "sql",
     "toml",
     "typescript",
-    "vimdoc",
-    "zig"
+    "vimdoc"
   ],
   "tree-sitter.indent": {
     "exclude": ["php"]
