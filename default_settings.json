@@ -1,4 +1,32 @@
 {
+  "tree-sitter.uses": [
+    "c",
+    "c_sharp",
+    "ca65",
+    "cpp",
+    "css",
+    "go",
+    "gomod",
+    "html",
+    "java",
+    "javascript",
+    "json",
+    "ld65",
+    "lua",
+    "markdown",
+    "php",
+    "phpdoc",
+    "query",
+    "rust",
+    "sql",
+    "toml",
+    "typescript",
+    "vimdoc",
+    "zig"
+  ],
+  "tree-sitter.indent": {
+    "exclude": ["php"]
+  },
   "lsp.providers": {
     "clangd": {},
     "cmake": {},

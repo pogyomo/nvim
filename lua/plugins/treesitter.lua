@@ -4,6 +4,9 @@ return {
     branch = "main",
     build = ":TSUpdate",
     config = function()
+        local settings = require("helpers.settings")
+        local global_settings = settings.get_global_settings()
+
         if vim.fn.executable("tree-sitter") == 0 then
             -- NOTE:
             -- Install hungs if tree-sitter is not found.
@@ -22,10 +25,6 @@ return {
         local function has_indents(lang)
             return #vim.treesitter.query.get_files(lang, "indents") > 0
         end
-
-        local ft_use_vim_regex_indent = {
-            "php",
-        }
 
         -- Register parsers not in nvim-treesitter
         vim.api.nvim_create_autocmd("User", {
@@ -50,31 +49,8 @@ return {
             end,
         })
 
-        require("nvim-treesitter").install {
-            "c",
-            "c_sharp",
-            "ca65",
-            "cpp",
-            "css",
-            "go",
-            "gomod",
-            "html",
-            "java",
-            "javascript",
-            "json",
-            "ld65",
-            "lua",
-            "markdown",
-            "php",
-            "phpdoc",
-            "query",
-            "rust",
-            "sql",
-            "toml",
-            "typescript",
-            "vimdoc",
-            "zig",
-        }
+        -- Install parsers
+        require("nvim-treesitter").install(global_settings["tree-sitter.uses"])
 
         vim.api.nvim_create_autocmd("FileType", {
             group = vim.api.nvim_create_augroup("treesitter-start-by-ft", {}),
@@ -89,12 +65,13 @@ return {
                     vim.treesitter.start(ev.buf, lang)
                 end
 
-                if vim.list_contains(ft_use_vim_regex_indent, ft) then
+                local indent = global_settings["tree-sitter.indent"]
+                if
+                    not indent["enabled"]
+                    or vim.list_contains(indent["exclude"], ft)
+                then
                     vim.bo[ev.buf].syntax = "on"
-                    if ft == "php" then
-                        -- Indentation of html in php broken with this option set.
-                        vim.bo[ev.buf].indentexpr = ""
-                    end
+                    vim.bo[ev.buf].indentexpr = ""
                 elseif has_indents(lang) then
                     local e = "v:lua.require'nvim-treesitter'.indentexpr()"
                     vim.bo[ev.buf].indentexpr = e

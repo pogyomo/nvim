@@ -23,6 +23,11 @@ local function with_default(settings)
             style = "space",
             size = 4,
         },
+        ["tree-sitter.uses"] = {},
+        ["tree-sitter.indent"] = {
+            ["enabled"] = true,
+            ["exclude"] = {},
+        },
         ["formatter.providers"] = {},
         ["formatter.format_on_save"] = true,
         ["formatter.use_lsp_format"] = false,
