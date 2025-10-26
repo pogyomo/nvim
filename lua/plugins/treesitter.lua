@@ -52,6 +52,7 @@ return {
 
         require("nvim-treesitter").install {
             "c",
+            "c_sharp",
             "ca65",
             "cpp",
             "css",
