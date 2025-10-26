@@ -42,7 +42,9 @@
       "ensure_installed": false
     },
     "stylua": {},
-    "gofmt": {}
+    "gofmt": {
+      "ensure_installed": false
+    }
   },
   "[c,cpp]": {
     "fmt.uses": ["clang-format"],
