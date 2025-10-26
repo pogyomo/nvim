@@ -20,6 +20,7 @@ return {
         },
         config = function()
             local helper = require("helpers.settings")
+            local global_settings = helper.get_global_settings()
             local ft_settings = helper.get_ft_settings()
 
             -- Keymaps for lsp actions
@@ -48,24 +49,27 @@ return {
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
             })
 
-            -- Collect lsp infomations and enable these.
+            -- Collect lsp infomations
             local ensure_installed = {}
-            for _, value in pairs(ft_settings) do
-                if value["lsp"] and value["lsp"]["provider"] then
-                    local provider = value["lsp"]["provider"]
-
-                    if value["lsp"]["ensure_installed"] then
-                        if
-                            not vim.list_contains(ensure_installed, provider)
-                        then
-                            ensure_installed[#ensure_installed + 1] = provider
-                        end
-                    end
-                    if value["lsp"]["config"] then
-                        vim.lsp.config(provider, value["lsp"]["config"])
-                    end
-                    vim.lsp.enable(provider)
+            for name, setting in pairs(global_settings["lsp.providers"]) do
+                if setting["ensure_installed"] then
+                    ensure_installed[#ensure_installed + 1] = name
                 end
+                vim.lsp.config(name, setting["config"])
+            end
+
+            -- Collect filetype specific lsp infomations
+            for fts, value in pairs(ft_settings) do
+                for _, name in ipairs(value["lsp.uses"]) do
+                    vim.lsp.config(name, {
+                        filetypes = fts,
+                    })
+                end
+            end
+
+            -- Enable lsp
+            for _, name in ipairs(ensure_installed) do
+                vim.lsp.enable(name)
             end
 
             -- Install required servers

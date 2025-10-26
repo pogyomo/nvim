@@ -1,0 +1,87 @@
+{
+  "lsp.providers": {
+    "clangd": {},
+    "cmake": {},
+    "cssls": {},
+    "html": {},
+    "ts_ls": {},
+    "jsonls": {},
+    "intelephense": {},
+    "rust_analyzer": {
+      "ensure_installed": false,
+      "config": {
+        "settings": {
+          "rust-analyzer": {
+            "check": {
+              "command": "clippy"
+            }
+          }
+        }
+      }
+    },
+    "lua_ls": {
+      "config": {
+        "settings": {
+          "Lua": {
+            "workspace": {
+              "checkThirdParty": false
+            },
+            "runtime": {
+              "version": "LuaJIT"
+            }
+          }
+        }
+      }
+    },
+    "gopls": {},
+    "tailwindcss": {}
+  },
+  "fmt.providers": {
+    "clang-format": {},
+    "prettier": {},
+    "rustfmt": {
+      "ensure_installed": false
+    },
+    "stylua": {},
+    "gofmt": {}
+  },
+  "[c,cpp]": {
+    "fmt.uses": ["clang-format"],
+    "lsp.uses": ["clangd"]
+  },
+  "[cmake]": {
+    "lsp.uses": ["cmake"]
+  },
+  "[css]": {
+    "fmt.uses": ["prettier"],
+    "lsp.uses": ["cssls"]
+  },
+  "[html]": {
+    "fmt.uses": ["prettier"],
+    "lsp.uses": ["html"]
+  },
+  "[javascript,typescript,javascriptreact,typescriptreact]": {
+    "fmt.uses": ["prettier"],
+    "lsp.uses": ["ts_ls"]
+  },
+  "[json]": {
+    "fmt.uses": ["prettier"],
+    "lsp.uses": ["jsonls"]
+  },
+  "[php]": {
+    "fmt.use_lsp_format": false,
+    "lsp.uses": ["intelephense", "tailwindcss"]
+  },
+  "[rust]": {
+    "fmt.uses": ["rustfmt"],
+    "lsp.uses": ["rust_analyzer"]
+  },
+  "[lua]": {
+    "fmt.uses": ["stylua"],
+    "lsp.uses": ["lua_ls"]
+  },
+  "[go]": {
+    "fmt.uses": ["goftm"],
+    "lsp.uses": ["gopls"]
+  }
+}
