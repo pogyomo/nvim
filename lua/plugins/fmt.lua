@@ -4,19 +4,19 @@ return {
     cmd = { "ConformInfo" },
     dependencies = {
         "mason-org/mason.nvim",
-        "zapling/mason-conform.nvim",
     },
     config = function()
-        local helper = require("helpers.settings")
+        local settings = require("helpers.settings")
+        local bridge = require("helpers.bridge")
         local conform = require("conform")
-        local global_settings = helper.get_global_settings()
-        local ft_settings = helper.get_ft_settings()
+        local global_settings = settings.get_global_settings()
+        local ft_settings = settings.get_ft_settings()
 
         -- Collect formatter infomations
-        local ignore_install = {}
+        local ensure_installed = {}
         for name, setting in pairs(global_settings["fmt.providers"]) do
-            if not setting["ensure_installed"] then
-                ignore_install[#ignore_install + 1] = name
+            if setting["ensure_installed"] then
+                ensure_installed[#ensure_installed + 1] = name
             end
         end
 
@@ -31,7 +31,8 @@ return {
                     lsp_format = lsp_format,
                 }
                 for _, provider in ipairs(value["fmt.uses"]) do
-                    formatters_by_ft[ft][#formatters_by_ft[ft] + 1] = provider
+                    formatters_by_ft[ft][#formatters_by_ft[ft] + 1] =
+                        bridge.get_conform_name(provider)
                 end
 
                 format_on_save_by_ft[ft] = value["fmt.format_on_save"]
@@ -49,9 +50,36 @@ return {
         }
 
         -- Install formatters
-        require("mason-conform").setup {
-            ignore_install = ignore_install,
-        }
+        local registry = require("mason-registry")
+        for _, name in ipairs(ensure_installed) do
+            if not registry.has_package(name) then
+                goto continue
+            end
+
+            local pkg = registry.get_package(name)
+            if pkg:is_installed() then
+                goto continue
+            end
+
+            vim.notify(("[fmt.lua] installing %s"):format(pkg.name))
+            pkg:install():once(
+                "closed",
+                vim.schedule_wrap(function()
+                    if pkg:is_installed() then
+                        vim.notify(
+                            ("[fmt.lua] %s was successfully installed"):format(
+                                pkg.name
+                            )
+                        )
+                    else
+                        vim.notify(
+                            ("[fmt.lua] failed to install %s"):format(pkg.name)
+                        )
+                    end
+                end)
+            )
+            ::continue::
+        end
 
         -- Configure format on save
         vim.api.nvim_create_autocmd("BufWritePre", {

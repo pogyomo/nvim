@@ -19,9 +19,9 @@ return {
             "stevearc/conform.nvim",
         },
         config = function()
-            local helper = require("helpers.settings")
-            local global_settings = helper.get_global_settings()
-            local ft_settings = helper.get_ft_settings()
+            local settings = require("helpers.settings")
+            local global_settings = settings.get_global_settings()
+            local ft_settings = settings.get_ft_settings()
 
             -- Keymaps for lsp actions
             -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf
