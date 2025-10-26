@@ -14,7 +14,7 @@ return {
 
         -- Collect formatter infomations
         local ensure_installed = {}
-        for name, setting in pairs(global_settings["fmt.providers"]) do
+        for name, setting in pairs(global_settings["formatter.providers"]) do
             if setting["ensure_installed"] then
                 ensure_installed[#ensure_installed + 1] = name
             end
@@ -24,23 +24,22 @@ return {
         local formatters_by_ft = {}
         local format_on_save_by_ft = {}
         for fts, value in pairs(ft_settings) do
-            local use_lsp_format = value["fmt.use_lsp_format"]
+            local use_lsp_format = value["formatter.use_lsp_format"]
             local lsp_format = use_lsp_format and "fallback" or "never"
             for _, ft in ipairs(fts) do
-                formatters_by_ft[ft] = {
-                    lsp_format = lsp_format,
-                }
-                for _, provider in ipairs(value["fmt.uses"]) do
+                formatters_by_ft[ft] = {}
+                for _, provider in ipairs(value["formatter.uses"]) do
                     formatters_by_ft[ft][#formatters_by_ft[ft] + 1] =
                         bridge.get_conform_name(provider)
                 end
+                formatters_by_ft[ft]["lsp_format"] = lsp_format
 
-                format_on_save_by_ft[ft] = value["fmt.format_on_save"]
+                format_on_save_by_ft[ft] = value["formatter.format_on_save"]
             end
         end
 
         -- Configure formatters
-        local use_lsp_format = global_settings["fmt.use_lsp_format"]
+        local use_lsp_format = global_settings["formatter.use_lsp_format"]
         conform.setup {
             formatters_by_ft = formatters_by_ft,
             default_format_opts = {
@@ -61,19 +60,21 @@ return {
                 goto continue
             end
 
-            vim.notify(("[fmt.lua] installing %s"):format(pkg.name))
+            vim.notify(("[formatter.lua] installing %s"):format(pkg.name))
             pkg:install():once(
                 "closed",
                 vim.schedule_wrap(function()
                     if pkg:is_installed() then
                         vim.notify(
-                            ("[fmt.lua] %s was successfully installed"):format(
+                            ("[formatter.lua] %s was successfully installed"):format(
                                 pkg.name
                             )
                         )
                     else
                         vim.notify(
-                            ("[fmt.lua] failed to install %s"):format(pkg.name)
+                            ("[formatter.lua] failed to install %s"):format(
+                                pkg.name
+                            )
                         )
                     end
                 end)

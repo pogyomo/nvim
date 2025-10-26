@@ -35,7 +35,7 @@
     "gopls": {},
     "tailwindcss": {}
   },
-  "fmt.providers": {
+  "formatter.providers": {
     "clang-format": {},
     "prettier": {},
     "rustfmt": {
@@ -47,42 +47,42 @@
     }
   },
   "[c,cpp]": {
-    "fmt.uses": ["clang-format"],
+    "formatter.uses": ["clang-format"],
     "lsp.uses": ["clangd"]
   },
   "[cmake]": {
     "lsp.uses": ["cmake"]
   },
   "[css]": {
-    "fmt.uses": ["prettier"],
+    "formatter.uses": ["prettier"],
     "lsp.uses": ["cssls"]
   },
   "[html]": {
-    "fmt.uses": ["prettier"],
+    "formatter.uses": ["prettier"],
     "lsp.uses": ["html"]
   },
   "[javascript,typescript,javascriptreact,typescriptreact]": {
-    "fmt.uses": ["prettier"],
+    "formatter.uses": ["prettier"],
     "lsp.uses": ["ts_ls"]
   },
   "[json]": {
-    "fmt.uses": ["prettier"],
+    "formatter.uses": ["prettier"],
     "lsp.uses": ["jsonls"]
   },
   "[php]": {
-    "fmt.use_lsp_format": false,
+    "formatter.use_lsp_format": false,
     "lsp.uses": ["intelephense", "tailwindcss"]
   },
   "[rust]": {
-    "fmt.uses": ["rustfmt"],
+    "formatter.uses": ["rustfmt"],
     "lsp.uses": ["rust_analyzer"]
   },
   "[lua]": {
-    "fmt.uses": ["stylua"],
+    "formatter.uses": ["stylua"],
     "lsp.uses": ["lua_ls"]
   },
   "[go]": {
-    "fmt.uses": ["goftm"],
+    "formatter.uses": ["gofmt"],
     "lsp.uses": ["gopls"]
   }
 }

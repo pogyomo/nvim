@@ -10,7 +10,7 @@ local function lsp_provider_with_default(setting)
     }, setting)
 end
 
-local function fmt_provider_with_default(setting)
+local function formatter_provider_with_default(setting)
     return vim.tbl_deep_extend("force", {
         ensure_installed = true,
     }, setting)
@@ -22,17 +22,17 @@ local function with_default(settings)
             style = "space",
             size = 4,
         },
-        ["fmt.providers"] = {},
-        ["fmt.format_on_save"] = true,
-        ["fmt.use_lsp_format"] = false,
-        ["fmt.uses"] = {},
+        ["formatter.providers"] = {},
+        ["formatter.format_on_save"] = true,
+        ["formatter.use_lsp_format"] = false,
+        ["formatter.uses"] = {},
         ["lsp.providers"] = {},
         ["lsp.uses"] = {},
     }
     settings = vim.tbl_deep_extend("force", default_settings, settings)
-    settings["fmt.providers"] = vim.iter(settings["fmt.providers"])
+    settings["formatter.providers"] = vim.iter(settings["formatter.providers"])
         :map(function(name, provider)
-            return { name, fmt_provider_with_default(provider) }
+            return { name, formatter_provider_with_default(provider) }
         end)
         :fold({}, function(acc, value)
             acc[value[1]] = value[2]
