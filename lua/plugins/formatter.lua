@@ -18,6 +18,12 @@ return {
             if setting["ensure_installed"] then
                 ensure_installed[#ensure_installed + 1] = name
             end
+            if vim.tbl_count(setting["config"]) ~= 0 then
+                conform.formatters[name] = {}
+                for key, value in pairs(setting["config"]) do
+                    conform.formatters[name][key] = value
+                end
+            end
         end
 
         -- Collect filetype specific formatter imfomations

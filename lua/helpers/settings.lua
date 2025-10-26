@@ -13,6 +13,7 @@ end
 local function formatter_provider_with_default(setting)
     return vim.tbl_deep_extend("force", {
         ensure_installed = true,
+        config = {},
     }, setting)
 end
 
@@ -98,7 +99,10 @@ function M.__load()
     M.global_settings = with_default(M.global_settings)
     M.ft_settings = vim.iter(M.ft_settings)
         :map(function(fts, settings)
-            return { fts, with_default(settings) }
+            return {
+                fts,
+                vim.tbl_deep_extend("force", M.global_settings, settings),
+            }
         end)
         :fold({}, function(acc, value)
             acc[value[1]] = value[2]
