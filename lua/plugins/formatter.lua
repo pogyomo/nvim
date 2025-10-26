@@ -11,7 +11,6 @@ return {
         local conform = require("conform")
         local global_settings = settings.get_global_settings()
         local ft_settings = settings.get_ft_settings()
-        vim.notify(vim.inspect(ft_settings))
 
         -- Collect formatter infomations
         local ensure_installed = {}
