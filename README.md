@@ -15,3 +15,12 @@ Run below command.
 ```
 git clone https://github.com/pogyomo/nvim ~/.config/nvim
 ```
+
+Then, create settings.json by copying from default_settings.json, or from scratch.
+
+```
+cd ~/.config/nvim
+cp default_settings.json settings.json
+# nvim settings.json
+```
+
