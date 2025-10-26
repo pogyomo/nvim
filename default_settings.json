@@ -37,7 +37,11 @@
   },
   "formatter.providers": {
     "clang-format": {},
-    "prettier": {},
+    "prettier": {
+      "config": {
+        "append_args": ["--ignore-path", ".prettierignore"]
+      }
+    },
     "rustfmt": {
       "ensure_installed": false
     },
