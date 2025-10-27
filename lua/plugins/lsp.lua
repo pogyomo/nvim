@@ -50,8 +50,10 @@ return {
             })
 
             -- Collect lsp infomations
+            local all_provider_names = {}
             local ensure_installed = {}
             for name, setting in pairs(global_settings["lsp.providers"]) do
+                all_provider_names[#all_provider_names + 1] = name
                 if setting["ensure_installed"] then
                     ensure_installed[#ensure_installed + 1] = name
                 end
@@ -68,7 +70,7 @@ return {
             end
 
             -- Enable lsp
-            for _, name in ipairs(ensure_installed) do
+            for _, name in ipairs(all_provider_names) do
                 vim.lsp.enable(name)
             end
 
