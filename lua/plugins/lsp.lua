@@ -12,7 +12,8 @@ return {
         },
     },
     {
-        "neovim/nvim-lspconfig",
+        -- Temporary uses forked one until pr merged
+        "pogyomo/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "mason-org/mason-lspconfig.nvim",

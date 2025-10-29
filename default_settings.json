@@ -1,6 +1,7 @@
 {
   "tree-sitter.uses": [
     "c",
+    "c_sharp",
     "ca65",
     "cmake",
     "cpp",
@@ -61,7 +62,8 @@
     },
     "gopls": {},
     "tailwindcss": {},
-    "pyright": {}
+    "pyright": {},
+    "csharp_ls": {}
   },
   "formatter.providers": {
     "clang-format": {},
@@ -78,7 +80,8 @@
       "ensure_installed": false
     },
     "black": {},
-    "isort": {}
+    "isort": {},
+    "csharpier": {}
   },
   "[c,cpp]": {
     "formatter.uses": ["clang-format"],
@@ -122,5 +125,9 @@
   "[python]": {
     "formatter.uses": ["black", "isort"],
     "lsp.uses": ["pyright"]
+  },
+  "[cs]": {
+    "formatter.uses": ["csharpier"],
+    "lsp.uses": ["csharp_ls"]
   }
 }
