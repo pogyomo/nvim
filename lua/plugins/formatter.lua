@@ -28,10 +28,9 @@ return {
 
         -- Collect filetype specific formatter imfomations
         local formatters_by_ft = {}
-        local format_on_save_by_ft = {}
+        local auto_format_by_ft = {}
         for fts, value in pairs(ft_settings) do
-            local use_lsp_format = value["formatter.use_lsp_format"]
-            local lsp_format = use_lsp_format and "fallback" or "never"
+            local lsp_format = value["formatter.lsp_format"]
             for _, ft in ipairs(fts) do
                 formatters_by_ft[ft] = {}
                 for _, provider in ipairs(value["formatter.uses"]) do
@@ -40,12 +39,25 @@ return {
                 end
                 formatters_by_ft[ft]["lsp_format"] = lsp_format
 
-                format_on_save_by_ft[ft] = value["formatter.format_on_save"]
+                auto_format_by_ft[ft] = value["formatter.auto_format"]
             end
         end
 
+        -- Some commands for auto format
+        vim.api.nvim_create_user_command("EnableAutoFormat", function()
+            auto_format_by_ft[vim.bo.filetype] = true
+        end, {})
+        vim.api.nvim_create_user_command("DisableAutoFormat", function()
+            auto_format_by_ft[vim.bo.filetype] = false
+        end, {})
+
         -- Configure formatters
         conform.setup {
+            format_after_save = function(bufnr)
+                if auto_format_by_ft[vim.bo[bufnr].filetype] then
+                    return {}
+                end
+            end,
             formatters_by_ft = formatters_by_ft,
         }
 
@@ -82,21 +94,5 @@ return {
             )
             ::continue::
         end
-
-        -- Configure format on save
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = vim.api.nvim_create_augroup("format-on-save", {}),
-            callback = function(args)
-                if format_on_save_by_ft[vim.bo[args.buf].filetype] then
-                    require("conform").format { bufnr = args.buf }
-                end
-            end,
-        })
-        vim.api.nvim_create_user_command("EnableFormatOnSave", function()
-            format_on_save_by_ft[vim.bo.filetype] = true
-        end, {})
-        vim.api.nvim_create_user_command("DisableFormatOnSave", function()
-            format_on_save_by_ft[vim.bo.filetype] = false
-        end, {})
     end,
 }

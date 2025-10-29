@@ -107,7 +107,7 @@
     "lsp.uses": ["jsonls"]
   },
   "[php]": {
-    "formatter.use_lsp_format": false,
+    "formatter.auto_format": false,
     "lsp.uses": ["intelephense", "tailwindcss"]
   },
   "[rust]": {
