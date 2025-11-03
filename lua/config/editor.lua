@@ -68,6 +68,9 @@ vim.o.pumheight = 10
 -- No splash screen
 vim.opt.shm:append("I")
 
+-- Sync neovim's clipboard with system's one
+vim.opt.clipboard:append("unnamedplus")
+
 -- Automatically clear hlsearch
 -- from https://www.reddit.com/r/neovim/comments/1ct2w2h/lua_adaptation_of_vimcool_auto_nohlsearch
 local auto_hlsearch = vim.api.nvim_create_augroup("auto-hlsearch", {})
