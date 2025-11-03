@@ -62,6 +62,9 @@ vim.o.signcolumn = "yes"
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Set maximum height of completion menu
+vim.o.pumheight = 10
+
 -- No splash screen
 vim.opt.shm:append("I")
 

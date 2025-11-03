@@ -1,17 +1,13 @@
 return {
     {
-        "pogyomo/cppguard.nvim",
-        dev = true,
-    },
-    {
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             -- Snippet engine
             "L3MON4D3/LuaSnip",
 
-            -- Snippent
-            "pogyomo/cppguard.nvim",
+            -- Snippents
+            { "pogyomo/cppguard.nvim", dev = true },
 
             -- Sources
             "hrsh7th/cmp-nvim-lsp",
