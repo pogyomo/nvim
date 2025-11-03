@@ -44,21 +44,10 @@ return {
                         border = "rounded",
                     },
                 },
-                ---@diagnostic disable-next-line
                 formatting = {
+                    fields = { "kind", "abbr" },
                     format = require("lspkind").cmp_format {
-                        mode = "symbol_text",
-                        -- List all possible source name
-                        menu = {
-                            buffer = "[Buffer]",
-                            cmdline = "[Cmd]",
-                            lazydev = "[LazyDev]",
-                            luasnip = "[LuaSnip]",
-                            neorg = "[Neorg]",
-                            nvim_lsp = "[LSP]",
-                            nvim_lsp_signature_help = "[Signature]",
-                            path = "[Path]",
-                        },
+                        mode = "symbol",
                     },
                 },
                 mapping = {
