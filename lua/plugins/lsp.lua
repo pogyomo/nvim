@@ -12,7 +12,6 @@ return {
         },
     },
     {
-        -- Temporary uses forked one until pr merged
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
