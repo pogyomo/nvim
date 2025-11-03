@@ -76,9 +76,7 @@ return {
 
             -- Install required servers
             require("mason-lspconfig").setup {
-                automatic_enable = {
-                    exclude = ensure_installed,
-                },
+                automatic_enable = false,
                 ensure_installed = ensure_installed,
             }
         end,
