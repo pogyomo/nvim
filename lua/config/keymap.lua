@@ -30,6 +30,4 @@ vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 
 -- Leave from insert mode.
-vim.keymap.set("i", "jj", "<esc>", {
-    desc = "leave from insert mode",
-})
+vim.keymap.set("i", "jj", "<esc>")
