@@ -30,7 +30,9 @@ return {
                 callback = function(ev)
                     local opts = { buffer = ev.buf }
 
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "K", function()
+                        vim.lsp.buf.hover { border = "rounded" }
+                    end, opts)
                     vim.keymap.set("n", "gf", function()
                         require("conform").format { async = true }
                     end, opts)
