@@ -12,6 +12,15 @@ return {
         },
     },
     {
+        "ray-x/lsp_signature.nvim",
+        event = "InsertEnter",
+        opts = {
+            doc_lines = 0,
+            hint_enable = false,
+            transparency = 10,
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
