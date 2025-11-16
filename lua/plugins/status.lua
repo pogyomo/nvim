@@ -11,7 +11,7 @@ return {
                 segments = {
                     {
                         sign = {
-                            namespace = { "diagnostic/signs" },
+                            namespace = { "diagnostic" },
                         },
                     },
                     {
