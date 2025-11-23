@@ -1,6 +1,6 @@
 return {
     "stevearc/overseer.nvim",
-    version = "1.*",
+    version = "2.*",
     cmd = {
         "OverseerRun",
         "OverseerInfo",
