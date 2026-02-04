@@ -43,7 +43,7 @@ return {
                 },
             },
             formatting = {
-                fields = { "kind", "abbr" },
+                fields = { "icon", "abbr" },
                 format = require("lspkind").cmp_format {
                     mode = "symbol",
                 },
