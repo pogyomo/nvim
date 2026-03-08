@@ -6,6 +6,7 @@ local M = {
 local function lsp_provider_with_default(setting)
     return vim.tbl_deep_extend("force", {
         ensure_installed = true,
+        version = "*",
         config = {},
     }, setting)
 end

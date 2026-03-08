@@ -47,6 +47,7 @@
       }
     },
     "lua_ls": {
+      "version": "3.16.4",
       "config": {
         "settings": {
           "Lua": {
@@ -63,7 +64,9 @@
     "gopls": {},
     "tailwindcss": {},
     "pyright": {},
-    "csharp_ls": {}
+    "csharp_ls": {
+      "version": "0.20.0"
+    }
   },
   "formatter.providers": {
     "clang-format": {},

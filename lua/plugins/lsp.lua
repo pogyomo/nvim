@@ -66,7 +66,13 @@ return {
             for name, setting in pairs(global_settings["lsp.providers"]) do
                 all_provider_names[#all_provider_names + 1] = name
                 if setting["ensure_installed"] then
-                    ensure_installed[#ensure_installed + 1] = name
+                    local install_name
+                    if setting["version"] == "*" then
+                        install_name = name
+                    else
+                        install_name = name .. "@" .. setting["version"]
+                    end
+                    ensure_installed[#ensure_installed + 1] = install_name
                 end
                 vim.lsp.config(name, setting["config"])
             end
@@ -86,6 +92,9 @@ return {
             end
 
             -- Install required servers
+            -- TODO:
+            -- We can specify lsp version, but is still upgradable in :Mason
+            -- How can I disable it so `U` don't upgrade pinned lsp?
             require("mason-lspconfig").setup {
                 automatic_enable = false,
                 ensure_installed = ensure_installed,
