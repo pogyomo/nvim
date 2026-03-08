@@ -1,23 +1,17 @@
 local M = {
-    -- mason.nvim to conform mapping
-    conform_mapping = {
-        ["clang-format"] = "clang-format",
-        ["prettier"] = "prettier",
-        ["rustfmt"] = "rustfmt",
-        ["stylua"] = "stylua",
-        ["gofmt"] = "gofmt",
-    },
+    -- conform.nvim to mason.nvim mapping
+    conform_to_mason = {},
 }
 
 --- Get conform.nvim style formatter name from mason.nvim uses name
 ---
---- @param mason_name string mason.nvim uses name
---- @return string # conform.nvim uses name
-function M.get_conform_name(mason_name)
-    if M.conform_mapping[mason_name] == nil then
-        return mason_name
+--- @param conform_name string conform.nvim uses name
+--- @return string # mason.nvim uses name
+function M.convert_conform_to_mason(conform_name)
+    if M.conform_to_mason[conform_name] == nil then
+        return conform_name
     end
-    return M.conform_mapping[mason_name]
+    return M.conform_to_mason[conform_name]
 end
 
 return M

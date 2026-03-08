@@ -16,7 +16,8 @@ return {
         local ensure_installed = {}
         for name, setting in pairs(global_settings["formatter.providers"]) do
             if setting["ensure_installed"] then
-                ensure_installed[#ensure_installed + 1] = name
+                ensure_installed[#ensure_installed + 1] =
+                    bridge.convert_conform_to_mason(name)
             end
             if vim.tbl_count(setting["config"]) ~= 0 then
                 conform.formatters[name] = {}
@@ -34,8 +35,7 @@ return {
             for _, ft in ipairs(fts) do
                 formatters_by_ft[ft] = {}
                 for _, provider in ipairs(value["formatter.uses"]) do
-                    formatters_by_ft[ft][#formatters_by_ft[ft] + 1] =
-                        bridge.get_conform_name(provider)
+                    formatters_by_ft[ft][#formatters_by_ft[ft] + 1] = provider
                 end
                 formatters_by_ft[ft]["lsp_format"] = lsp_format
 
