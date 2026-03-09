@@ -64,9 +64,7 @@
     "gopls": {},
     "tailwindcss": {},
     "pyright": {},
-    "csharp_ls": {
-      "version": "0.20.0"
-    }
+    "csharp_ls": {}
   },
   "formatter.providers": {
     "clang-format": {},
