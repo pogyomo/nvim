@@ -47,7 +47,6 @@
       }
     },
     "lua_ls": {
-      "version": "3.16.4",
       "config": {
         "settings": {
           "Lua": {
