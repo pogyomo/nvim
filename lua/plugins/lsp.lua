@@ -24,7 +24,6 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            "mason-org/mason-lspconfig.nvim",
             "stevearc/conform.nvim",
         },
         config = function()
@@ -62,18 +61,8 @@ return {
 
             -- Collect lsp infomations
             local all_provider_names = {}
-            local ensure_installed = {}
             for name, setting in pairs(global_settings["lsp.providers"]) do
                 all_provider_names[#all_provider_names + 1] = name
-                if setting["ensure_installed"] then
-                    local install_name
-                    if setting["version"] == "*" then
-                        install_name = name
-                    else
-                        install_name = name .. "@" .. setting["version"]
-                    end
-                    ensure_installed[#ensure_installed + 1] = install_name
-                end
                 vim.lsp.config(name, setting["config"])
             end
 
@@ -90,15 +79,6 @@ return {
             for _, name in ipairs(all_provider_names) do
                 vim.lsp.enable(name)
             end
-
-            -- Install required servers
-            -- TODO:
-            -- We can specify lsp version, but is still upgradable in :Mason
-            -- How can I disable it so `U` don't upgrade pinned lsp?
-            require("mason-lspconfig").setup {
-                automatic_enable = false,
-                ensure_installed = ensure_installed,
-            }
         end,
     },
 }

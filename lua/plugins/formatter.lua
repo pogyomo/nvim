@@ -7,20 +7,12 @@ return {
     },
     config = function()
         local settings = require("helpers.settings")
-        local bridge = require("helpers.bridge")
         local conform = require("conform")
         local global_settings = settings.get_global_settings()
         local ft_settings = settings.get_ft_settings()
 
         -- Collect formatter infomations
-        local ensure_installed = {}
         for name, setting in pairs(global_settings["formatter.providers"]) do
-            if setting["ensure_installed"] then
-                ensure_installed[#ensure_installed + 1] = {
-                    name = bridge.convert_conform_to_mason(name),
-                    version = setting["version"],
-                }
-            end
             if vim.tbl_count(setting["config"]) ~= 0 then
                 conform.formatters[name] = {}
                 for key, value in pairs(setting["config"]) do
@@ -62,43 +54,5 @@ return {
             end,
             formatters_by_ft = formatters_by_ft,
         }
-
-        -- Install formatters
-        local registry = require("mason-registry")
-        for _, data in ipairs(ensure_installed) do
-            local name = data["name"]
-            local version = data["version"]
-
-            if not registry.has_package(name) then
-                goto continue
-            end
-
-            -- TODO: Should I install if version differ?
-            local pkg = registry.get_package(name)
-            if pkg:is_installed() then
-                goto continue
-            end
-
-            vim.notify(("[formatter.lua] installing %s"):format(pkg.name))
-            pkg:install({ version = version ~= "*" and version or nil }):once(
-                "closed",
-                vim.schedule_wrap(function()
-                    if pkg:is_installed() then
-                        vim.notify(
-                            ("[formatter.lua] %s was successfully installed"):format(
-                                pkg.name
-                            )
-                        )
-                    else
-                        vim.notify(
-                            ("[formatter.lua] failed to install %s"):format(
-                                pkg.name
-                            )
-                        )
-                    end
-                end)
-            )
-            ::continue::
-        end
     end,
 }

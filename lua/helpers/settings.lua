@@ -19,6 +19,13 @@ local function formatter_provider_with_default(setting)
     }, setting)
 end
 
+local function linter_provider_with_default(setting)
+    return vim.tbl_deep_extend("force", {
+        ensure_installed = true,
+        version = "*",
+    }, setting)
+end
+
 local function with_default(settings)
     local default_settings = {
         ["indent"] = {
@@ -36,6 +43,8 @@ local function with_default(settings)
         ["formatter.uses"] = {},
         ["lsp.providers"] = {},
         ["lsp.uses"] = {},
+        ["linter.providers"] = {},
+        ["linter.uses"] = {},
     }
     settings = vim.tbl_deep_extend("force", default_settings, settings)
     settings["formatter.providers"] = vim.iter(settings["formatter.providers"])
@@ -49,6 +58,14 @@ local function with_default(settings)
     settings["lsp.providers"] = vim.iter(settings["lsp.providers"])
         :map(function(name, provider)
             return { name, lsp_provider_with_default(provider) }
+        end)
+        :fold({}, function(acc, value)
+            acc[value[1]] = value[2]
+            return acc
+        end)
+    settings["linter.providers"] = vim.iter(settings["linter.providers"])
+        :map(function(name, provider)
+            return { name, linter_provider_with_default(provider) }
         end)
         :fold({}, function(acc, value)
             acc[value[1]] = value[2]
