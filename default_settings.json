@@ -83,6 +83,9 @@
     "isort": {},
     "csharpier": {}
   },
+  "linter.providers": {
+    "selene": {}
+  },
   "[c,cpp]": {
     "formatter.uses": ["clang-format"],
     "lsp.uses": ["clangd"]
@@ -116,7 +119,8 @@
   },
   "[lua]": {
     "formatter.uses": ["stylua"],
-    "lsp.uses": ["lua_ls"]
+    "lsp.uses": ["lua_ls"],
+    "linter.uses": ["selene"]
   },
   "[go]": {
     "formatter.uses": ["gofmt"],
