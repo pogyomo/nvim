@@ -22,63 +22,76 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "stevearc/conform.nvim",
         },
         config = function()
-            local settings = require("helpers.settings")
-            local global_settings = settings.get_global_settings()
-            local ft_settings = settings.get_ft_settings()
+            local event = require("helpers.event")
 
-            -- Keymaps for lsp actions
-            -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("register-lsp-keymaps", {}),
-                callback = function(ev)
-                    local opts = { buffer = ev.buf }
+            event.once("auto_install_finished", function()
+                local settings = require("helpers.settings")
+                local global_settings = settings.get_global_settings()
+                local ft_settings = settings.get_ft_settings()
 
-                    vim.keymap.set("n", "K", function()
-                        vim.lsp.buf.hover { border = "rounded" }
-                    end, opts)
-                    vim.keymap.set("n", "gf", function()
-                        require("conform").format { async = true }
-                    end, opts)
-                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-                    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-                    vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
-                    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts)
-                end,
-            })
+                -- Keymaps for lsp actions
+                -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf
+                vim.api.nvim_create_autocmd("LspAttach", {
+                    group = vim.api.nvim_create_augroup("pogyomo.lsp", {}),
+                    callback = function(ev)
+                        local opts = { buffer = ev.buf }
 
-            -- Add capabilities for all server.
-            vim.lsp.config("*", {
-                capabilities = require("cmp_nvim_lsp").default_capabilities(),
-            })
+                        vim.keymap.set("n", "K", function()
+                            vim.lsp.buf.hover { border = "rounded" }
+                        end, opts)
+                        vim.keymap.set("n", "gf", function()
+                            require("conform").format { async = true }
+                        end, opts)
+                        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+                        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                        vim.keymap.set(
+                            "n",
+                            "gi",
+                            vim.lsp.buf.implementation,
+                            opts
+                        )
+                        vim.keymap.set(
+                            "n",
+                            "gt",
+                            vim.lsp.buf.type_definition,
+                            opts
+                        )
+                        vim.keymap.set("n", "gn", vim.lsp.buf.rename, opts)
+                        vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts)
+                    end,
+                })
 
-            -- Collect lsp infomations
-            local all_provider_names = {}
-            for name, setting in pairs(global_settings["lsp.providers"]) do
-                all_provider_names[#all_provider_names + 1] = name
-                vim.lsp.config(name, setting["config"])
-            end
+                -- Add capabilities for all server.
+                vim.lsp.config("*", {
+                    capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                })
 
-            -- Collect filetype specific lsp infomations
-            for fts, value in pairs(ft_settings) do
-                for _, name in ipairs(value["lsp.uses"]) do
-                    vim.lsp.config(name, {
-                        filetypes = fts,
-                    })
+                -- Collect lsp infomations
+                local all_provider_names = {}
+                for name, setting in pairs(global_settings["lsp.providers"]) do
+                    all_provider_names[#all_provider_names + 1] = name
+                    vim.lsp.config(name, setting["config"])
                 end
-            end
 
-            -- Enable lsp
-            for _, name in ipairs(all_provider_names) do
-                vim.lsp.enable(name)
-            end
+                -- Collect filetype specific lsp infomations
+                for fts, value in pairs(ft_settings) do
+                    for _, name in ipairs(value["lsp.uses"]) do
+                        vim.lsp.config(name, {
+                            filetypes = fts,
+                        })
+                    end
+                end
+
+                -- Enable lsp
+                for _, name in ipairs(all_provider_names) do
+                    vim.lsp.enable(name)
+                end
+            end)
         end,
     },
 }
