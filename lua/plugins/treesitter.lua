@@ -7,13 +7,6 @@ return {
         local settings = require("helpers.settings")
         local global_settings = settings.get_global_settings()
 
-        if vim.fn.executable("tree-sitter") == 0 then
-            -- NOTE:
-            -- Install hungs if tree-sitter is not found.
-            -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/8010
-            error("no tree-sitter executable found")
-        end
-
         --- @param lang string
         --- @return boolean
         local function has_highlights(lang)
