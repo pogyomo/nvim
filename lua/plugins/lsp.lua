@@ -28,6 +28,8 @@ return {
         config = function()
             local event = require("helpers.event")
 
+            -- Load lsp config after mason installed servers.
+            -- Lsp will starts after servers installed without opening file.
             event.once("auto_install_finished", function()
                 local settings = require("helpers.settings")
                 local global_settings = settings.get_global_settings()

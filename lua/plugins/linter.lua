@@ -3,6 +3,8 @@ return {
     config = function()
         local event = require("helpers.event")
 
+        -- Load linter config after mason installed linters.
+        -- Prevent `linter unavaliable` errors while installing linters.
         event.once("auto_install_finished", function()
             local lint = require("lint")
             local settings = require("helpers.settings")

@@ -6,6 +6,8 @@ return {
     config = function()
         local event = require("helpers.event")
 
+        -- Load formatter config after mason installed formatters.
+        -- Prevent `formatter unavailable` warning while installing formatters.
         event.once("auto_install_finished", function()
             local settings = require("helpers.settings")
             local conform = require("conform")
