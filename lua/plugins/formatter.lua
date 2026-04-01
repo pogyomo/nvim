@@ -1,8 +1,5 @@
 return {
     "stevearc/conform.nvim",
-    dependencies = {
-        "mason-org/mason.nvim",
-    },
     config = function()
         local conform = require("conform")
         local event = require("helpers.event")
