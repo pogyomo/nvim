@@ -18,7 +18,7 @@ end
 -- Tab and indent
 set_indent_style(global_settings)
 vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("set-indent-style", {}),
+    group = vim.api.nvim_create_augroup("pogyomo.set_indent_style", {}),
     callback = function(arg)
         local bo = vim.bo[arg.buf]
         for fts, setting in pairs(ft_settings) do
@@ -73,7 +73,7 @@ vim.opt.clipboard:append("unnamedplus")
 
 -- Automatically clear hlsearch
 -- from https://www.reddit.com/r/neovim/comments/1ct2w2h/lua_adaptation_of_vimcool_auto_nohlsearch
-local auto_hlsearch = vim.api.nvim_create_augroup("auto-hlsearch", {})
+local auto_hlsearch = vim.api.nvim_create_augroup("pogyomo.auto_hlsearch", {})
 vim.api.nvim_create_autocmd("CursorMoved", {
     group = auto_hlsearch,
     callback = function()
@@ -106,7 +106,7 @@ vim.ui.input = function(opts, on_confirm)
         vim.api.nvim_buf_set_lines(buf, 0, 1, true, { opts.default })
     end
     vim.api.nvim_create_autocmd("BufWinEnter", {
-        group = vim.api.nvim_create_augroup("vim.ui.input", {}),
+        group = vim.api.nvim_create_augroup("pogyomo.enter_insert", {}),
         callback = function(ev)
             if ev.buf == buf then
                 vim.api.nvim_input("A")

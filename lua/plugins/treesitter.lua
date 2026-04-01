@@ -53,7 +53,7 @@ return {
         require("nvim-treesitter").install(global_settings["tree-sitter.uses"])
 
         vim.api.nvim_create_autocmd("FileType", {
-            group = vim.api.nvim_create_augroup("treesitter-start-by-ft", {}),
+            group = vim.api.nvim_create_augroup("pogyomo.treesitter", {}),
             callback = function(ev)
                 local ft = vim.bo[ev.buf].filetype
                 local lang = vim.treesitter.language.get_lang(ft)
