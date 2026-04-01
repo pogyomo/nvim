@@ -27,14 +27,13 @@ return {
         },
         config = function()
             local event = require("helpers.event")
+            local settings = require("helpers.settings")
+            local global_settings = settings.get_global_settings()
+            local ft_settings = settings.get_ft_settings()
 
             -- Load lsp config after mason installed servers.
             -- Lsp will starts after servers installed without opening file.
             event.once("auto_install_finished", function()
-                local settings = require("helpers.settings")
-                local global_settings = settings.get_global_settings()
-                local ft_settings = settings.get_ft_settings()
-
                 -- Keymaps for lsp actions
                 -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf
                 vim.api.nvim_create_autocmd("LspAttach", {

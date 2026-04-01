@@ -1,15 +1,14 @@
 return {
     "mfussenegger/nvim-lint",
     config = function()
+        local lint = require("lint")
         local event = require("helpers.event")
+        local settings = require("helpers.settings")
+        local ft_settings = settings.get_ft_settings()
 
         -- Load linter config after mason installed linters.
         -- Prevent `linter unavaliable` errors while installing linters.
         event.once("auto_install_finished", function()
-            local lint = require("lint")
-            local settings = require("helpers.settings")
-            local ft_settings = settings.get_ft_settings()
-
             -- Collect filetype specific linter imfomations
             local linters_by_ft = {}
             for fts, value in pairs(ft_settings) do
