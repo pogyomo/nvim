@@ -15,6 +15,7 @@ local M = {
         ["tailwindcss"] = "tailwindcss-language-server",
         ["pyright"] = "pyright",
         ["csharp_ls"] = "csharp-language-server",
+        ["roslyn_ls"] = "roslyn-language-server",
     },
 
     -- conform.nvim to mason.nvim mapping

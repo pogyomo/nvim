@@ -63,7 +63,9 @@
     "gopls": {},
     "tailwindcss": {},
     "pyright": {},
-    "csharp_ls": {}
+    "roslyn_ls": {
+      "ensure_installed": false
+    }
   },
   "formatter.providers": {
     "clang-format": {},
@@ -132,6 +134,6 @@
   },
   "[cs]": {
     "formatter.uses": ["csharpier"],
-    "lsp.uses": ["csharp_ls"]
+    "lsp.uses": ["roslyn_ls"]
   }
 }
