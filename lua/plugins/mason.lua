@@ -18,33 +18,6 @@ return {
         local settings = require("helpers.settings")
         local global_settings = settings.get_global_settings()
 
-        -- Collect packages that should be installed
-        local ensure_installed = {}
-        for name, setting in pairs(global_settings["lsp.providers"]) do
-            if setting["ensure_installed"] then
-                ensure_installed[#ensure_installed + 1] = {
-                    name = bridge.convert_lspconfig_to_mason(name),
-                    version = setting["version"],
-                }
-            end
-        end
-        for name, setting in pairs(global_settings["formatter.providers"]) do
-            if setting["ensure_installed"] then
-                ensure_installed[#ensure_installed + 1] = {
-                    name = bridge.convert_conform_to_mason(name),
-                    version = setting["version"],
-                }
-            end
-        end
-        for name, setting in pairs(global_settings["linter.providers"]) do
-            if setting["ensure_installed"] then
-                ensure_installed[#ensure_installed + 1] = {
-                    name = bridge.convert_lint_to_mason(name),
-                    version = setting["version"],
-                }
-            end
-        end
-
         --- Check if package should be installed
         ---
         --- @param spec {name: string, version?: string} Package spec
@@ -102,32 +75,63 @@ return {
             )
         end
 
-        -- Collec package specs that should be installed
-        local should_install = {}
-        for _, spec in ipairs(ensure_installed) do
-            if should_install_package(spec) then
-                should_install[#should_install + 1] = spec
+        -- Collect packages that should be installed
+        local ensure_installed = {}
+        for name, setting in pairs(global_settings["lsp.providers"]) do
+            if setting["ensure_installed"] then
+                ensure_installed[#ensure_installed + 1] = {
+                    name = bridge.convert_lspconfig_to_mason(name),
+                    version = setting["version"],
+                }
+            end
+        end
+        for name, setting in pairs(global_settings["formatter.providers"]) do
+            if setting["ensure_installed"] then
+                ensure_installed[#ensure_installed + 1] = {
+                    name = bridge.convert_conform_to_mason(name),
+                    version = setting["version"],
+                }
+            end
+        end
+        for name, setting in pairs(global_settings["linter.providers"]) do
+            if setting["ensure_installed"] then
+                ensure_installed[#ensure_installed + 1] = {
+                    name = bridge.convert_lint_to_mason(name),
+                    version = setting["version"],
+                }
             end
         end
 
-        -- If no package should be installed, notify and return early
-        if #should_install == 0 then
-            event.emit("auto_install_finished")
-            return
-        end
-
-        -- Install packages
-        local install_finished = 0
-        for _, spec in ipairs(should_install) do
-            install_package(spec, function()
-                install_finished = install_finished + 1
-                if install_finished < #should_install then
-                    return
+        -- Refresh mason-registry before start installing `ensure_installed` packages.
+        -- Without this, packages will be **not found** on the first startup of nvim.
+        registry.refresh(vim.schedule_wrap(function()
+            -- Collect package specs that should be installed
+            local should_install = {}
+            for _, spec in ipairs(ensure_installed) do
+                if should_install_package(spec) then
+                    should_install[#should_install + 1] = spec
                 end
+            end
 
-                -- Notify install finished
+            -- If no package should be installed, notify and return early
+            if #should_install == 0 then
                 event.emit("auto_install_finished")
-            end)
-        end
+                return
+            end
+
+            -- Install packages
+            local install_finished = 0
+            for _, spec in ipairs(should_install) do
+                install_package(spec, function()
+                    install_finished = install_finished + 1
+                    if install_finished < #should_install then
+                        return
+                    end
+
+                    -- Notify install finished
+                    event.emit("auto_install_finished")
+                end)
+            end
+        end))
     end,
 }
