@@ -8,8 +8,8 @@ return {
     },
     config = function(_, opts)
         -- TODO:
-        -- roslyn-language-server is available, but install via mason will crash.
-        -- It seems installed path is too long to handle by windows, so need to change install dir for windows?
+        -- roslyn-language-server is available, but the one installed via mason will crash on Windows.
+        -- It seems installed path is too long to be handled by Windows. Need to change install destination?
         require("mason").setup(opts)
 
         local event = require("helpers.event")
