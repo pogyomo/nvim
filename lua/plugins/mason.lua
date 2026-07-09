@@ -112,10 +112,7 @@ return {
 
         -- If no package should be installed, notify and return early
         if #should_install == 0 then
-            -- Ensure this event to be emitted after others called `once` to subscribe it
-            vim.schedule(function()
-                event.emit("auto_install_finished")
-            end)
+            event.emit("auto_install_finished")
             return
         end
 
@@ -129,7 +126,6 @@ return {
                 end
 
                 -- Notify install finished
-                -- Install takes time, others should already called `once`
                 event.emit("auto_install_finished")
             end)
         end

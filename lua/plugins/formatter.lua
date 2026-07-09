@@ -1,7 +1,6 @@
 return {
     "stevearc/conform.nvim",
-    config = function()
-        local conform = require("conform")
+    init = function()
         local event = require("helpers.event")
         local settings = require("helpers.settings")
         local ft_settings = settings.get_ft_settings()
@@ -26,6 +25,8 @@ return {
         -- Load formatter config after mason installed formatters.
         -- Prevent `formatter unavailable` warning while installing formatters.
         event.once("auto_install_finished", function()
+            local conform = require("conform")
+
             -- Collect formatter infomations
             for name, setting in pairs(global_settings["formatter.providers"]) do
                 if vim.tbl_count(setting["config"]) ~= 0 then

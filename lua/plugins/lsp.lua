@@ -25,7 +25,7 @@ return {
         dependencies = {
             "stevearc/conform.nvim",
         },
-        config = function()
+        init = function()
             local event = require("helpers.event")
             local settings = require("helpers.settings")
             local global_settings = settings.get_global_settings()

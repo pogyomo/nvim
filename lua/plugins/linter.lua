@@ -1,6 +1,6 @@
 return {
     "mfussenegger/nvim-lint",
-    config = function()
+    init = function()
         local lint = require("lint")
         local event = require("helpers.event")
         local settings = require("helpers.settings")
