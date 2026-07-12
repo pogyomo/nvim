@@ -28,6 +28,8 @@ vim.keymap.set("n", "<Leader>ed", "<cmd>bdelete<cr>")
 -- Move over displayed lines.
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
+vim.keymap.set("n", "gj", "j")
+vim.keymap.set("n", "gk", "k")
 
 -- Leave from insert mode.
 vim.keymap.set("i", "jj", "<esc>")
