@@ -3,6 +3,7 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
+        "j-hui/fidget.nvim",
     },
     branch = "master",
     cmd = "Telescope",
@@ -52,5 +53,6 @@ return {
             },
         }
         require("telescope").load_extension("ui-select")
+        require("telescope").load_extension("fidget")
     end,
 }

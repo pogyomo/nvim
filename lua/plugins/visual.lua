@@ -23,28 +23,15 @@ return {
         },
     },
     {
-        "rcarriga/nvim-notify",
-        lazy = true,
-        opts = {
-            timeout = 1000,
-            fps = 60,
-            stages = "fade",
-        },
-        init = function()
-            ---@diagnostic disable-next-line
-            vim.notify = function(...)
-                require("lazy").load { plugins = { "nvim-notify" } }
-                return require("notify")(...)
-            end
-        end,
-    },
-    {
         "HiPhish/rainbow-delimiters.nvim",
     },
     {
         "j-hui/fidget.nvim",
-        event = { "BufReadPost", "BufNewFile" },
-        opts = {},
+        opts = {
+            notification = {
+                override_vim_notify = true,
+            },
+        },
     },
     {
         "folke/tokyonight.nvim",
