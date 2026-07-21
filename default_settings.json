@@ -65,7 +65,8 @@
     "pyright": {},
     "roslyn_ls": {
       "ensure_installed": false
-    }
+    },
+    "yamlls": {}
   },
   "formatter.providers": {
     "clang-format": {},

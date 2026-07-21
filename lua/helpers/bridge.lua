@@ -16,6 +16,7 @@ local M = {
         ["pyright"] = "pyright",
         ["csharp_ls"] = "csharp-language-server",
         ["roslyn_ls"] = "roslyn-language-server",
+        ["yamlls"] = "yaml-language-server",
     },
 
     -- conform.nvim to mason.nvim mapping
