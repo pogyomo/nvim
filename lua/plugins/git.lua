@@ -26,6 +26,19 @@ return {
                 mode = "n",
             },
         },
-        opts = {},
+        opts = {
+            mappings = {
+                -- Use neovim's default features to edit rebase items
+                rebase_editor = {
+                    ["r"] = false,
+                    ["e"] = false,
+                    ["s"] = false,
+                    ["f"] = false,
+                    ["x"] = false,
+                    ["d"] = false,
+                    ["b"] = false,
+                },
+            },
+        },
     },
 }
