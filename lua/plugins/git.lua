@@ -1,6 +1,18 @@
 return {
     {
         "lewis6991/gitsigns.nvim",
+        keys = {
+            {
+                "]c",
+                "<cmd>Gitsigns next_hunk<cr>",
+                mode = "n",
+            },
+            {
+                "[c",
+                "<cmd>Gitsigns prev_hunk<cr>",
+                mode = "n",
+            },
+        },
         opts = {},
     },
     {
@@ -14,19 +26,8 @@ return {
             "Neogit",
             "NeogitResetState",
         },
-        keys = {
-            {
-                "]c",
-                "<cmd>Gitsigns next_hunk<cr>",
-                mode = "n",
-            },
-            {
-                "[c",
-                "<cmd>Gitsigns prev_hunk<cr>",
-                mode = "n",
-            },
-        },
         opts = {
+            graph_style = "unicode",
             mappings = {
                 -- Use neovim's default features to edit rebase items
                 rebase_editor = {
