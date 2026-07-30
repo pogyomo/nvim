@@ -100,12 +100,11 @@ function M.__load()
     local fp = io.open(path)
     local user_settings = {}
     if fp then
-        local success, e = pcall(function()
-            user_settings = vim.json.decode(fp:read("*a"))
-        end)
+        local success, result = pcall(vim.json.decode, fp:read("*a"))
         if not success then
-            vim.notify(e, vim.log.levels.ERROR)
-            user_settings = {}
+            vim.notify(result, vim.log.levels.ERROR)
+        else
+            user_settings = result
         end
     end
 
