@@ -38,6 +38,7 @@ return {
                     ["x"] = false,
                     ["d"] = false,
                     ["b"] = false,
+                    ["p"] = false,
                 },
             },
         },
