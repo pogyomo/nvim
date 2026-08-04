@@ -19,6 +19,7 @@ return {
         "NeogitOrg/neogit",
         branch = "master",
         dependencies = {
+            "folke/tokyonight.nvim",
             "sindrets/diffview.nvim",
             "nvim-telescope/telescope.nvim",
         },
@@ -26,21 +27,37 @@ return {
             "Neogit",
             "NeogitResetState",
         },
-        opts = {
-            graph_style = "unicode",
-            mappings = {
-                -- Use neovim's default features to edit rebase items
-                rebase_editor = {
-                    ["r"] = false,
-                    ["e"] = false,
-                    ["s"] = false,
-                    ["f"] = false,
-                    ["x"] = false,
-                    ["d"] = false,
-                    ["b"] = false,
-                    ["p"] = false,
+        opts = {},
+        config = function()
+            local colors = require("tokyonight.colors").setup()
+            require("neogit").setup {
+                graph_style = "kitty",
+                highlight = {
+                    -- NOTE:
+                    -- tokyonight.nvim support neogit, but its definitions seem to be incomplete.
+                    -- Provide colors manually so it will be more colorful.
+                    red = colors.red,
+                    orange = colors.orange,
+                    yellow = colors.yellow,
+                    green = colors.green,
+                    cyan = colors.cyan,
+                    blue = colors.blue,
+                    purple = colors.purple,
                 },
-            },
-        },
+                mappings = {
+                    -- Use neovim's default features to edit rebase items
+                    rebase_editor = {
+                        ["r"] = false,
+                        ["e"] = false,
+                        ["s"] = false,
+                        ["f"] = false,
+                        ["x"] = false,
+                        ["d"] = false,
+                        ["b"] = false,
+                        ["p"] = false,
+                    },
+                },
+            }
+        end,
     },
 }
