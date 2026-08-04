@@ -44,9 +44,7 @@ return {
             },
             formatting = {
                 fields = { "icon", "abbr" },
-                format = require("lspkind").cmp_format {
-                    mode = "symbol",
-                },
+                format = require("lspkind").cmp_format {},
             },
             mapping = {
                 ["<Tab>"] = cmp.mapping(function(fallback)
