@@ -31,6 +31,7 @@ return {
         config = function()
             local colors = require("tokyonight.colors").setup()
             require("neogit").setup {
+                use_per_project_settings = false,
                 graph_style = "kitty",
                 highlight = {
                     -- NOTE:
