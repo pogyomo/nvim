@@ -50,7 +50,7 @@ return {
                 end
             end
 
-            submode.create("win-resizer", {
+            submode.create("winresize", {
                 mode = "n",
                 enter = "<Leader>r",
                 leave = { "q", "<ESC>" },
