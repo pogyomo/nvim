@@ -1,7 +1,28 @@
 return {
     {
         "delphinus/cellwidths.nvim",
-        opts = {},
+        opts = {
+            name = "user/custom",
+            fallback = function(cw)
+                cw.load("default")
+                cw.delete {
+                    0x2768, -- ❨
+                    0x2769, -- ❩
+                    0x276a, -- ❪
+                    0x276b, -- ❫
+                    0x276c, -- ❬
+                    0x276d, -- ❭
+                    0x276e, -- ❮
+                    0x276f, -- ❯
+                    0x2770, -- ❰
+                    0x2771, -- ❱
+                    0x2772, -- ❲
+                    0x2773, -- ❳
+                    0x2774, -- ❴
+                    0x2775, -- ❵
+                }
+            end,
+        },
     },
     {
         "folke/todo-comments.nvim",
