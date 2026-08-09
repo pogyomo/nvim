@@ -33,3 +33,6 @@ vim.keymap.set("n", "gk", "k")
 
 -- Leave from insert mode.
 vim.keymap.set("i", "jj", "<esc>")
+
+-- Leave from terminal insert mode.
+vim.keymap.set("t", "jj", "<C-\\><C-n>")
