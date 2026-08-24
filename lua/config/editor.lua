@@ -45,6 +45,9 @@ vim.diagnostic.config {
     severity_sort = true,
 }
 
+-- Enable project-local config
+vim.o.exrc = true
+
 -- Disable mouse
 vim.o.mouse = ""
 
