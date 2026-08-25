@@ -153,3 +153,6 @@ vim.ui.input = function(opts, on_confirm)
     vim.keymap.set("n", "<Enter>", confirm_cb, { buffer = buf })
     vim.keymap.set("n", "<Esc>", discard_cb, { buffer = buf })
 end
+
+-- Better quickfix buffer visual
+vim.o.quickfixtextfunc = "v:lua.require'helpers.quickfix'.format"
