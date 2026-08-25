@@ -28,6 +28,11 @@ return {
             "<cmd>Telescope help_tags<cr>",
             mode = "n",
         },
+        {
+            "<Leader>fd",
+            "<cmd>Telescope diagnostics<cr>",
+            mode = "n",
+        },
     },
     init = function()
         ---@diagnostic disable-next-line
