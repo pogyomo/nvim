@@ -1,8 +1,9 @@
 local M = {}
+local ns = vim.api.nvim_create_namespace("pogyomo.quickfix")
 
 --- Do highlight to specified buffer
 local function do_highlight(buf, highlights)
-    local ns = vim.api.nvim_create_namespace("pogyomo.quickfix")
+    vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
     for _, highlight in ipairs(highlights) do
         vim.hl.range(
             buf,
@@ -16,10 +17,11 @@ end
 
 --- Get list from either quickfix or location list
 local function get_list(info)
+    local what = { id = info.id, items = 0, qfbufnr = 0 }
     if info.quickfix == 1 then
-        return vim.fn.getqflist { id = info.id, items = 0 }
+        return vim.fn.getqflist(what)
     else
-        return vim.fn.getloclist(info.winid, { id = info.id, items = 0 })
+        return vim.fn.getloclist(info.winid, what)
     end
 end
 
@@ -27,7 +29,7 @@ end
 function M.format(info)
     local list = get_list(info)
     local items = list.items
-    local buf = list.qfbufnr
+    local bufnr = list.qfbufnr
 
     local function spaces(s, n, left)
         while s:len() < n do
@@ -112,7 +114,7 @@ function M.format(info)
         })
     end
     vim.schedule(function()
-        do_highlight(buf, highlights)
+        do_highlight(bufnr, highlights)
     end)
 
     local ret = {}
