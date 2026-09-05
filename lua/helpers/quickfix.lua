@@ -25,6 +25,24 @@ local function get_list(info)
     end
 end
 
+--- Get appropriate hlgroup from `type` responsed from `getqflist` or `getloclist`
+---
+--- @param t string
+--- @return string
+local function hlgroup_by_type(t)
+    if t == "E" then
+        return "DiagnosticError"
+    elseif t == "W" then
+        return "DiagnosticWarn"
+    elseif t == "I" then
+        return "DiagnosticInfo"
+    elseif t == "N" then
+        return "DiagnosticHint"
+    else
+        return "Normal"
+    end
+end
+
 --- Format function for `quickfixtextfunc`
 function M.format(info)
     local list = get_list(info)
@@ -63,11 +81,13 @@ function M.format(info)
             lnum = lnum,
             col = col,
             text = item.text,
+            type = item.type,
         })
     end
 
     local highlights = {}
-    for line = 0, #items, 1 do
+    for index, elem in ipairs(elems) do
+        local line = index - 1
         local start_column = 0
         local end_column = fname_width + 1
         table.insert(highlights, {
@@ -110,7 +130,7 @@ function M.format(info)
             line = line,
             start_column = start_column,
             end_column = end_column,
-            hlgroup = "Normal",
+            hlgroup = hlgroup_by_type(elem.type),
         })
     end
     vim.schedule(function()
