@@ -106,23 +106,30 @@ return {
             }
 
             local status_tab = {
-                lualine_a = {},
+                lualine_a = {
+                    { "tabs", max_length = vim.o.columns, mode = 0 },
+                },
                 lualine_b = {
                     { "buffers", max_length = vim.o.columns, mode = 2 },
                 },
                 lualine_c = {},
                 lualine_x = {},
                 lualine_y = {
-                    { "tabs", max_length = vim.o.columns, mode = 0 },
                     {
                         function()
                             return vim.fn.strftime("%Y/%m/%d %H:%M:%S")
                         end,
-                        separator = { left = "" },
                         color = "lualine_b_normal",
                     },
                 },
-                lualine_z = {},
+                lualine_z = {
+                    {
+                        function()
+                            return require("helpers.weather").get_status()
+                        end,
+                        color = "lualine_a_normal",
+                    },
+                },
             }
 
             local status_bar = {
