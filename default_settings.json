@@ -87,7 +87,16 @@
     "csharpier": {}
   },
   "linter.providers": {
-    "selene": {}
+    "selene": {
+      "config": {
+        "root_marker": "selene.toml"
+      }
+    },
+    "stylelint": {
+      "config": {
+        "root_marker": "node_modules"
+      }
+    }
   },
   "[c,cpp]": {
     "formatter.uses": ["clang-format"],

@@ -4,11 +4,18 @@ return {
         local lint = require("lint")
         local event = require("helpers.event")
         local settings = require("helpers.settings")
+        local global_settings = settings.get_global_settings()
         local ft_settings = settings.get_ft_settings()
 
         -- Load linter config after mason installed linters.
         -- Prevent `linter unavaliable` errors while installing linters.
         event.once("auto_install_finished", function()
+            -- Collect linter config
+            local config_by_linter = {}
+            for name, setting in pairs(global_settings["linter.providers"]) do
+                config_by_linter[name] = setting["config"]
+            end
+
             -- Collect filetype specific linter imfomations
             local linters_by_ft = {}
             for fts, value in pairs(ft_settings) do
@@ -32,9 +39,12 @@ return {
                 local linters = linters_by_ft[vim.bo[bufnr].filetype]
                 for _, linter in ipairs(linters) do
                     local opts = {}
-                    if linter == "selene" then
-                        -- selene needs to be executed where selene.toml exists
-                        opts["cwd"] = vim.fs.root(bufnr, "selene.toml")
+                    if config_by_linter[linter]["root_marker"] ~= nil then
+                        -- Some linter need to be executed on directory where specific file exists.
+                        opts["cwd"] = vim.fs.root(
+                            bufnr,
+                            config_by_linter[linter]["root_marker"]
+                        )
                     end
                     lint.try_lint(linter, opts)
                 end
