@@ -93,6 +93,7 @@
       }
     },
     "stylelint": {
+      "ensure_installed": false,
       "config": {
         "root_marker": "node_modules"
       }
