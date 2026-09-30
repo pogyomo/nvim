@@ -30,7 +30,17 @@
   "lsp.providers": {
     "clangd": {},
     "cmake": {},
-    "cssls": {},
+    "cssls": {
+      "config": {
+        "settings": {
+          "css": {
+            "lint": {
+              "unknownAtRules": "ignore"
+            }
+          }
+        }
+      }
+    },
     "html": {},
     "ts_ls": {},
     "jsonls": {},
