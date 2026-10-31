@@ -94,7 +94,10 @@
     },
     "black": {},
     "isort": {},
-    "csharpier": {}
+    "csharpier": {},
+    "php_cs_fixer": {
+      "ensure_installed": false
+    }
   },
   "linter.providers": {
     "selene": {
@@ -133,7 +136,7 @@
     "lsp.uses": ["jsonls"]
   },
   "[php]": {
-    "formatter.auto_format": false,
+    "formatter.uses": ["php_cs_fixer"],
     "lsp.uses": ["intelephense", "tailwindcss"]
   },
   "[rust]": {

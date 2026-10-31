@@ -29,6 +29,7 @@ local M = {
         ["black"] = "black",
         ["isort"] = "isort",
         ["csharpier"] = "csharpier",
+        ["php_cs_fixer"] = "php-cs-fixer",
     },
 
     -- nvim-lint to mason.nvim mapping
