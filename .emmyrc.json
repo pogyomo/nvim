@@ -1,8 +1,5 @@
 {
   "runtime": {
     "version": "LuaJIT"
-  },
-  "semanticTokens": {
-    "enable": false
   }
 }
