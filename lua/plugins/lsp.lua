@@ -35,7 +35,7 @@ return {
             -- Keymaps for lsp actions
             -- reference: https://zenn.dev/botamotch/articles/21073d78bc68bf
             vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("pogyomo.lsp", {}),
+                group = vim.api.nvim_create_augroup("pogyomo.lsp.keymap", {}),
                 callback = function(ev)
                     local opts = { buffer = ev.buf }
 
@@ -68,6 +68,19 @@ return {
                 for name, setting in pairs(global_settings["lsp.providers"]) do
                     all_provider_names[#all_provider_names + 1] = name
                     vim.lsp.config(name, setting["config"])
+
+                    -- NOTE:
+                    -- lazydev.nvim dynamically changes Lua section
+                    -- But if emmylua section exists, the change is ignored by emmylua
+                    -- Make emmylua section not exists, so emmylua works correctly with lazydev.nvim
+                    -- Remove this code after lazydev.nvim adjust this problem.
+                    if name == "emmylua_ls" then
+                        vim.lsp.config(name, {
+                            settings = {
+                                emmylua = vim.NIL,
+                            },
+                        })
+                    end
                 end
 
                 -- Collect filetype specific lsp infomations
