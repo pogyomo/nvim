@@ -56,20 +56,7 @@
         }
       }
     },
-    "lua_ls": {
-      "config": {
-        "settings": {
-          "Lua": {
-            "workspace": {
-              "checkThirdParty": false
-            },
-            "runtime": {
-              "version": "LuaJIT"
-            }
-          }
-        }
-      }
-    },
+    "emmylua_ls": {},
     "gopls": {},
     "tailwindcss": {},
     "pyright": {},
@@ -145,7 +132,7 @@
   },
   "[lua]": {
     "formatter.uses": ["stylua"],
-    "lsp.uses": ["lua_ls"],
+    "lsp.uses": ["emmylua_ls"],
     "linter.uses": ["selene"]
   },
   "[go]": {
