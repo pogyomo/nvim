@@ -35,7 +35,6 @@ return {
         },
     },
     init = function()
-        ---@diagnostic disable-next-line
         vim.ui.select = function(...)
             require("lazy").load { plugins = { "telescope.nvim" } }
             vim.ui.select(...)

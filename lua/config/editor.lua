@@ -102,7 +102,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 vim.o.foldmethod = "marker"
 
 -- Better vim.ui.input
----@diagnostic disable-next-line
 vim.ui.input = function(opts, on_confirm)
     local buf = vim.api.nvim_create_buf(false, true)
     if opts.default then

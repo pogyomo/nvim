@@ -24,7 +24,6 @@ return {
             pattern = "TSUpdate",
             callback = function()
                 require("nvim-treesitter.parsers").ld65 = {
-                    --- @diagnostic disable-next-line
                     install_info = {
                         url = "https://github.com/pogyomo/tree-sitter-ld65",
                         queries = "queries",
@@ -32,7 +31,6 @@ return {
                     tier = 2,
                 }
                 require("nvim-treesitter.parsers").ca65 = {
-                    --- @diagnostic disable-next-line
                     install_info = {
                         url = "https://github.com/pogyomo/tree-sitter-ca65",
                         queries = "queries",
