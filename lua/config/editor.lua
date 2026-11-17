@@ -31,6 +31,12 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Workaround for msys2:
+-- In msys2 and using unix shell (like bash.exe), 'shellcmdflag' should be '-c', not '/s /c'
+if require("helpers.msys2").is_msys2_unix_shell() then
+    vim.o.shellcmdflag = "-c"
+end
+
 -- Diagnostic
 vim.diagnostic.config {
     virtual_text = true,

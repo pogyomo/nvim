@@ -24,3 +24,13 @@ cp default_settings.json settings.json
 # nvim settings.json
 ```
 
+## Using with msys2
+
+If you are using msys2, and neovim is installed using pacman,
+it's recommended to install win32yank.exe so clipboard works well.
+
+```bash
+curl -LO https://github.com/equalsraf/win32yank/releases/download/v0.1.1/win32yank-x64.zip
+unzip win32yank-x64.zip win32yank.exe -d $(dirname $(which nvim))
+```
+
