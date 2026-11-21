@@ -19,6 +19,33 @@ return {
             return #vim.treesitter.query.get_files(lang, "indents") > 0
         end
 
+        --- @param node TSNode
+        --- @return boolean
+        local function is_php_node_has_html(node)
+            if node:type() == "text" then
+                return true
+            end
+
+            for child in node:iter_children() do
+                if is_php_node_has_html(child) then
+                    return true
+                end
+            end
+        end
+
+        --- @param buf integer
+        --- @return boolean
+        local function is_php_has_html(buf)
+            local parser = vim.treesitter.get_parser(buf, "php")
+            local trees = parser:parse()
+            for _, tree in ipairs(trees) do
+                if is_php_node_has_html(tree:root()) then
+                    return true
+                end
+            end
+            return false
+        end
+
         -- Register parsers not in nvim-treesitter
         vim.api.nvim_create_autocmd("User", {
             pattern = "TSUpdate",
@@ -66,6 +93,14 @@ return {
                 elseif has_indents(lang) then
                     local e = "v:lua.require'nvim-treesitter'.indentexpr()"
                     vim.bo[ev.buf].indentexpr = e
+
+                    -- TODO:
+                    -- Indentation of html in php still broken.
+                    -- Disable tree-sitter indent if it contains html.
+                    if lang == "php" and is_php_has_html(ev.buf) then
+                        vim.bo[ev.buf].syntax = "on"
+                        vim.bo[ev.buf].indentexpr = ""
+                    end
                 end
             end,
         })
