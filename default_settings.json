@@ -24,9 +24,6 @@
     "typescript",
     "vimdoc"
   ],
-  "tree-sitter.indent": {
-    "exclude": ["php"]
-  },
   "lsp.providers": {
     "clangd": {},
     "cmake": {},
