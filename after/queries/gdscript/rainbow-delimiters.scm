@@ -10,3 +10,6 @@
 (arguments
   "(" @delimiter
   ")" @delimiter) @container
+(parenthesized_expression
+  "(" @delimiter
+  ")" @delimiter) @container

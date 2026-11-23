@@ -101,6 +101,18 @@ return {
                         vim.bo[ev.buf].syntax = "on"
                         vim.bo[ev.buf].indentexpr = ""
                     end
+
+                    -- NOTE:
+                    -- In following, when you insert `:` for typing `:=`, the indentation of `var a :` breaks.
+                    -- ```gdscript
+                    -- func hoge() -> void:
+                    --     if true:
+                    --         var a |
+                    -- ```
+                    -- Prevent reindentation when type `:`, so this problem doesn't happen.
+                    if lang == "gdscript" then
+                        vim.opt_local.indentkeys:remove { "<:>" }
+                    end
                 end
             end,
         })

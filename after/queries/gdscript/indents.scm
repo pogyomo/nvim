@@ -4,6 +4,10 @@
   (#set! indent.immediate 1))
 ((if_statement) @indent.begin
   (#set! indent.immediate 1))
+((while_statement) @indent.begin
+  (#set! indent.immediate 1))
+((for_statement) @indent.begin
+  (#set! indent.immediate 1))
 ((pattern_section) @indent.begin
   (#set! indent.immediate 1))
 ((lambda) @indent.begin
