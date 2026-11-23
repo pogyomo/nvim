@@ -22,6 +22,9 @@
 ((dictionary) @indent.align
   (#set! indent.open_delimiter "{")
   (#set! indent.close_delimiter "}"))
+((enumerator_list) @indent.align
+  (#set! indent.open_delimiter "{")
+  (#set! indent.close_delimiter "}"))
 ((array) @indent.align
   (#set! indent.open_delimiter "[")
   (#set! indent.close_delimiter "]"))
