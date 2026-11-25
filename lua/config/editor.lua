@@ -1,4 +1,4 @@
-local helper = require("helpers.settings")
+local helper = require("modules.settings")
 local global_settings = helper.get_global_settings()
 local ft_settings = helper.get_ft_settings()
 
@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Workaround for msys2:
 -- In msys2 and using unix shell (like bash.exe), 'shellcmdflag' should be '-c', not '/s /c'
-if require("helpers.msys2").is_msys2_unix_shell() then
+if require("modules.msys2").is_msys2_unix_shell() then
     vim.o.shellcmdflag = "-c"
 end
 
@@ -108,7 +108,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 vim.o.foldmethod = "marker"
 
 -- Better vim.ui.input
-vim.ui.input = require("helpers.input").input
+vim.ui.input = require("modules.input").input
 
 -- Better quickfix buffer visual
-vim.o.quickfixtextfunc = "v:lua.require'helpers.quickfix'.format"
+vim.o.quickfixtextfunc = "v:lua.require'modules.quickfix'.format"

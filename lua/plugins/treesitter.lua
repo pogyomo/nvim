@@ -4,7 +4,7 @@ return {
     branch = "main",
     build = ":TSUpdate",
     config = function()
-        local settings = require("helpers.settings")
+        local settings = require("modules.settings")
         local global_settings = settings.get_global_settings()
 
         --- @param lang string

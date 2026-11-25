@@ -10,7 +10,7 @@ return {
                 -- In msys2 and if 'shell' is unix shell (like bash.exe), 'shellcmdflag' should be '-s'.
                 -- But commands with '!' works correctly with '-c', so restore 'shellcmdflag' after launch terminal.
                 local shellcmdflag = vim.o.shellcmdflag
-                if require("helpers.msys2").is_msys2_unix_shell() then
+                if require("modules.msys2").is_msys2_unix_shell() then
                     vim.o.shellcmdflag = "-s"
                 end
                 vim.cmd([[ToggleTerm direction=float]])

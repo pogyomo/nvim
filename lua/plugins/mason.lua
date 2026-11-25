@@ -12,10 +12,10 @@ return {
         -- It seems installed path is too long to be handled by Windows. Need to change install destination?
         require("mason").setup(opts)
 
-        local event = require("helpers.event")
+        local event = require("modules.event")
         local registry = require("mason-registry")
-        local bridge = require("helpers.bridge")
-        local settings = require("helpers.settings")
+        local bridge = require("modules.bridge")
+        local settings = require("modules.settings")
         local global_settings = settings.get_global_settings()
 
         --- Check if package should be installed

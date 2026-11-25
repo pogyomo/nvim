@@ -2,8 +2,8 @@ return {
     "mfussenegger/nvim-lint",
     init = function()
         local lint = require("lint")
-        local event = require("helpers.event")
-        local settings = require("helpers.settings")
+        local event = require("modules.event")
+        local settings = require("modules.settings")
         local global_settings = settings.get_global_settings()
         local ft_settings = settings.get_ft_settings()
 

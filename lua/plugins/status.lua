@@ -125,7 +125,7 @@ return {
                 lualine_z = {
                     {
                         function()
-                            return require("helpers.weather").get_status()
+                            return require("modules.weather").get_status()
                         end,
                         color = "lualine_a_normal",
                     },
