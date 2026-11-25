@@ -98,7 +98,6 @@ function M.format(info)
         })
 
         start_column = end_column
-        end_column = start_column
         table.insert(highlights, {
             line = line,
             start_column = start_column,
@@ -116,7 +115,6 @@ function M.format(info)
         })
 
         start_column = end_column
-        end_column = start_column
         table.insert(highlights, {
             line = line,
             start_column = start_column,
